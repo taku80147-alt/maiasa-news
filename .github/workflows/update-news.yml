@@ -1,5 +1,10 @@
 name: 毎朝ニュース更新
 on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/update_news.py"
+      - ".github/workflows/update-news.yml"
   schedule:
     - cron: "15 21 * * *" # 日本時間 毎朝6:15
   workflow_dispatch:
