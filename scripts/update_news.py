@@ -94,11 +94,14 @@ def page_detail(url:str,title:str,source_name:str)->tuple[str,str,list[str]]:
         parser=PageParser();parser.feed(get(url))
         candidates=[]
         title_terms=[x for x in re.findall(r"[一-龠ァ-ヶ]{3,}",title) if x not in ("について","における","に関する")]
-        if useful_block(parser.meta,title):candidates.append(focus_block(parser.meta,title_terms))
+        if useful_block(parser.meta,title) and any(k in parser.meta for k in title_terms):
+            candidates.append(focus_block(parser.meta,title_terms))
         scored=[]
         for i,b in enumerate(parser.blocks):
             if not useful_block(b,title):continue
-            score=sum(4 for k in title_terms if k in b)+sum(2 for k in PRIORITY if k in b)+sum(1 for k in KEYWORDS["care"]+KEYWORDS["welfare"] if k in b)
+            title_score=sum(4 for k in title_terms if k in b)
+            if not title_score:continue
+            score=title_score+sum(2 for k in PRIORITY if k in b)+sum(1 for k in KEYWORDS["care"]+KEYWORDS["welfare"] if k in b)
             score+=2 if re.search(r"20\d{2}年|令和\s*\d+年|対象|開始|施行|改正|公表|通知",b) else 0
             if score>0:scored.append((score,-i,b))
         # Prefer the official page's lead/description, then the most relevant concrete passages.
