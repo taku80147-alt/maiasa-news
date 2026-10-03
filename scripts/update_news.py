@@ -74,6 +74,21 @@ def useful_block(text:str,title:str)->bool:
 def broken_text(text:str)->bool:
     return text.count("�")>0 or sum(text.count(x) for x in ("縺","譁","螟","蜿","繧"))>=3
 
+def focus_block(text:str,title_terms:list[str])->str:
+    """Remove neighboring press-release headlines from an official page excerpt."""
+    parts=[x.strip() for x in re.split(r"(?<=[。！？])\s*",text) if x.strip()]
+    hits=[i for i,x in enumerate(parts) if any(k in x for k in title_terms)]
+    if not hits:return text
+    start=hits[0]
+    if start and len(parts[start-1])<110 and not re.search(r"開始します|開催します|実施します|お知らせします|公表します",parts[start-1]):
+        start-=1
+    kept=[]
+    for i,x in enumerate(parts[start:],start):
+        if kept and i not in hits and len(x)<110 and re.search(r"開始します|開催します|実施します|お知らせします|公表します",x):break
+        kept.append(x)
+        if len(kept)>=3 or sum(map(len,kept))>=480:break
+    return " ".join(kept)
+
 def page_detail(url:str,title:str,source_name:str)->tuple[str,str,list[str]]:
     try:
         parser=PageParser();parser.feed(get(url))
@@ -88,6 +103,7 @@ def page_detail(url:str,title:str,source_name:str)->tuple[str,str,list[str]]:
             if score>0:scored.append((score,-i,b))
         # Prefer the official page's lead/description, then the most relevant concrete passages.
         for _,__,b in sorted(scored,reverse=True):
+            b=focus_block(b,title_terms)
             if all(b not in x and x not in b for x in candidates):candidates.append(b)
             if len(candidates)>=6:break
         if not candidates:return ("","",[])
