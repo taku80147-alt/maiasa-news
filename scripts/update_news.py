@@ -13,7 +13,7 @@ SOURCES=[
   {"name":"厚生労働省","url":"https://www.mhlw.go.jp/stf/news.html","category":"care","primary":True},
   {"name":"厚生労働省・介護保険","url":"https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index.html","category":"care","primary":True},
   {"name":"厚生労働省・福祉用具","url":"https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000212398.html","category":"welfare","primary":True},
-  {"name":"PMDA","url":"https://www.pmda.go.jp/","category":"care","primary":True},
+  {"name":"PMDA","url":"https://www.pmda.go.jp/","category":"medical","primary":True},
   {"name":"宮城県","url":"https://www.pref.miyagi.jp/site/kourei/","category":"local","primary":True},
   {"name":"仙台市","url":"https://www.city.sendai.jp/kurashi/kenkotofukushi/korenokata/index.html","category":"local","primary":True},
   {"name":"内閣府","url":"https://www.cao.go.jp/press/new_wave/","category":"general","primary":True},
@@ -24,6 +24,7 @@ KEYWORDS={
  "care":["介護","高齢","医療","診療報酬","介護報酬","在宅","認知症","社会保障","福祉","看護","リハビリ","薬","医療機器"],
  "welfare":["福祉用具","貸与価格","上限価格","車いす","歩行器","介護ベッド","手すり","スロープ","リフト","安全情報","自主回収"],
  "local":["介護","高齢","医療","福祉","地域包括","在宅","補助","支援","施設"],
+ "medical":["医薬品","医療機器","安全","副作用","回収","医療事故","承認","注意"],
  "general":["物価","景気","雇用","賃金","金利","災害","地震","経済","企業","人口"],
 }
 DECISION=["公布","施行","決定","公表","通知","改正しました","開始します","発出"]
@@ -96,7 +97,8 @@ def page_detail(url:str,title:str,source_name:str)->tuple[str,str,list[str]]:
 def tidy_title(value:str)->str:
     value=re.sub(r"^20\d{2}年\s*\d{1,2}月\s*\d{1,2}日(?:掲載)?\s*","",value)
     value=re.sub(r"^(?:(?:安全|審査|救済|採用|その他|国際|医薬品|部外品|全製品|イベント)\s+|New\s+)+","",value)
-    return value.strip() or value
+    value=re.sub(r"\s*(?:NEW|New)\s*$","",value)
+    return value.strip()
 
 def status(text:str)->tuple[str,str]:
     if any(k in text for k in DISCUSSION): return "検討・会議資料","確定事項とは限りません。元資料で議論の段階をご確認ください。"
@@ -109,6 +111,7 @@ def extract(source:dict,body:str)->list[dict]:
     for m in re.finditer(r"<a\b[^>]*href=[\"']([^\"'#]+)[\"'][^>]*>(.*?)</a>",body,flags=re.I|re.S):
         title=clean(m.group(2))
         if not (12<=len(title)<=130):continue
+        if title.count("「")!=title.count("」") or title.count("『")!=title.count("』"):continue
         url=urllib.parse.urljoin(source["url"],html.unescape(m.group(1)))
         if urllib.parse.urlparse(url).scheme not in ("http","https"):continue
         if url.rstrip("/")==source["url"].rstrip("/"):continue
@@ -141,9 +144,9 @@ def main()->int:
         score=(1 if x["published"] else 0)+(2 if x["category"] in ("care","welfare") else 0)
         if x["id"] not in unique or score>unique[x["id"]][0]:unique[x["id"]]=(score,x)
     rows=[v[1] for v in unique.values()]
-    rows.sort(key=lambda x:(x["published"],x["category"] in ("care","welfare")),reverse=True)
+    rows.sort(key=lambda x:(x["published"],x["category"] in ("care","welfare","medical")),reverse=True)
     # Keep the page compact; healthcare/care gets the largest quota.
-    quotas={"care":18,"welfare":12,"local":12,"general":8};kept=[]
+    quotas={"care":14,"welfare":12,"local":12,"medical":10,"general":6};kept=[]
     for cat,n in quotas.items():kept.extend([x for x in rows if x["category"]==cat][:n])
     # Read each selected announcement page so the app itself contains useful detail.
     with ThreadPoolExecutor(max_workers=8) as pool:
