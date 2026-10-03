@@ -93,8 +93,8 @@ def page_detail(url:str,title:str,source_name:str)->tuple[str,str,list[str]]:
     try:
         parser=PageParser();parser.feed(get(url))
         candidates=[]
-        if useful_block(parser.meta,title):candidates.append(parser.meta)
         title_terms=[x for x in re.findall(r"[一-龠ァ-ヶ]{3,}",title) if x not in ("について","における","に関する")]
+        if useful_block(parser.meta,title):candidates.append(focus_block(parser.meta,title_terms))
         scored=[]
         for i,b in enumerate(parser.blocks):
             if not useful_block(b,title):continue
@@ -198,3 +198,4 @@ def main()->int:
     print(f"Collected {len(kept)} official-source items; {len(errors)} source errors.")
     return 0
 if __name__=="__main__":raise SystemExit(main())
+
