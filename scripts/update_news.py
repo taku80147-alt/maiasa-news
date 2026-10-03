@@ -14,8 +14,8 @@ SOURCES=[
   {"name":"厚生労働省・介護保険","url":"https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index.html","category":"care","primary":True},
   {"name":"厚生労働省・福祉用具","url":"https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000212398.html","category":"welfare","primary":True},
   {"name":"PMDA","url":"https://www.pmda.go.jp/","category":"medical","primary":True},
-  {"name":"宮城県","url":"https://www.pref.miyagi.jp/site/kourei/","category":"local","primary":True},
-  {"name":"仙台市","url":"https://www.city.sendai.jp/kurashi/kenkotofukushi/korenokata/index.html","category":"local","primary":True},
+  {"name":"宮城県","url":"https://www.pref.miyagi.jp/","category":"local","primary":True,"accept_all":True},
+  {"name":"仙台市","url":"https://www.city.sendai.jp/shise/koho/kisha/index.html","category":"local","primary":True,"accept_all":True},
   {"name":"内閣府","url":"https://www.cao.go.jp/press/new_wave/","category":"general","primary":True},
   {"name":"総務省統計局","url":"https://www.stat.go.jp/data/index.html","category":"general","primary":True},
   {"name":"日本銀行","url":"https://www.boj.or.jp/announcements/release_2026/index.htm","category":"general","primary":True},
@@ -29,7 +29,7 @@ KEYWORDS={
 }
 DECISION=["公布","施行","決定","公表","通知","改正しました","開始します","発出"]
 DISCUSSION=["検討会","審議会","部会","議論","案","意見募集","取りまとめに向け"]
-BOILERPLATE=["ページの先頭","サイトマップ","お問い合わせ","メニューを開く","本文へ","著作権","プライバシー","アクセシビリティ","検索"]
+BOILERPLATE=["ページの先頭","サイトマップ","お問い合わせ","メニューを開く","本文へ","著作権","プライバシー","アクセシビリティ","検索","翻訳対象","ホーム >","について紹介しています"]
 PRIORITY=["介護保険","介護報酬","福祉用具","貸与","販売種目","上限価格","給付","改正","施行","通知","報酬改定","地域包括","在宅介護","宮城県","仙台市"]
 LOW_PRIORITY=["採用","仕事体験","タイアップ","研修会","ラーニングビデオ"]
 
@@ -51,7 +51,7 @@ class PageParser(HTMLParser):
         super().__init__(convert_charrefs=True);self.blocks=[];self.meta="";self.capture=None;self.buf=[];self.skip=0
     def handle_starttag(self,tag,attrs):
         attrs=dict(attrs)
-        if tag in ("script","style","noscript","svg"):self.skip+=1
+        if tag in ("script","style","noscript","svg","nav","footer","header","aside"):self.skip+=1
         if tag=="meta" and (attrs.get("name","").lower()=="description" or attrs.get("property","").lower()=="og:description"):
             if not self.meta:self.meta=clean(attrs.get("content",""))
         if not self.skip and tag in ("h1","h2","h3","p","li","dd"):
@@ -59,7 +59,7 @@ class PageParser(HTMLParser):
     def handle_data(self,data):
         if self.capture and not self.skip:self.buf.append(data)
     def handle_endtag(self,tag):
-        if tag in ("script","style","noscript","svg") and self.skip:self.skip-=1
+        if tag in ("script","style","noscript","svg","nav","footer","header","aside") and self.skip:self.skip-=1
         if self.capture==tag:
             value=clean(" ".join(self.buf))
             if value:self.blocks.append(value)
@@ -79,23 +79,24 @@ def page_detail(url:str,title:str,source_name:str)->tuple[str,str,list[str]]:
         parser=PageParser();parser.feed(get(url))
         candidates=[]
         if useful_block(parser.meta,title):candidates.append(parser.meta)
+        title_terms=[x for x in re.findall(r"[一-龠ァ-ヶ]{3,}",title) if x not in ("について","における","に関する")]
         scored=[]
         for i,b in enumerate(parser.blocks):
             if not useful_block(b,title):continue
-            score=sum(3 for k in PRIORITY if k in b)+sum(1 for k in KEYWORDS["care"]+KEYWORDS["welfare"] if k in b)
+            score=sum(4 for k in title_terms if k in b)+sum(2 for k in PRIORITY if k in b)+sum(1 for k in KEYWORDS["care"]+KEYWORDS["welfare"] if k in b)
             score+=2 if re.search(r"20\d{2}年|令和\s*\d+年|対象|開始|施行|改正|公表|通知",b) else 0
-            scored.append((score,-i,b))
+            if score>0:scored.append((score,-i,b))
         # Prefer the official page's lead/description, then the most relevant concrete passages.
         for _,__,b in sorted(scored,reverse=True):
             if all(b not in x and x not in b for x in candidates):candidates.append(b)
             if len(candidates)>=6:break
-        if not candidates:return (f"{source_name}の公式ページに掲載された情報です。",f"{source_name}の公式ページに掲載された情報です。",[])
+        if not candidates:return ("","",[])
         points=[x[:260].rstrip("、。 ")+"。" for x in candidates[:4]]
-        summary=" ".join(points[:2])[:430].rstrip("、。 ")+"。"
+        summary=" ".join(points[:3])[:520].rstrip("、。 ")+"。"
         detail="\n\n".join(points)[:1200]
         return summary,detail,points
     except Exception:
-        return (f"{source_name}の公式ページに掲載された情報です。",f"{source_name}の公式ページに掲載された情報です。",[])
+        return ("","",[])
 
 def tidy_title(value:str)->str:
     value=re.sub(r"^20\d{2}年\s*\d{1,2}月\s*\d{1,2}日(?:掲載)?\s*","",value)
@@ -131,7 +132,7 @@ def extract(source:dict,body:str)->list[dict]:
         keys=KEYWORDS[source["category"]]
         # Navigation text around an unrelated link can contain care keywords.
         # Require the link title itself to show why it belongs in this category.
-        if not any(k in title for k in keys):continue
+        if not source.get("accept_all") and not any(k in title for k in keys):continue
         category=source["category"]
         if any(k in title+around for k in KEYWORDS["welfare"]):category="welfare"
         date_match=re.search(r"(20\d{2})[年./-]\s*(\d{1,2})[月./-]\s*(\d{1,2})日?",around)
@@ -154,8 +155,8 @@ def main()->int:
         score=(1 if x["published"] else 0)+(2 if x["category"] in ("care","welfare") else 0)
         if x["id"] not in unique or score>unique[x["id"]][0]:unique[x["id"]]=(score,x)
     rows=[v[1] for v in unique.values()]
-    cutoff=(datetime.now(JST)-timedelta(days=180)).date().isoformat()
-    rows=[x for x in rows if not x["published"] or x["published"]>=cutoff]
+    cutoff=(datetime.now(JST)-timedelta(days=30)).date().isoformat()
+    rows=[x for x in rows if x["published"] and x["published"]>=cutoff]
     rows.sort(key=lambda x:(x["published"],x["category"] in ("care","welfare","medical")),reverse=True)
     # Keep the page compact; healthcare/care gets the largest quota.
     quotas={"care":14,"welfare":12,"local":12,"medical":10,"general":6};kept=[]
@@ -165,7 +166,7 @@ def main()->int:
         jobs={pool.submit(page_detail,x["url"],x["title"],x["source"]):x for x in kept}
         for job in as_completed(jobs):
             x=jobs[job];x["summary"],x["detail"],x["key_points"]=job.result();x.pop("listing_title",None)
-    kept=[x for x in kept if not broken_text(x["title"]+x["summary"]+x["detail"])]
+    kept=[x for x in kept if x["key_points"] and x["summary"] and not broken_text(x["title"]+x["summary"]+x["detail"])]
     def importance(x):
         text=x["title"]+" "+x["summary"]
         return sum(4 for k in PRIORITY if k in text)-sum(4 for k in LOW_PRIORITY if k in text)+(2 if x["published"] else 0)
