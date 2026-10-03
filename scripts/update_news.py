@@ -136,6 +136,10 @@ def extract(source:dict,body:str)->list[dict]:
         if any(k in title+around for k in KEYWORDS["welfare"]):category="welfare"
         date_match=re.search(r"(20\d{2})[年./-]\s*(\d{1,2})[月./-]\s*(\d{1,2})日?",around)
         published=f"{date_match.group(1)}-{int(date_match.group(2)):02d}-{int(date_match.group(3)):02d}" if date_match else ""
+        if not published:
+            era=re.search(r"令和\s*(\d{1,2})年\s*(\d{1,2})月\s*(\d{1,2})日",title+" "+around)
+            if era:
+                published=f"{2018+int(era.group(1)):04d}-{int(era.group(2)):02d}-{int(era.group(3)):02d}"
         st,note=status(title+around)
         out.append({"id":hashlib.sha1(url.encode()).hexdigest()[:14],"category":category,"title":tidy_title(title),"listing_title":title,"summary":"","detail":"","key_points":[],"source":source["name"],"published":published,"status":st,"fact_note":note,"url":url,"primary":True})
     return out
@@ -150,6 +154,8 @@ def main()->int:
         score=(1 if x["published"] else 0)+(2 if x["category"] in ("care","welfare") else 0)
         if x["id"] not in unique or score>unique[x["id"]][0]:unique[x["id"]]=(score,x)
     rows=[v[1] for v in unique.values()]
+    cutoff=(datetime.now(JST)-timedelta(days=180)).date().isoformat()
+    rows=[x for x in rows if not x["published"] or x["published"]>=cutoff]
     rows.sort(key=lambda x:(x["published"],x["category"] in ("care","welfare","medical")),reverse=True)
     # Keep the page compact; healthcare/care gets the largest quota.
     quotas={"care":14,"welfare":12,"local":12,"medical":10,"general":6};kept=[]
