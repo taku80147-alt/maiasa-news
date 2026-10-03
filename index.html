@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#1468a8">
+  <title>毎朝ニュース</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="top-inner">
+      <div class="brand-row">
+        <div>
+          <p class="eyebrow">仕事に効く、自分専用朝刊</p>
+          <h1>毎朝ニュース</h1>
+        </div>
+        <div id="updated" class="updated">更新確認中</div>
+      </div>
+      <nav id="tabs" aria-label="ニュースの分類"></nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="notice" aria-label="掲載方針">
+      <strong>一次情報を優先</strong>
+      <span>介護・医療を厚く掲載。確定事項と検討中を分け、推測は載せません。</span>
+    </section>
+
+    <section id="important-section" class="section">
+      <div class="section-head">
+        <div><span class="section-kicker">まずここだけ</span><h2>今日の重要3件</h2></div>
+        <span class="count" id="important-count"></span>
+      </div>
+      <div id="important-list" class="news-list important-grid"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div><span class="section-kicker">すべての新着</span><h2 id="list-title">介護・医療</h2></div>
+        <span class="count" id="result-count"></span>
+      </div>
+      <div id="news-list" class="news-list"></div>
+      <div id="empty" class="empty" hidden>この分類の新着情報はありません。</div>
+    </section>
+  </main>
+
+  <dialog id="detail-dialog" aria-labelledby="detail-title">
+    <button class="close" id="close-detail" aria-label="詳細を閉じる">×</button>
+    <div id="detail"></div>
+  </dialog>
+
+  <template id="card-template">
+    <article class="card">
+      <button class="card-button">
+        <div class="card-top"><span class="tag"></span><span class="status"></span></div>
+        <h3></h3>
+        <p class="summary"></p>
+        <div class="meta"><span class="source-name"></span><time></time></div>
+      </button>
+    </article>
+  </template>
+  <script src="app.js" defer></script>
+</body>
+</html>
