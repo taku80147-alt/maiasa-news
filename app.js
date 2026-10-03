@@ -1,4 +1,4 @@
-const CATEGORIES={care:"介護・医療",welfare:"福祉用具",local:"宮城・仙台",general:"国内・経済"};
+const CATEGORIES={care:"介護制度",welfare:"福祉用具",local:"宮城・仙台",medical:"医療・安全",general:"国内・経済"};
 let allNews=[];let current="care";
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const fmtDate=s=>{if(!s)return"日付記載なし";const d=new Date(s);return Number.isNaN(d.getTime())?s:new Intl.DateTimeFormat("ja-JP",{month:"numeric",day:"numeric"}).format(d)};
