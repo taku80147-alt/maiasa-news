@@ -93,7 +93,8 @@ def page_detail(url:str,title:str,source_name:str)->tuple[str,str,list[str]]:
     try:
         parser=PageParser();parser.feed(get(url))
         candidates=[]
-        title_terms=[x for x in re.findall(r"[一-龠ァ-ヶ]{3,}",title) if x not in ("について","における","に関する")]
+        generic_terms=("について","における","に関する","令和","年度","仙台市","宮城県","お知らせ","公表します","実施します","開催します","開始します")
+        title_terms=[x for x in re.findall(r"[一-龠ァ-ヶ]{3,}",title) if x not in generic_terms]
         if useful_block(parser.meta,title) and any(k in parser.meta for k in title_terms):
             candidates.append(focus_block(parser.meta,title_terms))
         scored=[]
