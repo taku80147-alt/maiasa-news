@@ -2,7 +2,9 @@
 """Official-source news collector. No generated claims or inferred summaries."""
 from __future__ import annotations
 import hashlib, html, json, re, sys, urllib.parse, urllib.request
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta, timezone
+from html.parser import HTMLParser
 from pathlib import Path
 
 JST=timezone(timedelta(hours=9))
@@ -26,6 +28,9 @@ KEYWORDS={
 }
 DECISION=["公布","施行","決定","公表","通知","改正しました","開始します","発出"]
 DISCUSSION=["検討会","審議会","部会","議論","案","意見募集","取りまとめに向け"]
+BOILERPLATE=["ページの先頭","サイトマップ","お問い合わせ","メニューを開く","本文へ","著作権","プライバシー","アクセシビリティ","検索"]
+PRIORITY=["介護保険","介護報酬","福祉用具","貸与","販売種目","上限価格","給付","改正","施行","通知","報酬改定","地域包括","在宅介護","宮城県","仙台市"]
+LOW_PRIORITY=["採用","仕事体験","タイアップ","研修会","ラーニングビデオ"]
 
 def get(url:str)->str:
     req=urllib.request.Request(url,headers={"User-Agent":UA,"Accept-Language":"ja"})
@@ -40,6 +45,59 @@ def clean(s:str)->str:
     s=re.sub(r"<[^>]+>"," ",s);s=html.unescape(s)
     return re.sub(r"\s+"," ",s).strip()
 
+class PageParser(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True);self.blocks=[];self.meta="";self.capture=None;self.buf=[];self.skip=0
+    def handle_starttag(self,tag,attrs):
+        attrs=dict(attrs)
+        if tag in ("script","style","noscript","svg"):self.skip+=1
+        if tag=="meta" and (attrs.get("name","").lower()=="description" or attrs.get("property","").lower()=="og:description"):
+            if not self.meta:self.meta=clean(attrs.get("content",""))
+        if not self.skip and tag in ("h1","h2","h3","p","li","dd"):
+            self.capture=tag;self.buf=[]
+    def handle_data(self,data):
+        if self.capture and not self.skip:self.buf.append(data)
+    def handle_endtag(self,tag):
+        if tag in ("script","style","noscript","svg") and self.skip:self.skip-=1
+        if self.capture==tag:
+            value=clean(" ".join(self.buf))
+            if value:self.blocks.append(value)
+            self.capture=None;self.buf=[]
+
+def useful_block(text:str,title:str)->bool:
+    if not 24<=len(text)<=700:return False
+    if any(x in text for x in BOILERPLATE):return False
+    if text==title:return False
+    return len(re.findall(r"[一-龠ぁ-んァ-ヶ]",text))>=12
+
+def page_detail(url:str,title:str,source_name:str)->tuple[str,str,list[str]]:
+    try:
+        parser=PageParser();parser.feed(get(url))
+        candidates=[]
+        if useful_block(parser.meta,title):candidates.append(parser.meta)
+        scored=[]
+        for i,b in enumerate(parser.blocks):
+            if not useful_block(b,title):continue
+            score=sum(3 for k in PRIORITY if k in b)+sum(1 for k in KEYWORDS["care"]+KEYWORDS["welfare"] if k in b)
+            score+=2 if re.search(r"20\d{2}年|令和\s*\d+年|対象|開始|施行|改正|公表|通知",b) else 0
+            scored.append((score,-i,b))
+        # Prefer the official page's lead/description, then the most relevant concrete passages.
+        for _,__,b in sorted(scored,reverse=True):
+            if all(b not in x and x not in b for x in candidates):candidates.append(b)
+            if len(candidates)>=6:break
+        if not candidates:return (f"{source_name}の公式ページに掲載された情報です。",f"{source_name}の公式ページに掲載された情報です。",[])
+        points=[x[:260].rstrip("、。 ")+"。" for x in candidates[:4]]
+        summary=" ".join(points[:2])[:430].rstrip("、。 ")+"。"
+        detail="\n\n".join(points)[:1200]
+        return summary,detail,points
+    except Exception:
+        return (f"{source_name}の公式ページに掲載された情報です。",f"{source_name}の公式ページに掲載された情報です。",[])
+
+def tidy_title(value:str)->str:
+    value=re.sub(r"^20\d{2}年\s*\d{1,2}月\s*\d{1,2}日(?:掲載)?\s*","",value)
+    value=re.sub(r"^(?:(?:安全|審査|救済|採用|その他|国際|医薬品|部外品|全製品|イベント)\s+|New\s+)+","",value)
+    return value.strip() or value
+
 def status(text:str)->tuple[str,str]:
     if any(k in text for k in DISCUSSION): return "検討・会議資料","確定事項とは限りません。元資料で議論の段階をご確認ください。"
     if any(k in text for k in DECISION): return "公式発表","公表元が示した内容の範囲で掲載しています。"
@@ -53,6 +111,7 @@ def extract(source:dict,body:str)->list[dict]:
         if not (12<=len(title)<=130):continue
         url=urllib.parse.urljoin(source["url"],html.unescape(m.group(1)))
         if urllib.parse.urlparse(url).scheme not in ("http","https"):continue
+        if url.rstrip("/")==source["url"].rstrip("/"):continue
         start=max(0,m.start()-180);end=min(len(body),m.end()+280)
         # Avoid beginning or ending the excerpt inside an HTML tag.
         if start:
@@ -68,12 +127,8 @@ def extract(source:dict,body:str)->list[dict]:
         if any(k in title+around for k in KEYWORDS["welfare"]):category="welfare"
         date_match=re.search(r"(20\d{2})[年./-]\s*(\d{1,2})[月./-]\s*(\d{1,2})日?",around)
         published=f"{date_match.group(1)}-{int(date_match.group(2)):02d}-{int(date_match.group(3)):02d}" if date_match else ""
-        summary=around
-        if title in summary: summary=summary.replace(title,"",1).strip(" ｜|・:：")
-        if len(summary)<20: summary=f"{source['name']}が公開している新着情報です。"
-        summary=summary[:220].rstrip("、。 ")+"。"
-        st,note=status(title+summary)
-        out.append({"id":hashlib.sha1(url.encode()).hexdigest()[:14],"category":category,"title":title,"summary":summary,"detail":summary,"source":source["name"],"published":published,"status":st,"fact_note":note,"url":url,"primary":True})
+        st,note=status(title+around)
+        out.append({"id":hashlib.sha1(url.encode()).hexdigest()[:14],"category":category,"title":tidy_title(title),"listing_title":title,"summary":"","detail":"","key_points":[],"source":source["name"],"published":published,"status":st,"fact_note":note,"url":url,"primary":True})
     return out
 
 def main()->int:
@@ -90,10 +145,18 @@ def main()->int:
     # Keep the page compact; healthcare/care gets the largest quota.
     quotas={"care":18,"welfare":12,"local":12,"general":8};kept=[]
     for cat,n in quotas.items():kept.extend([x for x in rows if x["category"]==cat][:n])
+    # Read each selected announcement page so the app itself contains useful detail.
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        jobs={pool.submit(page_detail,x["url"],x["title"],x["source"]):x for x in kept}
+        for job in as_completed(jobs):
+            x=jobs[job];x["summary"],x["detail"],x["key_points"]=job.result();x.pop("listing_title",None)
+    def importance(x):
+        text=x["title"]+" "+x["summary"]
+        return sum(4 for k in PRIORITY if k in text)-sum(4 for k in LOW_PRIORITY if k in text)+(2 if x["published"] else 0)
     important=[]
-    for cat in ("care","welfare","local","general"):
-        hit=next((x for x in kept if x["category"]==cat),None)
-        if hit and len(important)<3:important.append(hit["id"])
+    for cat in ("care","welfare","local"):
+        group=[x for x in kept if x["category"]==cat]
+        if group:important.append(max(group,key=importance)["id"])
     now=datetime.now(JST)
     payload={"updated_at":now.isoformat(),"updated_label":f"{now.month}月{now.day}日 {now:%H:%M}","important_ids":important,"items":kept,"source_errors":errors}
     if len(kept)<3:
