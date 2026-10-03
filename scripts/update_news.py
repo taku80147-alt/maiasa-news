@@ -53,7 +53,15 @@ def extract(source:dict,body:str)->list[dict]:
         if not (12<=len(title)<=130):continue
         url=urllib.parse.urljoin(source["url"],html.unescape(m.group(1)))
         if urllib.parse.urlparse(url).scheme not in ("http","https"):continue
-        around=clean(body[max(0,m.start()-180):min(len(body),m.end()+280)])
+        start=max(0,m.start()-180);end=min(len(body),m.end()+280)
+        # Avoid beginning or ending the excerpt inside an HTML tag.
+        if start:
+            tag_end=body.find(">",start,m.start())
+            if tag_end!=-1:start=tag_end+1
+        if end<len(body):
+            tag_start=body.rfind("<",m.end(),end)
+            if tag_start!=-1:end=tag_start
+        around=clean(body[start:end])
         keys=KEYWORDS[source["category"]]
         if not any(k in title+around for k in keys):continue
         category=source["category"]
