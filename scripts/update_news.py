@@ -71,6 +71,9 @@ def useful_block(text:str,title:str)->bool:
     if text==title:return False
     return len(re.findall(r"[一-龠ぁ-んァ-ヶ]",text))>=12
 
+def broken_text(text:str)->bool:
+    return text.count("�")>0 or sum(text.count(x) for x in ("縺","譁","螟","蜿","繧"))>=3
+
 def page_detail(url:str,title:str,source_name:str)->tuple[str,str,list[str]]:
     try:
         parser=PageParser();parser.feed(get(url))
@@ -111,6 +114,7 @@ def extract(source:dict,body:str)->list[dict]:
     for m in re.finditer(r"<a\b[^>]*href=[\"']([^\"'#]+)[\"'][^>]*>(.*?)</a>",body,flags=re.I|re.S):
         title=clean(m.group(2))
         if not (12<=len(title)<=130):continue
+        if broken_text(title):continue
         if title.count("「")!=title.count("」") or title.count("『")!=title.count("』"):continue
         url=urllib.parse.urljoin(source["url"],html.unescape(m.group(1)))
         if urllib.parse.urlparse(url).scheme not in ("http","https"):continue
@@ -125,7 +129,9 @@ def extract(source:dict,body:str)->list[dict]:
             if tag_start!=-1:end=tag_start
         around=clean(body[start:end])
         keys=KEYWORDS[source["category"]]
-        if not any(k in title+around for k in keys):continue
+        # Navigation text around an unrelated link can contain care keywords.
+        # Require the link title itself to show why it belongs in this category.
+        if not any(k in title for k in keys):continue
         category=source["category"]
         if any(k in title+around for k in KEYWORDS["welfare"]):category="welfare"
         date_match=re.search(r"(20\d{2})[年./-]\s*(\d{1,2})[月./-]\s*(\d{1,2})日?",around)
@@ -153,6 +159,7 @@ def main()->int:
         jobs={pool.submit(page_detail,x["url"],x["title"],x["source"]):x for x in kept}
         for job in as_completed(jobs):
             x=jobs[job];x["summary"],x["detail"],x["key_points"]=job.result();x.pop("listing_title",None)
+    kept=[x for x in kept if not broken_text(x["title"]+x["summary"]+x["detail"])]
     def importance(x):
         text=x["title"]+" "+x["summary"]
         return sum(4 for k in PRIORITY if k in text)-sum(4 for k in LOW_PRIORITY if k in text)+(2 if x["published"] else 0)
