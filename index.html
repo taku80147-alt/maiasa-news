@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#1468a8">
+  <meta name="theme-color" content="#063c9a">
   <title>毎朝ニュース</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=3">
@@ -13,8 +13,8 @@
     <div class="top-inner">
       <div class="brand-row">
         <div>
-          <p class="eyebrow">仕事に効く、自分専用朝刊</p>
-          <h1>毎朝ニュース</h1>
+          <p class="eyebrow">今日の営業に効く、注目トピックス</p>
+          <h1><span class="sun" aria-hidden="true">☀</span>毎朝ニュース</h1>
         </div>
         <div id="updated" class="updated">更新確認中</div>
       </div>
@@ -46,6 +46,11 @@
     </section>
   </main>
 
+  <div id="selection-bar" class="selection-bar" hidden>
+    <span><b id="selection-count">0</b>件を選択中</span>
+    <button id="make-pdf">選んだ記事でPDFを作成</button>
+  </div>
+
   <dialog id="detail-dialog" aria-labelledby="detail-title">
     <button class="close" id="close-detail" aria-label="詳細を閉じる">×</button>
     <div id="detail"></div>
@@ -54,13 +59,14 @@
   <template id="card-template">
     <article class="card">
       <button class="card-button">
-        <div class="card-top"><span class="tag"></span><span class="status"></span></div>
+        <div class="card-top"><span class="card-number"></span><span class="tag"></span><span class="status"></span></div>
         <h3></h3>
         <p class="summary"></p>
         <div class="meta"><span class="source-name"></span><time></time></div>
+        <label class="select-row"><input type="checkbox"><span>配布資料に追加</span></label>
       </button>
     </article>
   </template>
-  <script src="app.js?v=3" defer></script>
+  <script src="app.js?v=4" defer></script>
 </body>
 </html>
