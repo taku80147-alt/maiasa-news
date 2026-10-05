@@ -10,8 +10,13 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  pages: write
+  id-token: write
 jobs:
   update:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,3 +33,13 @@ jobs:
           git diff --cached --quiet || git commit -m "毎朝のニュースを更新"
           git pull --rebase origin main
           git push
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - name: 最新ニュースを公開
+        id: deployment
+        uses: actions/deploy-pages@v4
+
