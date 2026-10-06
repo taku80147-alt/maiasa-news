@@ -18,3 +18,13 @@ nav{padding-bottom:2px}.tab{border:0;color:#fff;background:#64748b;box-shadow:in
 @media(max-width:480px){.notice{align-items:flex-start;flex-direction:column;gap:2px}.selection-bar button{font-size:.88rem}.brief-grid section{grid-template-columns:1fr}.brief-grid b{padding:7px 10px}.brief-grid p{padding:8px 10px}}
 
 .tab[data-category="facility"]{background:#087f8c}.tab[data-category="subsidy"]{background:#b36b00}.card[data-category="facility"]{--cat:#087f8c;border-left-color:#087f8c}.card[data-category="subsidy"]{--cat:#b36b00;border-left-color:#b36b00}
+
+/* All categories remain visible without horizontal swiping. */
+.topbar{position:static}#tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible;gap:8px;padding:12px 3px 4px}
+#tabs .tab{min-height:44px;padding:8px 5px;border-radius:9px;white-space:normal;font-size:.875rem;line-height:1.35;transform:none;min-width:0}
+#tabs .tab[aria-pressed="true"]{outline:2px solid white;outline-offset:2px}
+#tabs .tab[aria-pressed="true"]::before{content:"✓ ";font-weight:900}
+.tab[data-category="business"]{background:#334b68}.card[data-category="business"]{--cat:#334b68;border-left-color:#334b68}
+.brand-row h1{font-size:1.5rem}.eyebrow{font-size:.875rem}.updated{font-size:.875rem}.notice{font-size:.875rem}
+.tab:focus-visible{outline:3px solid #ffd43b;outline-offset:2px}
+@media(min-width:760px){#tabs{grid-template-columns:repeat(4,minmax(0,1fr))}}
