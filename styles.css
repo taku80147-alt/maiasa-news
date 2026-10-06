@@ -16,3 +16,5 @@ nav{padding-bottom:2px}.tab{border:0;color:#fff;background:#64748b;box-shadow:in
 .brief-grid{display:grid;gap:9px;margin:18px 0}.brief-grid section{display:grid;grid-template-columns:108px 1fr;background:#f4f8fd;border-radius:12px;overflow:hidden}.brief-grid b{padding:10px;background:#e3effd;color:#0763c9}.brief-grid p{margin:0;padding:10px;line-height:1.75}
 .content-summary{margin:18px 0;background:#f4f8fd;border-radius:15px;padding:15px;border-left:5px solid #0870de}.content-summary h3{margin:0 0 8px;color:#0763c9}.content-summary p{margin:0;line-height:1.85}.content-summary ul{margin:12px 0 0;padding-left:1.3rem}.content-summary li{margin:0 0 9px;line-height:1.8}
 @media(max-width:480px){.notice{align-items:flex-start;flex-direction:column;gap:2px}.selection-bar button{font-size:.88rem}.brief-grid section{grid-template-columns:1fr}.brief-grid b{padding:7px 10px}.brief-grid p{padding:8px 10px}}
+
+.tab[data-category="facility"]{background:#087f8c}.tab[data-category="subsidy"]{background:#b36b00}.card[data-category="facility"]{--cat:#087f8c;border-left-color:#087f8c}.card[data-category="subsidy"]{--cat:#b36b00;border-left-color:#b36b00}
