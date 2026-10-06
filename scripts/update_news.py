@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Official-source news collector. No generated claims or inferred summaries."""
 from __future__ import annotations
-import hashlib, html, json, re, sys, urllib.parse, urllib.request
+import hashlib, html, json, re, sys, urllib.parse, urllib.request, urllib.robotparser
+import xml.etree.ElementTree as ET
+from email.utils import parsedate_to_datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta, timezone
 from html.parser import HTMLParser
@@ -203,6 +205,54 @@ def verified_announcement(url:str,title:str,published:str)->bool:
         return published in dates
     except Exception:return False
 
+JOINT_FEED="https://www.joint-kaigo.com/feed/"
+MHLW_TERMS="https://www.mhlw.go.jp/chosakuken/"
+
+def joint_items(body:str)->list[dict]:
+    rows=[]
+    for item in ET.fromstring(body).findall("./channel/item"):
+        title=clean(item.findtext("title", ""));url=item.findtext("link", "").strip()
+        if urllib.parse.urlparse(url).hostname!="www.joint-kaigo.com" or not url.startswith("https://www.joint-kaigo.com/articles/"):continue
+        try:published=parsedate_to_datetime(item.findtext("pubDate", "")).astimezone(JST).date().isoformat()
+        except (ValueError,TypeError):continue
+        if not title or broken_text(title):continue
+        tags=[clean(t.text or "") for t in item.findall("category")]
+        commentary="コラム" in tags or title.startswith("【")
+        category=classify_title(title,"care")
+        if any(k in title for k in KEYWORDS["welfare"]):category="welfare"
+        if any(k in title for k in ("医療","看護","感染","医薬品")) and category=="care":category="medical"
+        rows.append({"id":hashlib.sha1(url.encode()).hexdigest()[:14],"category":category,"title":title,
+          "summary":"JOINTの"+("コラム・対談" if commentary else "報道記事")+"です。内容はJOINTの元記事でご確認ください。",
+          "detail":"","key_points":[],"source":"介護ニュースJOINT","published":published,
+          "status":"コラム・見解" if commentary else "JOINT報道","fact_note":"元記事へのリンク紹介です。公式確認済みの制度情報とは区別しています。",
+          "url":url,"primary":False,"verified_source":True,"source_type":"media_link","link_only":True,
+          "distribution_allowed":False,"distribution_note":"JOINTの記事は配布用PDFの対象外です。"})
+    return rows
+
+def collect_joint()->list[dict]:
+    robots=urllib.robotparser.RobotFileParser()
+    robots.parse(get("https://www.joint-kaigo.com/robots.txt").splitlines())
+    if not robots.can_fetch(UA,JOINT_FEED):raise ValueError("RSS access disallowed")
+    return joint_items(get(JOINT_FEED))
+
+def distribution_review(x:dict)->tuple[bool,str]:
+    # Default deny; only reviewed publisher-owned text under the confirmed policy.
+    if urllib.parse.urlparse(x["url"]).hostname!="www.mhlw.go.jp":return False,"配布条件未確認のため、閲覧用です。"
+    try:
+        body=get(x["url"])
+        # Restrict to individual announcements; never automatically approve PDF/third-party attachments.
+        path=urllib.parse.urlparse(x["url"]).path
+        if not path.startswith("/stf/") or path.endswith(".pdf"):return False,"配布条件未確認のため、閲覧用です。"
+        text=clean(body)
+        markers=("転載禁止","無断転載","第三者に著作権","第三者の著作権","別の利用条件","資料提供","写真提供","画像提供")
+        if any(k in text for k in markers):return False,"個別の権利条件の確認が必要なため、閲覧用です。"
+        # Quotations and attributed passages are excluded from automated PDF approval.
+        excerpt=x.get("summary", "")+x.get("detail", "")
+        if any(k in excerpt for k in ("出典：","出典:","提供：","提供:","©","Copyright","と述べ","と語","との声","引用")):
+            return False,"引用元の権利確認が必要なため、閲覧用です。"
+        return True,"厚生労働省の利用条件（PDL1.0）を確認。出典を明記して本文の抜粋を編集・整理しています。"
+    except Exception:return False,"配布条件を確認できなかったため、閲覧用です。"
+
 def main()->int:
     # Keep a compact history so the dashboard can show only genuinely new/updated items.
     previous={}
@@ -211,7 +261,9 @@ def main()->int:
     except Exception:
         previous={}
     history=previous.get("history",{}) if isinstance(previous,dict) else {}
-    items=[];errors=[]
+    items=[];errors=[];media=[]
+    try:media=collect_joint()
+    except Exception as e:errors.append(f"JOINT RSS: {type(e).__name__}")
     for src in SOURCES:
         try: items.extend(extract(src,get(src["url"])))
         except Exception as e: errors.append(f"{src['name']}: {type(e).__name__}")
@@ -239,7 +291,12 @@ def main()->int:
     for x in kept:
         x["verified_source"]=verified_announcement(x["url"],x["title"],x["published"])
         x["fact_note"]="公式本文からの抜粋です。対象・金額・期限は本文で確認できた範囲のみ掲載しています。"
+        x["source_type"]="official"
+        x["distribution_allowed"],x["distribution_note"]=distribution_review(x)
+        if x["distribution_allowed"]:x["distribution_policy_url"]=MHLW_TERMS
     kept=[x for x in kept if x["verified_source"] and x["key_points"] and x["summary"] and not broken_text(x["title"]+x["summary"]+x["detail"])]
+
+    kept.extend(x for x in media if fresh_cutoff<=x["published"]<=now.date().isoformat())
 
     def fingerprint(x):
         raw="\n".join([x.get("title",""),x.get("summary",""),x.get("detail","")])
@@ -255,6 +312,9 @@ def main()->int:
             fresh.append(x)
         elif old_fp!=fp:
             x["change_type"]="更新"
+            fresh.append(x)
+        else:
+            x["change_type"]=""
             fresh.append(x)
         history[x["id"]]={"fingerprint":fp,"last_seen":now.date().isoformat(),"published":x.get("published","")}
 
@@ -276,10 +336,10 @@ def main()->int:
     payload={
         "updated_at":now.isoformat(),
         "updated_label":f"{now.month}月{now.day}日 {now:%H:%M}",
-        "mode":"differential",
-        "new_count":len(fresh),
+        "mode":"recent_verified_and_media_links",
+        "new_count":sum(bool(x.get("change_type")) for x in fresh),
         "important_ids":important,
-        "items":fresh,
+        "items":sorted(fresh,key=lambda x:x["published"],reverse=True),
         "history":history,
         "source_errors":errors
     }
@@ -289,4 +349,5 @@ def main()->int:
     print(f"Collected {len(kept)} recent candidates; publishing {len(fresh)} new/updated items; {len(errors)} source errors.")
     return 0
 if __name__=="__main__":raise SystemExit(main())
+
 
