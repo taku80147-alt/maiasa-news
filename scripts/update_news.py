@@ -25,6 +25,8 @@ KEYWORDS={
  "welfare":["福祉用具","貸与価格","上限価格","車いす","歩行器","介護ベッド","手すり","スロープ","リフト","安全情報","自主回収"],
  "local":["介護","高齢","医療","福祉","地域包括","在宅","補助","支援","施設"],
  "medical":["医薬品","医療機器","安全","副作用","回収","医療事故","承認","注意"],
+ "facility":["施設","事業所","開設","開所","増床","移転"],
+ "subsidy":["補助金","助成金","交付金","補助事業","介護テクノロジー","介護DX"],
  "general":["物価","景気","雇用","賃金","金利","災害","地震","経済","企業","人口"],
 }
 DECISION=["公布","施行","決定","公表","通知","改正しました","開始します","発出"]
@@ -129,6 +131,15 @@ def status(text:str)->tuple[str,str]:
     if any(k in text for k in DECISION): return "公式発表","公表元が示した内容の範囲で掲載しています。"
     return "公式ページ","ページの記載内容だけを掲載しています。"
 
+def classify_title(title:str,default:str)->str:
+    care_context=any(k in title for k in ("介護","福祉","高齢","障害","医療","特養","老人ホーム","病院","診療所"))
+    if care_context and any(k in title for k in ("補助金","助成金","交付金","補助事業","補助","助成")):
+        return "subsidy"
+    facility_context=any(k in title for k in ("施設","事業所","老人ホーム","特養","病院","診療所","介護センター"))
+    if care_context and facility_context and any(k in title for k in ("新設","開設","開所","増床","移転","整備","設置","指定","廃止","休止")):
+        return "facility"
+    return default
+
 def extract(source:dict,body:str)->list[dict]:
     out=[]
     # Links are treated as candidate headlines; surrounding text becomes the non-generative summary.
@@ -153,8 +164,8 @@ def extract(source:dict,body:str)->list[dict]:
         # Navigation text around an unrelated link can contain care keywords.
         # Require the link title itself to show why it belongs in this category.
         if not source.get("accept_all") and not any(k in title for k in keys):continue
-        category=source["category"]
-        if any(k in title+around for k in KEYWORDS["welfare"]):category="welfare"
+        category=classify_title(title,source["category"])
+        if category not in ("facility","subsidy") and any(k in title for k in KEYWORDS["welfare"]):category="welfare"
         date_match=re.search(r"(20\d{2})[年./-]\s*(\d{1,2})[月./-]\s*(\d{1,2})日?",around)
         published=f"{date_match.group(1)}-{int(date_match.group(2)):02d}-{int(date_match.group(3)):02d}" if date_match else ""
         if not published:
@@ -189,7 +200,7 @@ def main()->int:
     rows=[x for x in rows if x["published"] and x["published"]>=fresh_cutoff]
     rows.sort(key=lambda x:(x["published"],x["category"] in ("care","welfare","medical")),reverse=True)
 
-    quotas={"care":18,"welfare":14,"local":14,"medical":12,"general":8};kept=[]
+    quotas={"care":18,"welfare":14,"local":14,"medical":12,"general":8,"facility":12,"subsidy":12};kept=[]
     for cat,n in quotas.items():kept.extend([x for x in rows if x["category"]==cat][:n])
 
     # Read each selected announcement page so fingerprints reflect actual content,
@@ -228,7 +239,7 @@ def main()->int:
 
     # Important 3 are selected ONLY from today's new/updated stories.
     important=[]
-    for cat in ("care","welfare","local","medical","general"):
+    for cat in ("care","welfare","facility","subsidy","local","medical","general"):
         group=[x for x in fresh if x["category"]==cat]
         if group and len(important)<3:important.append(max(group,key=importance)["id"])
 
