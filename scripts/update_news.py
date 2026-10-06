@@ -188,15 +188,15 @@ def verified_announcement(url:str,title:str,published:str)->bool:
     try:
         body=get(url)
         parser=PageParser();parser.feed(body)
-        heading=re.findall(r"<h1\\b[^>]*>(.*?)</h1>",body,re.I|re.S)
+        heading=re.findall(r"<h1\b[^>]*>(.*?)</h1>",body,re.I|re.S)
         terms=[t for t in re.findall(r"[一-龠ァ-ヶ]{3,}",title) if t not in ("について","に関する","お知らせ")]
         if not terms or not any(any(t in clean(h) for t in terms) for h in heading):return False
         text=clean(body)
         dates=set()
-        for y,m,d in re.findall(r"(20\\d{2})[年./-]\\s*(\\d{1,2})[月./-]\\s*(\\d{1,2})日?",text):
+        for y,m,d in re.findall(r"(20\d{2})[年./-]\s*(\d{1,2})[月./-]\s*(\d{1,2})日?",text):
             try:dates.add(datetime(int(y),int(m),int(d)).date().isoformat())
             except ValueError:pass
-        for y,m,d in re.findall(r"令和\\s*(\\d{1,2})年\\s*(\\d{1,2})月\\s*(\\d{1,2})日",text):
+        for y,m,d in re.findall(r"令和\s*(\d{1,2})年\s*(\d{1,2})月\s*(\d{1,2})日",text):
             try:dates.add(datetime(2018+int(y),int(m),int(d)).date().isoformat())
             except ValueError:pass
         # Reject listing dates absent from the individual announcement.
