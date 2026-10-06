@@ -28,3 +28,6 @@ nav{padding-bottom:2px}.tab{border:0;color:#fff;background:#64748b;box-shadow:in
 .brand-row h1{font-size:1.5rem}.eyebrow{font-size:.875rem}.updated{font-size:.875rem}.notice{font-size:.875rem}
 .tab:focus-visible{outline:3px solid #ffd43b;outline-offset:2px}
 @media(min-width:760px){#tabs{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+
+.select-row[hidden]{display:none!important}.distribution-note{font-size:.875rem;color:#526982;background:#eef3f7;border-radius:8px;padding:8px 10px;margin:12px 0 0}.print-source{overflow-wrap:anywhere}
