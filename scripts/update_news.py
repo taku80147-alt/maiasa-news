@@ -166,6 +166,13 @@ def extract(source:dict,body:str)->list[dict]:
     return out
 
 def main()->int:
+    # Keep a compact history so the dashboard can show only genuinely new/updated items.
+    previous={}
+    try:
+        previous=json.loads(Path("data/news.json").read_text(encoding="utf-8"))
+    except Exception:
+        previous={}
+    history=previous.get("history",{}) if isinstance(previous,dict) else {}
     items=[];errors=[]
     for src in SOURCES:
         try: items.extend(extract(src,get(src["url"])))
@@ -175,31 +182,70 @@ def main()->int:
         score=(1 if x["published"] else 0)+(2 if x["category"] in ("care","welfare") else 0)
         if x["id"] not in unique or score>unique[x["id"]][0]:unique[x["id"]]=(score,x)
     rows=[v[1] for v in unique.values()]
-    cutoff=(datetime.now(JST)-timedelta(days=30)).date().isoformat()
-    rows=[x for x in rows if x["published"] and x["published"]>=cutoff]
+    now=datetime.now(JST)
+    # Dashboard is a daily DIFFERENTIAL feed: only items from the last 3 days
+    # are candidates, and already-seen unchanged items are not shown again.
+    fresh_cutoff=(now.date()-timedelta(days=3)).isoformat()
+    rows=[x for x in rows if x["published"] and x["published"]>=fresh_cutoff]
     rows.sort(key=lambda x:(x["published"],x["category"] in ("care","welfare","medical")),reverse=True)
-    # Keep the page compact; healthcare/care gets the largest quota.
-    quotas={"care":14,"welfare":12,"local":12,"medical":10,"general":6};kept=[]
+
+    quotas={"care":18,"welfare":14,"local":14,"medical":12,"general":8};kept=[]
     for cat,n in quotas.items():kept.extend([x for x in rows if x["category"]==cat][:n])
-    # Read each selected announcement page so the app itself contains useful detail.
+
+    # Read each selected announcement page so fingerprints reflect actual content,
+    # not just the listing-page title.
     with ThreadPoolExecutor(max_workers=8) as pool:
         jobs={pool.submit(page_detail,x["url"],x["title"],x["source"]):x for x in kept}
         for job in as_completed(jobs):
             x=jobs[job];x["summary"],x["detail"],x["key_points"]=job.result();x.pop("listing_title",None)
     kept=[x for x in kept if x["key_points"] and x["summary"] and not broken_text(x["title"]+x["summary"]+x["detail"])]
+
+    def fingerprint(x):
+        raw="\n".join([x.get("title",""),x.get("summary",""),x.get("detail","")])
+        return hashlib.sha1(raw.encode("utf-8")).hexdigest()
+
+    fresh=[]
+    for x in kept:
+        fp=fingerprint(x)
+        old=history.get(x["id"],{}) if isinstance(history,dict) else {}
+        old_fp=old.get("fingerprint","") if isinstance(old,dict) else ""
+        if not old_fp:
+            x["change_type"]="新着"
+            fresh.append(x)
+        elif old_fp!=fp:
+            x["change_type"]="更新"
+            fresh.append(x)
+        history[x["id"]]={"fingerprint":fp,"last_seen":now.date().isoformat(),"published":x.get("published","")}
+
+    # Keep history bounded while retaining enough memory to prevent repeats.
+    if isinstance(history,dict) and len(history)>500:
+        ordered=sorted(history.items(),key=lambda kv:kv[1].get("last_seen",""),reverse=True)[:500]
+        history=dict(ordered)
+
     def importance(x):
         text=x["title"]+" "+x["summary"]
         return sum(4 for k in PRIORITY if k in text)-sum(4 for k in LOW_PRIORITY if k in text)+(2 if x["published"] else 0)
+
+    # Important 3 are selected ONLY from today's new/updated stories.
     important=[]
-    for cat in ("care","welfare","local"):
-        group=[x for x in kept if x["category"]==cat]
-        if group:important.append(max(group,key=importance)["id"])
-    now=datetime.now(JST)
-    payload={"updated_at":now.isoformat(),"updated_label":f"{now.month}月{now.day}日 {now:%H:%M}","important_ids":important,"items":kept,"source_errors":errors}
-    if len(kept)<3:
-        print(f"Collected only {len(kept)} items; preserving previous data.",file=sys.stderr);return 2
+    for cat in ("care","welfare","local","medical","general"):
+        group=[x for x in fresh if x["category"]==cat]
+        if group and len(important)<3:important.append(max(group,key=importance)["id"])
+
+    payload={
+        "updated_at":now.isoformat(),
+        "updated_label":f"{now.month}月{now.day}日 {now:%H:%M}",
+        "mode":"differential",
+        "new_count":len(fresh),
+        "important_ids":important,
+        "items":fresh,
+        "history":history,
+        "source_errors":errors
+    }
+    if not kept and len(errors)>=max(2,len(SOURCES)//2):
+        print("Most sources failed; preserving previous data.",file=sys.stderr);return 2
     Path("data").mkdir(exist_ok=True);Path("data/news.json").write_text(json.dumps(payload,ensure_ascii=False,separators=(",",":")),encoding="utf-8")
-    print(f"Collected {len(kept)} official-source items; {len(errors)} source errors.")
+    print(f"Collected {len(kept)} recent candidates; publishing {len(fresh)} new/updated items; {len(errors)} source errors.")
     return 0
 if __name__=="__main__":raise SystemExit(main())
 
