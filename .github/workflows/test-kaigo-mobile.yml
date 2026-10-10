@@ -1,0 +1,42 @@
+name: 介護ナビ・スマホ操作とレイアウト検査
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'kaigo-navi2027-preview/index.html'
+      - 'scripts/test_kaigo_mobile.cjs'
+      - '.github/workflows/test-kaigo-mobile.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Chromium テスト環境の準備
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: ローカルWebサーバー起動
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/kaigo-http.log 2>&1 &
+          for i in $(seq 1 20); do
+            curl -fsS http://127.0.0.1:8765/kaigo-navi2027-preview/data/latest.json > /dev/null && exit 0
+            sleep 1
+          done
+          exit 1
+      - name: 320・360・390・430pxで表示と記事操作を検証
+        run: node scripts/test_kaigo_mobile.cjs
+      - name: 画面スクリーンショットを保存
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kaigo-mobile-screenshots
+          path: kaigo-qa-screenshots/
+          if-no-files-found: ignore
+          retention-days: 7
