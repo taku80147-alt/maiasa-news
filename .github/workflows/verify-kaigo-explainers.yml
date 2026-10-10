@@ -9,6 +9,7 @@ on:
       - scripts/build_kaigo_explainers.py
       - scripts/test_kaigo_explainers.py
       - kaigo-navi2027-preview/data/explainers.json
+      - kaigo-navi2027-preview/data/latest.json
       - .github/workflows/verify-kaigo-explainers.yml
 permissions:
   contents: write
