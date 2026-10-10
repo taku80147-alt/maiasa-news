@@ -87,16 +87,16 @@ if(mode==='detail'){const a=items.find(x=>x.id===selected);if(a){const source=ty
 if(mode==='detail'){const a=items.find(x=>x.id===selected);if(a)content+=explainArticle(a);}
 if(mode==='detail' && !reviewedExplainers.has(selected) && selected!=='n-pay-269' && String(selected||'').startsWith('n-'))content+='<p class="exp-alert">この記事は現在、概要版です。本文・数値・適用条件まで確認した3段階の解説が整い次第、ここに追加します。</p>'; 
 if(mode==='detail' && selected==='n-pay-269') {
-  const links=[['n-pay-269-gh','認知症グループホームの解説'],['n-pay-269-sm','小規模多機能の解説']];
+  const links=[['n-pay-269-gh','認知症グループホームの解説'],['n-pay-269-sm','小規模多機能の解説'],['n-pay-269-nm','看護小規模多機能の解説'],['n-pay-269-dn','定期巡回・夜間対応型訪問介護の解説']];
   content+='<section class="card"><h3>📘 分科会の個別解説を読む</h3><p>本日の会議には複数のテーマがあります。詳しい本文と営業向けの説明は、次の記事で確認できます。</p>'+links.map(x=>'<p><button class="primary" type="button" data-id="'+x[0]+'" style="width:100%;text-align:left;padding:13px;margin:2px 0;border-radius:12px;">'+x[1]+' →</button></p>').join('')+'</section>';
 }
 if(mode==='today')content+='<div class="card"><h3>5分でわかる介護制度改正の基礎</h3><p>大切なのは「検討」「決定」「施行」の違いです。報道だけでなく、制度を所管する省庁の公表資料と日付を確認しましょう。</p></div>';
 if(mode==='talk')content+='<div class="card"><span class="tag">営業トークの例</span><h3>「最近、施設の運営で困っていることはありますか？」</h3><p>すぐに制度の説明を始めるのではなく、相手の課題を聞き、実際の改正情報が確認できた段階で関係する制度を伝えます。</p></div>';
 if(mode==='categories')content+='<div class="cards">'+categories.map(c=>'<button class="card" style="text-align:left" data-cat="'+esc(c[1])+'"><h3>'+c[0]+' '+esc(c[1])+' →</h3></button>').join('')+'</div>';
-if(mode==='category')content+='<h2>'+esc(selected)+'</h2><div class="cards">'+(items.filter(x=>x.category===selected).map(row).join('')||'<div class="empty">該当する見本記事はありません。</div>')+'</div>';
-if(mode==='search'||mode==='ai')content+='<p class="vsub">'+(mode==='ai'?'このデモは見本記事の検索のみ。実際のAI回答には未対応です。':'見本記事をキーワードで探せます。')+'</p><input class="input" id="q" placeholder="例：BCP / 人員配置"><div class="cards" id="results"></div>';
+if(mode==='category')content+='<h2>'+esc(selected)+'</h2><div class="cards">'+(items.filter(x=>x.category===selected).map(row).join('')||'<div class="empty">該当する記事はありません。</div>')+'</div>';
+if(mode==='search'||mode==='ai')content+='<p class="vsub">'+(mode==='ai'?'現在は記事内のキーワード検索のみ。AIによる制度解説の自動回答には未対応です。':'掲載記事をキーワードで探せます。')+'</p><input class="input" id="q" placeholder="例：BCP / 人員配置"><div class="cards" id="results"></div>';
 if(mode==='favorites')content+='<div class="cards">'+(items.filter(x=>saved.has(x.id)).map(row).join('')||'<div class="empty">保存した記事はまだありません。</div>')+'</div>';
-content+='<div class="notice">最新情報は厚生労働省の公式会議資料の概要です。決定した改正や施行日ではありません。テーマ解説・AI機能は試作段階です。</div>';$('viewbody').innerHTML=content;if(mode==='search'||mode==='ai'){$('q').addEventListener('input',e=>{$('results').innerHTML=items.filter(x=>e.target.value.trim()&&(x.title+x.summary+x.category).includes(e.target.value.trim())).map(row).join('')||'<div class="empty">該当する見本記事がありません。</div>'})}}
+content+='<div class="notice">最新情報は厚生労働省の公式会議資料の概要です。決定した改正や施行日ではありません。テーマ解説・AI機能は試作段階です。</div>';$('viewbody').innerHTML=content;if(mode==='search'||mode==='ai'){$('q').addEventListener('input',e=>{$('results').innerHTML=items.filter(x=>e.target.value.trim()&&(x.title+x.summary+x.category).includes(e.target.value.trim())).map(row).join('')||'<div class="empty">該当する記事がありません。</div>'})}}
 const detailHistory=[];
 function openArticle(id){if(mode==='detail'){if(selected)detailHistory.push(selected)}else{detailHistory.length=0;from=mode}selected=id;go('detail')}
 function paintOfficialHome(){const news=items.filter(x=>x.id.startsWith('n')).slice(0,3);$('homeNews').innerHTML=news.map(x=>'<button class="news" data-id="'+x.id+'"><img class="nthumb" src="'+x.image+'" alt=""><span class="ncopy"><span class="meta"><span class="state '+x.tag+'">'+esc(x.state)+'</span><span class="date">'+esc((x.date||'').slice(5).replace('-','/'))+' 開催</span></span><strong>'+esc(x.title)+'</strong><small>'+esc(x.summary)+'</small></span><span class="chev">›</span></button>').join('')}
