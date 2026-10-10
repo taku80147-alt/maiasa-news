@@ -31,6 +31,8 @@ jobs:
         run: python -m pip install pymupdf==1.26.5
       - name: 全PDFを読みページ根拠を照合（失敗時は公開しない）
         run: python scripts/build_kaigo_explainers.py
+      - name: 数値・決定状況・出典との整合性テスト
+        run: python -m unittest discover -s scripts -p 'test_kaigo_explainers.py' -v
       - name: 検証済みの解説のみ保存
         run: |
           git config user.name 'github-actions[bot]'
