@@ -4,8 +4,8 @@ import re
 import urllib.request
 import fitz
 SOURCES={
- "group_home":"https://www.mhlw.go.jp/content/12300000/001758120.pdf",
- "small_multifunction":"https://www.mhlw.go.jp/content/12300000/001758168.pdf",
+ "nursing_multifunction":"https://www.mhlw.go.jp/content/12300000/001758325.pdf",
+ "scheduled_night_visit":"https://www.mhlw.go.jp/content/12300000/001758324.pdf",
 }
 for name,url in SOURCES.items():
  print("============== SOURCE",name,url,"==============")
