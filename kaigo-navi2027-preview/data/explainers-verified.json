@@ -407,7 +407,7 @@
     }
   ],
   "source_verified_at": "2026-10-10",
-  "verification_scope": "All PDF pages readable and all declared evidence page-anchors matched. Editorial interpretations remain human/AI-reviewed separately, not mechanically proven.",
+  "verification_scope": "Whole PDF pages extracted, >=75% text coverage (multi-page), declared claim anchors and scoped numerical literals matched on specified pages. This does not prove every legal interpretation or table is correct.",
   "source_audits": [
     {
       "id": "n-pay-268",
@@ -440,7 +440,9 @@
           "anchor": "安定性・持続可能性",
           "status": "located"
         }
-      ]
+      ],
+      "numeric_checks": [],
+      "readable_page_rate": 1.0
     },
     {
       "id": "n-pay-259",
@@ -479,7 +481,22 @@
           "anchor": "松葉杖は除く",
           "status": "located"
         }
-      ]
+      ],
+      "numeric_checks": [
+        {
+          "pdf_page": 48,
+          "literal": "88.7%",
+          "scope": "令和6年度の貸与上限価格見直し・対象商品数ベースで引下げ",
+          "status": "located"
+        },
+        {
+          "pdf_page": 48,
+          "literal": "11.3%",
+          "scope": "令和6年度の貸与上限価格見直し・対象商品数ベースで引上げ",
+          "status": "located"
+        }
+      ],
+      "readable_page_rate": 1.0
     },
     {
       "id": "n-pay-269-gh",
@@ -518,7 +535,28 @@
           "anchor": "夜間の人員配置を２人体制",
           "status": "located"
         }
-      ]
+      ],
+      "numeric_checks": [
+        {
+          "pdf_page": 25,
+          "literal": "原則３人以上",
+          "scope": "現行3ユニット夜勤の原則人数",
+          "status": "located"
+        },
+        {
+          "pdf_page": 25,
+          "literal": "２人以上",
+          "scope": "一定要件下での現行例外",
+          "status": "located"
+        },
+        {
+          "pdf_page": 26,
+          "literal": "２人体制",
+          "scope": "検討中の3ユニット夜勤に関する対応案",
+          "status": "located"
+        }
+      ],
+      "readable_page_rate": 0.914
     },
     {
       "id": "n-pay-269-sm",
@@ -563,7 +601,22 @@
           "anchor": "要介護度別の月単位の定額報酬",
           "status": "located"
         }
-      ]
+      ],
+      "numeric_checks": [
+        {
+          "pdf_page": 21,
+          "literal": "29名以下",
+          "scope": "現行の1事業所登録定員",
+          "status": "located"
+        },
+        {
+          "pdf_page": 14,
+          "literal": "要介護１及び要介護２",
+          "scope": "今回の対応案で評価が議論されている軽度者",
+          "status": "located"
+        }
+      ],
+      "readable_page_rate": 0.9
     }
   ]
 }
