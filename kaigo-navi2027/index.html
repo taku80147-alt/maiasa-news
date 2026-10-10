@@ -6,6 +6,17 @@
 .newscard{width:100%;min-width:0;scroll-snap-align:none}
 .featured button{min-width:0;width:100%;min-height:142px}
 @media(max-width:420px){.horizontal,.featured{gap:8px}.newscard b{font-size:13px}.featured b{font-size:14px}.featured button{padding:12px 10px 32px}.newsart{height:75px}}
+
+/* Latest information uses full-width rows for legibility; reform feature cards remain a 2-column grid. */
+.horizontal{display:grid;grid-template-columns:minmax(0,1fr);gap:9px;overflow:visible;padding:0;scroll-snap-type:none}
+.newscard{width:100%;min-width:0;display:grid;grid-template-columns:88px minmax(0,1fr);grid-template-rows:auto auto auto;column-gap:12px;align-content:center;text-align:left;min-height:95px;padding:8px 12px 8px 8px;border:1px solid #eaf0fb}
+.newscard .newsart{grid-column:1;grid-row:1/4;height:78px;border-radius:11px;font-size:39px}
+.newscard .badge{grid-column:2;grid-row:1;justify-self:start;margin:0 0 3px;padding:3px 9px}
+.newscard b{grid-column:2;grid-row:2;padding:0;font-size:15px;line-height:1.42}
+.newscard small{grid-column:2;grid-row:3;padding:2px 0 0;font-size:11px}
+.featured{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible;gap:9px}
+.featured button{min-width:0;width:100%}
+@media(max-width:370px){.newscard{grid-template-columns:70px minmax(0,1fr);gap:9px}.newscard .newsart{height:73px;font-size:31px}.newscard b{font-size:14px}}
 </style></head><body><div class="app"><header class="header"><div class="logo">✦</div><div class="brand">介護制度改正ナビ<em>2027</em><small>変わる制度を、現場の力に。</small></div><button class="headbtn" id="searchOpen" aria-label="検索">⌕</button><button class="headbtn" id="menuOpen" aria-label="メニュー">☰</button></header>
 <main id="home" class="pane active"><section class="hero"><svg viewBox="0 0 500 265" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#b8edff"/><stop offset="1" stop-color="#eefcff"/></linearGradient></defs><rect width="500" height="265" fill="url(#sky)"/><path d="M0 62 Q145 -25 290 67 T550 30" stroke="#ffffff" stroke-width="60" fill="none" opacity=".48"/><path d="M0 245 Q200 85 515 174" stroke="#76dafa" stroke-width="38" fill="none" opacity=".45"/><g fill="#4b9ce0" opacity=".65"><path d="M240 172v-65h22v65h14V88h35v84h8v-98h34v98h15V115h37v57h14V96h28v76h20v-51h23v51z"/></g><path d="M215 177h285v90H215z" fill="#c5f2ff"/><path d="M215 190 Q327 156 500 191" stroke="#72bdef" stroke-width="8" fill="none"/><g fill="#48ad8e"><circle cx="270" cy="179" r="20"/><circle cx="290" cy="172" r="22"/><circle cx="415" cy="176" r="24"/><circle cx="440" cy="177" r="22"/></g><g transform="translate(280 78) rotate(12)"><rect width="105" height="135" rx="9" fill="#fff" stroke="#a7d4f7" stroke-width="2"/><path d="M18 24h70M18 40h70M18 56h56" stroke="#a3c8f1" stroke-width="6" stroke-linecap="round"/><path d="M20 105v-24M42 105v-37M64 105V86" stroke-width="14" stroke="#47b9dc"/></g><path d="M160 230 Q270 190 520 244" stroke="#86cef3" stroke-width="25" opacity=".58" fill="none"/></svg><div class="hero-copy"><h1>2027年<br>法改正<br>ここが<em>変わる</em></h1><p class="sub">制度の全体像から現場への影響まで。<br>わかりやすく、ひと目で。</p><button class="pinkbtn" data-go="reform">特集をみる →</button></div></section>
 <section class="section"><div class="title"><span class="bubble">🔔</span><strong>最新情報</strong><span class="count" id="newCount">新着デモ</span><button class="more" data-go="news">すべて見る →</button></div><div class="horizontal" id="newsHome"></div></section>
