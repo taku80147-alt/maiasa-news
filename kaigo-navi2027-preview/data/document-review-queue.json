@@ -49,6 +49,54 @@
       "readable_page_rate": 1.0,
       "sha256": "7d7fda582b863ef13666be3c780ab78e60e287f82deb3f0bcd0c20e586752697",
       "checked_at": "2026-10-10"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001753963.pdf",
+      "label": "【資料２】令和９年度介護報酬改定に向けた基本的な視点（案）概要［690KB］",
+      "meeting_date": "2026-09-30",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76281.html",
+      "status": "本文取得・解説未審査",
+      "pages": 1,
+      "chars": 1500,
+      "readable_page_rate": 1.0,
+      "sha256": "95b75dee1c1287e8eed1c0a8e03f2d772beea9628386c99515d2a61bb5a2983b",
+      "checked_at": "2026-10-10"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001753962.pdf",
+      "label": "【資料１】令和９年度介護報酬改定に向けた基本的な視点（案）［219KB］",
+      "meeting_date": "2026-09-30",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76281.html",
+      "status": "本文取得・解説未審査",
+      "pages": 5,
+      "chars": 5184,
+      "readable_page_rate": 1.0,
+      "sha256": "8b6857ef64bcc206c23a1683994bb7f3d4d06a6aecd42937b17120d87666e9aa",
+      "checked_at": "2026-10-10"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001750952.pdf",
+      "label": "資料２ 持続可能性の確保（給付と負担）について［PDF形式：3.0MB］",
+      "meeting_date": "2026-09-18",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76225.html",
+      "status": "本文取得・解説未審査",
+      "pages": 58,
+      "chars": 119535,
+      "readable_page_rate": 1.0,
+      "sha256": "a0b2bedbfa05bcc47fea7768f6505c3b8e10dfc0b578b8ec1d5bd3b833b38333",
+      "checked_at": "2026-10-10"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001750951.pdf",
+      "label": "資料１ 第１号保険料の在り方について［PDF形式：846KB］",
+      "meeting_date": "2026-09-18",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76225.html",
+      "status": "本文取得・解説未審査",
+      "pages": 11,
+      "chars": 13525,
+      "readable_page_rate": 0.91,
+      "sha256": "db4c9cfbc29e39501181712f0737a84dcb8153c5b28d6799b6685d2b35d9d50e",
+      "checked_at": "2026-10-10"
     }
   ]
 }
