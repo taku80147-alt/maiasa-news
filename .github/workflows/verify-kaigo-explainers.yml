@@ -1,10 +1,13 @@
 name: 介護制度改正・原文PDF検証
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '20 21 * * 6' # 日本時間 毎週日曜06:20、原文の変更もチェック
   push:
     branches: [main]
     paths:
       - scripts/build_kaigo_explainers.py
+      - scripts/test_kaigo_explainers.py
       - kaigo-navi2027-preview/data/explainers.json
       - .github/workflows/verify-kaigo-explainers.yml
 permissions:
