@@ -41,7 +41,7 @@ async function main() {
       await page.screenshot({path:path.join("kaigo-qa-screenshots",`home_${width}.png`),fullPage:true});
       // Parent Oct 9 overview: all four newly reviewed services must be navigable.
       await page.locator('.bottom [data-go="news"]').first().click();
-      await page.locator('[data-id="n-pay-269"]').first().click();
+      await page.locator('#viewbody [data-id="n-pay-269"]').first().click();
       for(const id of four) {
         const el=page.locator('#viewbody [data-id="'+id+'"]');
         assert.equal(await el.count(),1,`missing overview link to ${id}`);
