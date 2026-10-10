@@ -1,0 +1,21 @@
+name: 制度解説・原文の全ページ精読
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/inspect_kaigo_pdf.py
+      - .github/workflows/inspect-kaigo-pdf.yml
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pymupdf==1.26.5
+      - name: 厚労省PDFを全ページ取得して検証ログに記録
+        run: python scripts/inspect_kaigo_pdf.py
