@@ -1,0 +1,41 @@
+name: 介護制度改正・公式会議資料チェック
+on:
+  schedule:
+    - cron: '10 22 * * *' # 日本時間 毎朝07:10（GitHub側の遅延あり）
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-kaigo-reform.yml'
+      - 'scripts/update_kaigo_reform.py'
+permissions:
+  contents: write
+concurrency:
+  group: kaigo-official-sources
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: HTML解析ライブラリ
+        run: pip install beautifulsoup4==4.13.4
+      - name: 厚生労働省の介護関連審議会を確認
+        run: python scripts/update_kaigo_reform.py
+      - name: 公開データの変更のみ保存
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add kaigo-navi2027-preview/data/latest.json
+          if git diff --cached --quiet; then
+            echo 'No new official meeting information'
+          else
+            git commit -m '介護制度改正の公式会議資料を更新'
+            git pull --rebase origin main
+            git push origin main
+          fi
