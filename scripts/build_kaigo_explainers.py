@@ -34,6 +34,9 @@ def retrieve_pdf(url):
     return buf
 
 def examine(article, pdf_bytes):
+    digest=hashlib.sha256(pdf_bytes).hexdigest()
+    if article.get('pinned_pdf_sha256') and digest!=article['pinned_pdf_sha256']:
+        raise ValueError('Official source PDF changed since editorial review: '+article['id'])
     doc=fitz.open(stream=pdf_bytes,filetype="pdf")
     pages=[page.get_text(sort=True) for page in doc]
     if not pages or sum(len(p) for p in pages)<700:
