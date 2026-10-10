@@ -59,6 +59,7 @@ class TestCareReformExplainers(unittest.TestCase):
         self.assertTrue({'n-pay-268','n-pay-259','n-pay-269-gh','n-pay-269-sm'}<=article_ids)
         index=json.loads((BASE/'latest.json').read_text(encoding='utf-8'))
         visible_ids={a['id'] for a in index['articles']}
+        self.assertEqual(len(visible_ids),len(index['articles']),'latest news must not contain duplicate IDs')
         self.assertTrue(article_ids <= visible_ids)
 
     def test_single_document_full_five_directions(self):
