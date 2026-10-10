@@ -35,7 +35,7 @@ class TestCareReformExplainers(unittest.TestCase):
             self.assertEqual(a['source_pdf'].split('/')[2],'www.mhlw.go.jp')
             self.assertGreaterEqual(len(a['quick']),3)
             self.assertGreaterEqual(len(a['explain']),4)
-            self.assertIn('現行',a['now_vs_next']['now']+' '+a['now_vs_next']['next'])
+            self.assertTrue('現在' in a['now_vs_next']['now'] or '現行' in a['now_vs_next']['now'])
             self.assertTrue(all(v.get('source') for v in a['explain']))
             self.assertIn('caremanager',a['sales'])
             self.assertIn('family',a['sales'])
