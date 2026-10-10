@@ -27,6 +27,9 @@ class TestCareReformExplainers(unittest.TestCase):
                 self.assertGreater(doc['characters_read'],700)
                 self.assertEqual(len(doc['evidence_checks']),len(a['verified_claims']))
                 self.assertTrue(all(x['status']=='located' for x in doc['evidence_checks']))
+                self.assertGreaterEqual(doc['readable_page_rate'],.75 if doc['pdf_pages_read']>3 else 0)
+                self.assertEqual(len(doc['numeric_checks']),len(a['numeric_evidence']))
+                self.assertTrue(all(v['status']=='located' and v['scope'] for v in doc['numeric_checks']))
 
     def test_information_classified_as_proposal(self):
         for a in self.draft['articles']:
@@ -50,6 +53,13 @@ class TestCareReformExplainers(unittest.TestCase):
         self.assertIn('2027',a['numerical_caution'])
         self.assertIn('歩行車を除く',a['quick'][0])
         self.assertIn('松葉杖を除く',a['quick'][0])
+
+    def test_curated_four_articles_and_document_source(self):
+        article_ids={a['id'] for a in self.draft['articles']}
+        self.assertTrue({'n-pay-268','n-pay-259','n-pay-269-gh','n-pay-269-sm'}<=article_ids)
+        index=json.loads((BASE/'latest.json').read_text(encoding='utf-8'))
+        visible_ids={a['id'] for a in index['articles']}
+        self.assertTrue(article_ids <= visible_ids)
 
     def test_single_document_full_five_directions(self):
         a=next(x for x in self.draft['articles'] if x['id']=='n-pay-268')
