@@ -44,6 +44,23 @@ class EvidenceContractTests(unittest.TestCase):
                         for n in a["numeric_checks"]
                     ))
 
+    def test_source_audits_match_articles_exactly(self):
+        article_ids = [a["id"] for a in self.draft["articles"]]
+        audit_ids = [a["id"] for a in self.release["source_audits"]]
+        self.assertEqual(len(audit_ids), len(set(audit_ids)), "duplicate source audit IDs")
+        self.assertEqual(set(article_ids), set(audit_ids), "missing or stale source audits")
+        for audit in self.release["source_audits"]:
+            article = next(a for a in self.draft["articles"] if a["id"] == audit["id"])
+            with self.subTest(article=audit["id"]):
+                self.assertEqual(audit["source_pdf"], article["source_pdf"])
+                self.assertEqual(audit["sha256"], article["pinned_pdf_sha256"])
+                self.assertEqual(len(audit["evidence_checks"]), len(article["verified_claims"]))
+                for actual, expected in zip(audit["evidence_checks"], article["verified_claims"]):
+                    self.assertEqual(actual["pdf_page"], expected["pdf_page"])
+                    self.assertEqual(actual["anchor"], expected["anchor"])
+                    self.assertEqual(actual["claim"], expected["claim"])
+                    self.assertEqual(actual["status"], "located")
+
     def test_proposal_not_mislabeled_as_enacted(self):
         for article in self.draft["articles"]:
             with self.subTest(article=article["id"]):
