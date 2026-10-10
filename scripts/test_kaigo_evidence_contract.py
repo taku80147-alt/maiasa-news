@@ -22,7 +22,7 @@ class EvidenceContractTests(unittest.TestCase):
                 self.assertEqual((pdf.scheme, pdf.hostname), ("https", "www.mhlw.go.jp"))
                 self.assertTrue(pdf.path.startswith("/content/") and pdf.path.endswith(".pdf"))
                 self.assertRegex(article["pinned_pdf_sha256"], r"^[0-9a-f]{64}$")
-                self.assertRegex(article["meeting_date"], r"^20\\d{2}-\\d{2}-\\d{2}$")
+                self.assertRegex(article["meeting_date"], r"^20\d{2}-\d{2}-\d{2}$")
                 self.assertTrue(article.get("review_scope"))
                 self.assertTrue(article.get("source_scope"))
 
