@@ -61,16 +61,19 @@ def scan(code,label,url,html):
    if link: break
   if not link: continue
   number=n[1]
-  summary=f'第{number}回{label}の議題：{agenda}'
+  actual_label='介護事業経営調査委員会' if (code=='pay' and '介護事業経営調査委員会' in agenda) else label
+  actual_code='econ' if actual_label=='介護事業経営調査委員会' else code
+  if actual_code=='econ': agenda=agenda.replace('介護事業経営調査委員会','',1).strip()
+  summary=f'第{number}回{actual_label}の議題：{agenda}'
   if len(summary)>110: summary=summary[:107].rstrip(' ・、')+'…'
   meetings.append({
-   'id':f'n-{code}-{number}','date':date,
-   'title':f'第{number}回{label}の資料が公開',
+   'id':f'n-{actual_code}-{number}','date':date,
+   'title':f'第{number}回{actual_label}の資料が公開',
    'summary':summary,
-   'detail':f'{date}の第{number}回{label}の公式資料が公開されています。議題は「{agenda[:160]}」。資料の公表だけで制度改正が正式決定したわけではありません。',
+   'detail':f'{date}の第{number}回{actual_label}の公式資料が公開されています。議題は「{agenda[:160]}」。資料の公表だけで制度改正が正式決定したわけではありません。',
    'sales_tip':'得意先への説明では「審議された内容」と「法令で正式決定された内容」を区別してください。',
    'category':classify(agenda,code),'status':'会議資料',
-   'source_url':link,'source_name':f'厚生労働省 第{number}回{label}資料',
+   'source_url':link,'source_name':f'厚生労働省 第{number}回{actual_label}資料',
    'curated':False})
  if not meetings: raise RuntimeError(f'No parseable recent meetings: {url}')
  return meetings
