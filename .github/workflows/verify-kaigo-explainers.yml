@@ -8,6 +8,7 @@ on:
     paths:
       - scripts/build_kaigo_explainers.py
       - scripts/test_kaigo_explainers.py
+      - scripts/test_kaigo_evidence_contract.py
       - kaigo-navi2027-preview/data/explainers.json
       - kaigo-navi2027-preview/data/latest.json
       - .github/workflows/verify-kaigo-explainers.yml
@@ -37,6 +38,8 @@ jobs:
         run: python scripts/build_kaigo_explainers.py
       - name: 数値・決定状況・出典との整合性テスト
         run: python -m unittest discover -s scripts -p 'test_kaigo_explainers.py' -v
+      - name: 出典URL・数値適用範囲・検討状況の契約テスト
+        run: python -m unittest discover -s scripts -p 'test_kaigo_evidence_contract.py' -v
       - name: 検証済みの解説のみ保存
         run: |
           git config user.name 'github-actions[bot]'
