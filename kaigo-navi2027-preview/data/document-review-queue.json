@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "disclaimer": "本文取得は解説の正確さを意味しません。原文の読込・確認待ちリストです。",
+  "documents": [
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001758325.pdf",
+      "label": "【資料３】看護小規模多機能型居宅介護［1.9MB］",
+      "meeting_date": "2026-10-09",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76456.html",
+      "status": "本文取得・解説未審査",
+      "pages": 27,
+      "chars": 44302,
+      "readable_page_rate": 1.0,
+      "sha256": "2c10ae701e8cdc1ec76d9b65b7cdad044c6a6367ee544a3bf67ef253c4bc198a",
+      "checked_at": "2026-10-10"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001758324.pdf",
+      "label": "【資料１】定期巡回・随時対応型訪問介護看護及び夜間対応型訪問介護［2.0MB］",
+      "meeting_date": "2026-10-09",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76456.html",
+      "status": "本文取得・解説未審査",
+      "pages": 33,
+      "chars": 45022,
+      "readable_page_rate": 1.0,
+      "sha256": "4170b3d1e941c4f0addae4e42d5627ca1cf880a7ce3583a86d0a8f27da199cc9",
+      "checked_at": "2026-10-10"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001758168.pdf",
+      "label": "【資料２】小規模多機能型居宅介護［1.7MB］",
+      "meeting_date": "2026-10-09",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76456.html",
+      "status": "本文取得・解説未審査",
+      "pages": 30,
+      "chars": 40806,
+      "readable_page_rate": 1.0,
+      "sha256": "fcd4f2751c6c8f24a583102a1068ffae7c5e59c112c9702d2be724eecddca67b",
+      "checked_at": "2026-10-10"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001758120.pdf",
+      "label": "【資料４】認知症対応型共同生活介護［2.1MB］",
+      "meeting_date": "2026-10-09",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76456.html",
+      "status": "本文取得・解説未審査",
+      "pages": 35,
+      "chars": 51768,
+      "readable_page_rate": 1.0,
+      "sha256": "7d7fda582b863ef13666be3c780ab78e60e287f82deb3f0bcd0c20e586752697",
+      "checked_at": "2026-10-10"
+    }
+  ]
+}
