@@ -99,6 +99,48 @@
       "checked_at": "2026-10-10"
     },
     {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001716151.pdf",
+      "label": "【資料６】居宅介護支援・介護予防支援［5.9MB］",
+      "meeting_date": "2026-06-29",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_74005.html",
+      "status": "本文取得・解説未審査",
+      "pages": 73,
+      "chars": 150690,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 72,
+      "notes_and_exceptions_candidates": 127,
+      "sha256": "e761a7cb48db273ce67facae9b502723a9f58b84d9c0daf934656cae1debc05a",
+      "checked_at": "2026-10-11"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001716098.pdf",
+      "label": "【資料７】福祉用具・住宅改修［4.7MB］",
+      "meeting_date": "2026-06-29",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_74005.html",
+      "status": "本文取得・解説未審査",
+      "pages": 48,
+      "chars": 97938,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 61,
+      "notes_and_exceptions_candidates": 80,
+      "sha256": "53d36cdba40a14960748735fd17b20c759e31bbf0ca56ac6b3b6db3b6eb8fe55",
+      "checked_at": "2026-10-11"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001716097.pdf",
+      "label": "【資料５】居宅療養管理指導［3.5MB］",
+      "meeting_date": "2026-06-29",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_74005.html",
+      "status": "本文取得・解説未審査",
+      "pages": 52,
+      "chars": 69793,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 45,
+      "notes_and_exceptions_candidates": 82,
+      "sha256": "94d7bbdd0dbae93e507a724c1373708ada3c64f7fa2009f0df7bf673b880b74f",
+      "checked_at": "2026-10-11"
+    },
+    {
       "pdf_url": "https://www.mhlw.go.jp/content/12300000/001716096.pdf",
       "label": "【資料４】訪問リハビリテーション［2.8MB］",
       "meeting_date": "2026-06-29",
