@@ -59,3 +59,15 @@ Use small commits and/or pull requests, separate pipeline code from UI. No unexp
 - First run failed **only due to the QA selector grabbing a hidden home card** instead of a visible `#viewbody` card; we corrected the test, reran and it passed. This is not pixel-perfect screenshot comparison; do not claim exact design regression testing from the automated smoke tests alone.
 - `kaigo-navi2027-preview/index.html` parent `n-pay-269` article now links to all four developed subtopics (GH/SM/NM/DN), not only GH/SM; visible strings "見本記事" were corrected. No changes to approved home layout.
 - Reuse the smoke workflow and archived screenshots after any subsequent index.html edits. Do not alter auto-verified articles based on visual checks alone.
+
+
+## Work継続更新（2026-10-11）
+- 採用画像10点・バナー・丸い特集カード・縦スクロールを維持。特集は実記事へリンク。
+- 解説は13記事（うち現行制度の基礎2記事）。給付と負担、1号保険料、DX、公布済み法律・福祉用具販売の算定枠組みを追加。status_kind は proposal/current/mixed/enacted。記事日付は資料の実日付。
+- 看多機の費用表は計7件だが金額無回答1件を含む。平均の算出母数は明記されず、「7件すべての平均」と表現しない。
+- 原本を保存し、全ページ本文・表候補・注記例外候補を取得する kaigo_evidence.py を共通化。原本改変、空の根拠、読取不能、数値のページ違い、単位違い、途中失敗時の公開保持をテスト。
+- JSON schema2。article_sha256 と原本ハッシュ・根拠・数値をクライアントでも照合。未審査資料から解説を自動生成しない。
+- お気に入り永続化、詳細本文検索（全角数字・複数語）、学習記事、記事直リンク、営業ネタを実装。「調べる」は記事検索で、有料AI自動回答は使用しない。
+- Pages公開は再利用スマホQA＋全オフラインテストが必要。320/360/390/430px、全13記事、検索・保存・失敗時・改変記事除外と、採用画面の静的3領域の比較を検査。原文検証ワークフローは独自デプロイをせず、重複した先行公開を防ぐ。
+- 本スナップショットのローカル元はGitHub cfbda0d4dd6d5cf261bfd7e563941519bc64902e。ユーザーの以前のローカル未反映版は見つからず、確認済みGitHubから継続。
+- 開発・運用手順は kaigo-navi2027-preview/README.md。完全無料、ログイン・パスワード不要を引き続き遵守。

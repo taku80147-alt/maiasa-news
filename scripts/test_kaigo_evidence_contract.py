@@ -5,6 +5,7 @@ import re
 import unittest
 from pathlib import Path
 from urllib.parse import urlparse
+from kaigo_evidence import article_hash
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "kaigo-navi2027-preview" / "data"
@@ -54,6 +55,7 @@ class EvidenceContractTests(unittest.TestCase):
             with self.subTest(article=audit["id"]):
                 self.assertEqual(audit["source_pdf"], article["source_pdf"])
                 self.assertEqual(audit["sha256"], article["pinned_pdf_sha256"])
+                self.assertEqual(audit["article_sha256"], article_hash(article))
                 self.assertEqual(len(audit["evidence_checks"]), len(article["verified_claims"]))
                 for actual, expected in zip(audit["evidence_checks"], article["verified_claims"]):
                     self.assertEqual(actual["pdf_page"], expected["pdf_page"])
@@ -64,9 +66,11 @@ class EvidenceContractTests(unittest.TestCase):
     def test_proposal_not_mislabeled_as_enacted(self):
         for article in self.draft["articles"]:
             with self.subTest(article=article["id"]):
-                self.assertIn("検討中", article["status"])
+                self.assertIn(article['status_kind'], ('proposal','current','mixed','enacted'))
+                if article['status_kind'] in ('proposal','mixed'): self.assertIn('検討中', article['status'])
                 self.assertNotIn("施行済み", article["status"])
                 self.assertNotIn("決定済み", article["status"])
 
 if __name__ == "__main__":
     unittest.main()
+

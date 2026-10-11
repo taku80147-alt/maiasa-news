@@ -11,7 +11,10 @@ concurrency:
   group: pages
   cancel-in-progress: false
 jobs:
+  kaigo-validation:
+    uses: ./.github/workflows/test-kaigo-mobile.yml
   deploy:
+    needs: kaigo-validation
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -27,3 +30,4 @@ jobs:
       - name: 公開
         id: deployment
         uses: actions/deploy-pages@v4
+

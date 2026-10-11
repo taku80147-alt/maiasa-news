@@ -13,11 +13,12 @@ permissions:
   pages: write
   id-token: write
 concurrency:
-  group: kaigo-official-sources
+  group: pages
   cancel-in-progress: false
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -29,7 +30,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: HTML解析ライブラリ
-        run: pip install beautifulsoup4==4.13.4
+        run: pip install beautifulsoup4==4.13.4 pymupdf==1.26.5
       - name: 厚生労働省の介護関連審議会を確認
         run: python scripts/update_kaigo_reform.py
       - name: 公開データの変更のみ保存
@@ -44,6 +45,10 @@ jobs:
             git pull --rebase origin main
             git push origin main
           fi
+      - name: 公開直前に最新版と解説の整合性を確認
+        run: |
+          git pull --ff-only origin main
+          python -m unittest discover -s scripts -p 'test_kaigo_*.py' -v
       - uses: actions/configure-pages@v5
         with:
           enablement: true
@@ -53,3 +58,4 @@ jobs:
       - name: 最新の公式会議情報をサイトに公開
         id: deployment
         uses: actions/deploy-pages@v4
+

@@ -7,6 +7,7 @@ on:
     branches: [main]
     paths:
       - scripts/collect_kaigo_documents.py
+      - scripts/kaigo_evidence.py
       - .github/workflows/collect-kaigo-documents.yml
 permissions:
   contents: write
@@ -16,6 +17,9 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      KAIGO_EVIDENCE_DIR: ${{ runner.temp }}/kaigo-evidence
     steps:
       - uses: actions/checkout@v4
         with:
@@ -39,3 +43,12 @@ jobs:
             git pull --rebase origin main
             git push origin main
           fi
+
+      - name: 取得した原本とページ・表・注記の候補を保存
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kaigo-new-source-evidence
+          path: ${{ runner.temp }}/kaigo-evidence/
+          if-no-files-found: ignore
+          retention-days: 7

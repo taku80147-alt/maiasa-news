@@ -13,7 +13,8 @@ import urllib.request
 import unicodedata
 from pathlib import Path
 
-import fitz
+from kaigo_evidence import extract_pdf, fetch, archive_source, article_hash
+import os
 
 ROOT=Path(__file__).resolve().parent.parent
 DIR=ROOT/"kaigo-navi2027-preview"/"data"
@@ -27,19 +28,20 @@ def text_norm(s):
 def retrieve_pdf(url):
     if not url.startswith("https://www.mhlw.go.jp/content/") or not url.endswith(".pdf"):
         raise ValueError("URL must be an MHLW PDF")
-    request=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0 (compatible; KaigoNavi2027/1.0)"})
-    with urllib.request.urlopen(request,timeout=35) as response:
-        buf=response.read(MAX_DOWNLOAD+1)
-    if len(buf)>MAX_DOWNLOAD: raise ValueError("PDF exceeds 25 MiB limit")
-    if not buf.startswith(b"%PDF-"): raise ValueError("Response is not a PDF")
-    return buf
+    return fetch(url)
 
-def examine(article, pdf_bytes):
+def examine(article, pdf_bytes, extracted=None):
     digest=hashlib.sha256(pdf_bytes).hexdigest()
-    if article.get('pinned_pdf_sha256') and digest!=article['pinned_pdf_sha256']:
+    if not re.fullmatch(r'[0-9a-f]{64}', article.get('pinned_pdf_sha256', '')):
+        raise ValueError('Editorially pinned PDF hash required')
+    if digest!=article['pinned_pdf_sha256']:
         raise ValueError('Official source PDF changed since editorial review: '+article['id'])
-    doc=fitz.open(stream=pdf_bytes,filetype="pdf")
-    pages=[page.get_text(sort=True) for page in doc]
+    extracted = extracted or extract_pdf(pdf_bytes)
+    pages=[page['text'] for page in extracted['pages']]
+    if not article.get('verified_claims'):
+        raise ValueError('Evidence claims required')
+    if article.get('status_kind') not in ('proposal','current','mixed','enacted'):
+        raise ValueError('Explicit legal status required')
     if not pages or sum(len(p) for p in pages)<700:
         raise ValueError("Source PDF text is incomplete; manual review required")
     if len(pages)>300: raise ValueError("Too many PDF pages")
@@ -69,7 +71,12 @@ def examine(article, pdf_bytes):
             "sha256":hashlib.sha256(pdf_bytes).hexdigest(),
             "pdf_pages_read":len(pages),"characters_read":sum(len(p) for p in pages),
             "evidence_checks":results,"numeric_checks":numerics,
-            "readable_page_rate":round(readable/len(pages),3)}
+            "readable_page_rate":round(readable/len(pages),3),
+            "article_sha256":article_hash(article),
+            "tables_extracted":sum(len(p['tables']) for p in extracted['pages']),
+            "notes_and_exceptions_candidates":sum(len(p['notes_and_exceptions']) for p in extracted['pages']),
+            "pages_requiring_visual_review":[p['pdf_page'] for p in extracted['pages'] if p['review_required']],
+            "table_verification":"Extraction candidates only; semantic review remains editorial"}
 
 def build():
     data=json.loads(DRAFT.read_text(encoding="utf-8"))
@@ -77,15 +84,23 @@ def build():
     if not isinstance(articles,list) or len(articles)<2: raise ValueError("Need at least two curated articles")
     if len({a["id"] for a in articles})!=len(articles): raise ValueError("Duplicate article ids")
     reports=[]
+    sources={}
+    evidence_dir=os.environ.get("KAIGO_EVIDENCE_DIR",str(ROOT/".kaigo-evidence"))
     for article in articles:
         if not (article.get("one_liner") and article.get("quick") and article.get("explain") and article.get("sales")):
             raise ValueError("Missing reader or sales layer: "+article["id"])
-        pdf=retrieve_pdf(article["source_pdf"])
-        result=examine(article,pdf)
+        url=article["source_pdf"]
+        if url not in sources:
+            pdf=retrieve_pdf(url)
+            extracted=extract_pdf(pdf)
+            archive_source(evidence_dir,url,pdf,extracted)
+            sources[url]=(pdf,extracted)
+        pdf,extracted=sources[url]
+        result=examine(article,pdf,extracted)
         reports.append(result)
         print("Verified source",article["id"],"pages",result["pdf_pages_read"],"chars",result["characters_read"])
     approved={**data,"source_verified_at":dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d"),
-              "verification_scope":"Whole PDF pages extracted, >=75% text coverage (multi-page), declared claim anchors and scoped numerical literals matched on specified pages. This does not prove every legal interpretation or table is correct.",
+              "verification_scope":"All PDF pages, table candidates and exception-note candidates extracted; originals archived in CI. Pinned PDF hashes, page anchors, numeric literals and article hashes checked. Text coverage >=75% for multi-page files. Scope and legal meaning are editorial, not automatically certified.",
               "source_audits":reports}
     output=json.dumps(approved,ensure_ascii=False,indent=2)+"\n"
     if APPROVED.exists():
@@ -102,3 +117,4 @@ def build():
 
 if __name__=="__main__":
     build()
+

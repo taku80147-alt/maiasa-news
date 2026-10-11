@@ -33,7 +33,8 @@ class TestCareReformExplainers(unittest.TestCase):
 
     def test_information_classified_as_proposal(self):
         for a in self.draft['articles']:
-            self.assertIn('検討中',a['status'])
+            self.assertIn(a['status_kind'], ('proposal','current','mixed','enacted'))
+            if a['status_kind'] in ('proposal','mixed'): self.assertIn('検討中',a['status'])
             self.assertEqual(a['source_page'].split('/')[2],'www.mhlw.go.jp')
             self.assertEqual(a['source_pdf'].split('/')[2],'www.mhlw.go.jp')
             self.assertGreaterEqual(len(a['quick']),3)
@@ -60,7 +61,7 @@ class TestCareReformExplainers(unittest.TestCase):
         index=json.loads((BASE/'latest.json').read_text(encoding='utf-8'))
         visible_ids={a['id'] for a in index['articles']}
         self.assertEqual(len(visible_ids),len(index['articles']),'latest news must not contain duplicate IDs')
-        self.assertTrue(article_ids <= visible_ids)
+        self.assertTrue({a['id'] for a in self.draft['articles'] if a.get('article_kind') != 'learning'} <= visible_ids)
 
     def test_single_document_full_five_directions(self):
         a=next(x for x in self.draft['articles'] if x['id']=='n-pay-268')
@@ -70,3 +71,4 @@ class TestCareReformExplainers(unittest.TestCase):
         self.assertIn('未決定',a['explain'][1]['body'])
 
 if __name__=='__main__':unittest.main()
+

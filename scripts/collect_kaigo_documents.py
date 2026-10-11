@@ -13,7 +13,8 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 from bs4 import BeautifulSoup
-import fitz
+import os
+from kaigo_evidence import fetch as official_fetch, extract_pdf, archive_source
 
 ROOT=Path(__file__).resolve().parent.parent
 DATA=ROOT/'kaigo-navi2027-preview'/'data'
@@ -27,10 +28,7 @@ def fetch(url,limit):
     parts=urllib.parse.urlparse(url)
     if parts.scheme!='https' or parts.hostname!='www.mhlw.go.jp':
         raise ValueError('MHLW HTTPS URL required')
-    req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (compatible; KaigoNavi2027/1.0)'})
-    with urllib.request.urlopen(req,timeout=40) as r: raw=r.read(limit+1)
-    if len(raw)>limit:raise ValueError('Source exceeds limit')
-    return raw
+    return official_fetch(url,limit)
 
 def source_docs(meeting):
     html=fetch(meeting['source_url'],2*1024*1024).decode('utf-8','replace')
@@ -47,18 +45,14 @@ def source_docs(meeting):
     return [x for x in found if not (x['pdf_url'] in seen or seen.add(x['pdf_url']))]
 
 def inspect_pdf(data):
-    if not data.startswith(b'%PDF-'):raise ValueError('not a PDF')
-    pdf=fitz.open(stream=data,filetype='pdf')
-    if not (0<len(pdf)<=250):raise ValueError('invalid page count')
-    lengths=[]
-    for page in pdf:
-        content=page.get_text(sort=True)
-        lengths.append(len(content))
+    extracted=extract_pdf(data)
+    lengths=[len(page['text']) for page in extracted['pages']]
     total=sum(lengths)
     coverage=sum(n>=80 for n in lengths)/len(lengths)
-    if total<400 or coverage<.75:
-        return {'status':'本文不足・要確認','pages':len(lengths),'chars':total,'readable_page_rate':round(coverage,2)}
-    return {'status':'本文取得・解説未審査','pages':len(lengths),'chars':total,'readable_page_rate':round(coverage,2)}
+    status='本文不足・要確認' if total<400 or coverage<.75 else '本文取得・解説未審査'
+    return {'status':status,'pages':len(lengths),'chars':total,'readable_page_rate':round(coverage,2),
+            'tables_extracted':sum(len(p['tables']) for p in extracted['pages']),
+            'notes_and_exceptions_candidates':sum(len(p['notes_and_exceptions']) for p in extracted['pages'])},extracted
 
 def run():
     feed=json.loads(NEWS.read_text(encoding='utf-8'))['articles']
@@ -82,7 +76,8 @@ def run():
     for item in new[:MAX_PER_RUN]:
         try:
             raw=fetch(item['pdf_url'],MAX_PDF)
-            metrics=inspect_pdf(raw)
+            metrics,extracted=inspect_pdf(raw)
+            archive_source(os.environ.get('KAIGO_EVIDENCE_DIR',str(ROOT/'.kaigo-evidence')),item['pdf_url'],raw,extracted)
             docs[item['pdf_url']]={**item,**metrics,'sha256':hashlib.sha256(raw).hexdigest(),
                                    'checked_at':dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%d')}
         except Exception as e:
@@ -98,3 +93,4 @@ def run():
     if processed==0 and not docs:raise RuntimeError('Nothing retrieved; no queue produced')
 
 if __name__=='__main__':run()
+

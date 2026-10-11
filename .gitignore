@@ -1,3 +1,6 @@
 __pycache__/
 *.pyc
 .DS_Store
+.kaigo-evidence/
+kaigo-qa-screenshots/
+.qa-baseline/

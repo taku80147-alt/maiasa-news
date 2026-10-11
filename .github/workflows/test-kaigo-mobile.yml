@@ -1,11 +1,6 @@
 name: 介護ナビ・スマホ操作とレイアウト検査
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'kaigo-navi2027-preview/index.html'
-      - 'scripts/test_kaigo_mobile.cjs'
-      - '.github/workflows/test-kaigo-mobile.yml'
+  workflow_call:
   workflow_dispatch:
 permissions:
   contents: read
@@ -15,9 +10,25 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 公開データと失敗時の安全性を確認
+        run: |
+          python -m pip install pymupdf==1.26.5
+          python -m unittest discover -s scripts -p 'test_kaigo_*.py' -v
+      - name: 採用済み画面の比較元を準備
+        run: |
+          mkdir -p .qa-baseline/data
+          git show cfbda0d4dd6d5cf261bfd7e563941519bc64902e:kaigo-navi2027-preview/index.html > .qa-baseline/index.html
+          for file in latest.json explainers-verified.json; do
+            git show cfbda0d4dd6d5cf261bfd7e563941519bc64902e:kaigo-navi2027-preview/data/$file > .qa-baseline/data/$file
+          done
       - name: Chromium テスト環境の準備
         run: |
           npm install --no-save --no-package-lock playwright@1.56.1
@@ -31,6 +42,8 @@ jobs:
           done
           exit 1
       - name: 320・360・390・430pxで表示と記事操作を検証
+        env:
+          KAIGO_BASELINE_URL: http://127.0.0.1:8765/.qa-baseline/
         run: node scripts/test_kaigo_mobile.cjs
       - name: 画面スクリーンショットを保存
         if: always()
@@ -40,3 +53,4 @@ jobs:
           path: kaigo-qa-screenshots/
           if-no-files-found: ignore
           retention-days: 7
+
