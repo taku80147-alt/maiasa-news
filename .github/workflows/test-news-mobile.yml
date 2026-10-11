@@ -1,0 +1,47 @@
+name: 新聞版ニュース・表示と動作検査
+on:
+  workflow_call:
+    inputs:
+      ref:
+        type: string
+        default: ''
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 日付・出典・取得失敗時・改変時の安全性
+        run: python -m unittest discover -s scripts -p 'test_news.py' -v
+      - name: 無料のブラウザ検査環境
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: テスト用サーバー
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/news-http.log 2>&1 &
+          for i in $(seq 1 20); do
+            curl -fsS http://127.0.0.1:8765/data/news.json > /dev/null && exit 0
+            sleep 1
+          done
+          exit 1
+      - name: スマホ4サイズとPC・記事・分類・PDF・取得失敗
+        run: node scripts/test_news_mobile.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: news-mobile-screenshots
+          path: news-qa-screenshots/
+          if-no-files-found: ignore
+          retention-days: 7

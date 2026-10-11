@@ -6,31 +6,35 @@
   <meta name="theme-color" content="#063c9a">
   <title>毎朝ニュース</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=11">
+  <link rel="stylesheet" href="styles.css?v=12">
 </head>
 <body>
   <header class="topbar">
     <div class="top-inner">
       <div class="brand-row">
         <div>
-          <p class="eyebrow">今日の営業に効く、注目トピックス</p>
+          <p class="eyebrow">仙台・宮城から、今日の話題をひと読み</p>
           <h1><span class="sun" aria-hidden="true">☀</span>毎朝ニュース</h1>
         </div>
-        <div id="updated" class="updated">更新確認中</div>
+        <div id="updated" class="updated">確認中</div>
       </div>
       <nav id="tabs" aria-label="ニュースの分類"></nav>
     </div>
   </header>
 
   <main>
-    <section class="notice" aria-label="掲載方針">
-      <strong>公式情報＋JOINT</strong>
-      <span>JOINTは元記事へのリンク紹介。配布用チェックは利用条件を確認した公式記事だけに表示します。</span>
-    </section>
+    <section class="edition" aria-label="新聞の案内"><span>DAILY NEWSPAPER</span><p id="edition-date">最近1週間の話題</p><small>無料・ログイン不要</small></section>
+    <section class="reading-section" aria-label="報道サイトへの入口"><h2>新聞・ニュースを読む</h2><p>一般報道・スポーツは各サイトへ。記事の無料範囲は掲載元によります。</p><div class="reading-links">
+      <a href="https://news.yahoo.co.jp/" target="_blank" rel="noopener noreferrer"><b>国内・経済</b><span>Yahoo!ニュース ↗</span></a>
+      <a href="https://www.kahoku.co.jp/" target="_blank" rel="noopener noreferrer"><b>仙台・宮城</b><span>河北新報 ↗</span></a>
+      <a href="https://sendai.keizai.biz/" target="_blank" rel="noopener noreferrer"><b>街の話題</b><span>仙台経済新聞 ↗</span></a>
+      <a href="https://www.rakuteneagles.jp/" target="_blank" rel="noopener noreferrer"><b>楽天・野球</b><span>楽天イーグルス ↗</span></a>
+    </div></section>
+    <p id="source-warning" class="notice" hidden></p>
 
     <section id="important-section" class="section">
       <div class="section-head">
-      <div><span class="section-kicker">まずここだけ</span><h2>今日の注目</h2></div>
+      <div><span class="section-kicker">まずは3つの話題</span><h2>今朝の注目</h2></div>
         <span class="count" id="important-count"></span>
       </div>
       <div id="important-list" class="news-list important-grid"></div>
@@ -38,12 +42,14 @@
 
     <section class="section">
       <div class="section-head">
-        <div><span class="section-kicker">すべての新着</span><h2 id="list-title">すべての新着</h2></div>
-        <span class="count" id="result-count"></span>
+        <div><span class="section-kicker">最近のニュース</span><h2 id="list-title">最近のニュース</h2></div>
+        <div class="list-tools"><button id="reset-filter" type="button">すべて</button><span class="count" id="result-count"></span></div>
       </div>
       <div id="news-list" class="news-list"></div>
-      <div id="empty" class="empty" hidden>この分類の新着情報はありません。</div>
+      <div id="empty" class="empty" hidden>この分類では、確認できた最近の記事がありません。上のニュースサイトからも読めます。</div>
     </section>
+    <a class="care-link" href="kaigo-navi2027-preview/"><span>介護制度を調べたいときは</span><b>介護制度改正ナビ2027 →</b></a>
+    <details class="publication-policy"><summary>情報源と掲載について</summary><p>この紙面には仙台市・宮城県・外務省の発表を掲載しています。「要点」は出典の事実を当サイトが整理した文章、「本文抜粋」は公表元の文章の抜粋です。本文を確認できない情報は見出しから出典へ案内します。掲載・更新日と開催日は異なります。報道サイトの記事本文や写真の転載は行っていません。</p><p>朝の自動確認は日本時間6:15頃（実行時刻は前後します）。一部取得できない場合は、最近1週間以内の確認済みの記事を残します。PDFは利用条件を確認した本文抜粋だけを選べます。</p></details>
   </main>
 
   <div id="selection-bar" class="selection-bar" hidden>
@@ -63,11 +69,13 @@
         <h3></h3>
         <p class="summary"></p>
         <div class="meta"><span class="source-name"></span><time></time></div>
-        <label class="select-row"><input type="checkbox"><span>配布資料に追加</span></label>
+        <span class="read-more">詳しく読む →</span>
       </button>
+      <label class="select-row"><input type="checkbox"><span>配布資料に追加</span></label>
     </article>
   </template>
-  <script src="app.js?v=11" defer></script>
+  <script src="app.js?v=12" defer></script>
 </body>
 </html>
+
 

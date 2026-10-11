@@ -4,3 +4,5 @@ __pycache__/
 .kaigo-evidence/
 kaigo-qa-screenshots/
 .qa-baseline/
+
+news-qa-screenshots/

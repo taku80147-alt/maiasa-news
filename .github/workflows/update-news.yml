@@ -1,50 +1,51 @@
 name: 毎朝ニュース更新
 on:
-  push:
-    branches: [main]
-    paths:
-      - "scripts/update_news.py"
-      - ".github/workflows/update-news.yml"
   schedule:
-    - cron: "15 21 * * *" # 日本時間 毎朝6:15
+    - cron: '15 21 * * *' # 日本時間 毎朝6:15頃
   workflow_dispatch:
 permissions:
   contents: write
   pages: write
   id-token: write
 concurrency:
-  group: pages
+  group: news-update
   cancel-in-progress: false
 jobs:
   update:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      revision: ${{ steps.save.outputs.revision }}
+      changed: ${{ steps.save.outputs.changed }}
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-      - name: 公式情報を収集
+          python-version: '3.12'
+      - name: 公式発表と確認済みの要点を収集
         run: python scripts/update_news.py
+      - name: 公開データの検査
+        run: python -m unittest discover -s scripts -p 'test_news.py' -v
       - name: 更新内容を保存
+        id: save
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add data/news.json
-          git diff --cached --quiet || git commit -m "毎朝のニュースを更新"
-          git pull --rebase origin main
-          git push
-      - uses: actions/configure-pages@v5
-        with:
-          enablement: true
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-      - name: 最新ニュースを公開
-        id: deployment
-        uses: actions/deploy-pages@v4
-
+          if git diff --cached --quiet; then
+            echo 'changed=false' >> "$GITHUB_OUTPUT"
+          else
+            git commit -m '新聞版の公式ニュースを更新'
+            git pull --rebase origin main
+            git push
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          fi
+          echo "revision=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+  publish:
+    needs: update
+    if: needs.update.outputs.changed == 'true'
+    uses: ./.github/workflows/pages.yml
+    with:
+      ref: ${{ needs.update.outputs.revision }}

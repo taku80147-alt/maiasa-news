@@ -20,8 +20,12 @@ jobs:
     uses: ./.github/workflows/test-kaigo-mobile.yml
     with:
       ref: ${{ inputs.ref || github.sha }}
+  news-validation:
+    uses: ./.github/workflows/test-news-mobile.yml
+    with:
+      ref: ${{ inputs.ref || github.sha }}
   deploy:
-    needs: kaigo-validation
+    needs: [kaigo-validation, news-validation]
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
