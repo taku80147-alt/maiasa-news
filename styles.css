@@ -48,3 +48,5 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #de9d
 /* Keep desktop columns compact; the lead must not become a tall empty panel. */
 .detail-title{clear:both;margin-right:0}
 @media(min-width:760px){.important-grid{grid-template-columns:1.15fr 1fr 1fr;align-items:start}.important-grid>.card:first-child{grid-row:auto}.important-grid>.card:first-child h3{font-size:1.2rem}.important-grid .card{height:auto}.important-grid .card-button{height:auto}.important-grid>.card:first-child .summary{font-size:.9rem}}
+
+.empty p{margin:0}.empty a{display:inline-block;margin-top:10px;padding:8px 12px;border-radius:8px;background:#e1efff;color:#0b55a2;text-decoration:none;font-weight:800}

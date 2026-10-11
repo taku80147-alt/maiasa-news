@@ -36,10 +36,13 @@ const base='http://127.0.0.1:8765/';
           await page.keyboard.press('Escape');assert.equal(await page.locator('dialog[open]').count(),0);
         }
         await page.locator('[data-category="world"].tab').click();
+        assert(await page.locator('#important-section').isHidden());
         assert(await page.locator('#news-list .card').evaluateAll(rows=>rows.every(r=>r.dataset.category==='world')));
         await page.locator('[data-category="national"].tab').click();
         await page.locator('#empty').waitFor({state:'visible'});
+        assert.equal(await page.locator('#empty a').getAttribute('href'),'https://news.yahoo.co.jp/');
         await page.locator('#reset-filter').click();
+        assert(await page.locator('#important-section').isVisible());
         assert.equal(await page.locator('#news-list .card').count(),total);
         const checkbox=page.locator('#news-list .select-row input:enabled').first();
         if(await checkbox.count()) {
