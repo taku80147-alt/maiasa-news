@@ -16,6 +16,8 @@ on:
       - .github/workflows/verify-kaigo-explainers.yml
 permissions:
   contents: write
+  pages: write
+  id-token: write
 concurrency:
   group: kaigo-explainers
   cancel-in-progress: false
@@ -23,6 +25,9 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 12
+    outputs:
+      changed: ${{ steps.save.outputs.changed }}
+      revision: ${{ steps.save.outputs.sha }}
     env:
       KAIGO_EVIDENCE_DIR: /tmp/kaigo-evidence
     steps:
@@ -43,17 +48,21 @@ jobs:
       - name: 出典URL・数値適用範囲・検討状況の契約テスト
         run: python -m unittest discover -s scripts -p 'test_kaigo_evidence_contract.py' -v
       - name: 検証済みの解説のみ保存
+        id: save
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add kaigo-navi2027-preview/data/explainers-verified.json
           if git diff --cached --quiet; then
             echo 'No validated changes'
+            echo 'changed=false' >> "$GITHUB_OUTPUT"
           else
             git commit -m '原文検証済みの制度解説を公開'
             git pull --rebase origin main
             git push origin main
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
           fi
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - name: 原本PDF・全ページ本文・表・注記の候補を保存
         if: always()
         uses: actions/upload-artifact@v4
@@ -62,3 +71,9 @@ jobs:
           path: /tmp/kaigo-evidence/
           if-no-files-found: ignore
           retention-days: 7
+  publish:
+    needs: verify
+    if: needs.verify.outputs.changed == 'true'
+    uses: ./.github/workflows/pages.yml
+    with:
+      ref: ${{ needs.verify.outputs.revision }}

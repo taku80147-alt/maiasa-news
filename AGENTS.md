@@ -71,3 +71,5 @@ Use small commits and/or pull requests, separate pipeline code from UI. No unexp
 - Pages公開は再利用スマホQA＋全オフラインテストが必要。320/360/390/430px、全13記事、検索・保存・失敗時・改変記事除外と、採用画面の静的3領域の比較を検査。原文検証ワークフローは独自デプロイをせず、重複した先行公開を防ぐ。
 - 本スナップショットのローカル元はGitHub cfbda0d4dd6d5cf261bfd7e563941519bc64902e。ユーザーの以前のローカル未反映版は見つからず、確認済みGitHubから継続。
 - 開発・運用手順は kaigo-navi2027-preview/README.md。完全無料、ログイン・パスワード不要を引き続き遵守。
+
+- 日次会議一覧更新・週次解説検証からの自動公開も `pages.yml` の共通検査へ固定SHAで渡す。ボットのpushが他ワークフローを起動しない場合でも、検査を迂回して公開しない。

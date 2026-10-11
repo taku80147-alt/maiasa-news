@@ -84,7 +84,7 @@ async function main() {
         await noHorizontalOverflow(page,`${id} detail`,width);
         await page.locator("#back").click();
       }
-      await page.screenshot({path:path.join("kaigo-qa-screenshots",`article_${width}.png`),fullPage:true});
+      await page.screenshot({path:path.join("kaigo-qa-screenshots",`overview_${width}.png`),fullPage:true});
       // Every reviewed article, including current-system lessons, must load from a share link.
       for(const article of release.articles) {
         await page.goto(BASE+"#article="+article.id,{waitUntil:"networkidle"});
@@ -93,6 +93,8 @@ async function main() {
         for(const tab of ["quick","deep","sales"]) {
           await page.locator('[data-exp-tab="'+tab+'"]').click();
           assert.ok((await page.locator('[data-exp-panel="'+tab+'"]').innerText()).length>40);
+          if(["n-ins-136-burden","l-equipment-choice","n-law51-overview"].includes(article.id) && ["deep","sales"].includes(tab))
+            await page.screenshot({path:path.join("kaigo-qa-screenshots",`${article.id}_${tab}_${width}.png`),fullPage:true});
         }
         await noHorizontalOverflow(page,article.id,width);
       }
