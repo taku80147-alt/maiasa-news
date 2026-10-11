@@ -1,6 +1,10 @@
 name: 介護ナビ・スマホ操作とレイアウト検査
 on:
   workflow_call:
+    inputs:
+      ref:
+        type: string
+        default: ''
   workflow_dispatch:
 permissions:
   contents: read
@@ -12,6 +16,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ inputs.ref || github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: '22'

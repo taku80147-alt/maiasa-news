@@ -39,6 +39,8 @@ async function main() {
       const r=await page.goto(BASE,{waitUntil:"domcontentloaded",timeout:30000});
       assert.equal(r.status(),200);
       await page.waitForFunction(()=>document.querySelectorAll("#homeNews [data-id]").length>=1);
+      await page.waitForLoadState("networkidle");
+      await page.evaluate(()=>document.fonts.ready);
       await noHorizontalOverflow(page,"homepage",width);
       // Home retains required visual concepts and navigation.
       assert.ok(await page.locator("#homeNews .news").count()>=3,"home must show 3 news cards");
@@ -48,11 +50,17 @@ async function main() {
       if(process.env.KAIGO_BASELINE_URL) {
         const baseline = await browser.newPage({viewport:{width,height:844},deviceScaleFactor:1});
         await baseline.goto(process.env.KAIGO_BASELINE_URL,{waitUntil:"networkidle"});
+        // A fixed footer must not cover the region being compared.
+        const hideFooter=await page.addStyleTag({content:".bottom{visibility:hidden!important}"});
+        await baseline.addStyleTag({content:".bottom{visibility:hidden!important}"});
         for(const selector of [".hero","#featureGrid",".daily-grid"]) {
-          const before=await baseline.locator(selector).screenshot();
-          const after=await page.locator(selector).screenshot();
+          const label=selector.replace(/[^a-zA-Z0-9]/g, "");
+          const before=await baseline.locator(selector).screenshot({path:path.join("kaigo-qa-screenshots",`${width}_${label}_before.png`)});
+          const after=await page.locator(selector).screenshot({path:path.join("kaigo-qa-screenshots",`${width}_${label}_after.png`)});
+          console.log("Visual region",width,selector,JSON.stringify({before:await baseline.locator(selector).boundingBox(),after:await page.locator(selector).boundingBox()}));
           assert.ok(before.equals(after), `${width}px: adopted design changed at ${selector}`);
         }
+        await hideFooter.evaluate(el=>el.remove());
         await baseline.close();
       }
       // Parent Oct 9 overview: all four newly reviewed services must be navigable.

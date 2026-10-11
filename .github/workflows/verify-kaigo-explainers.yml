@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     env:
-      KAIGO_EVIDENCE_DIR: ${{ runner.temp }}/kaigo-evidence
+      KAIGO_EVIDENCE_DIR: /tmp/kaigo-evidence
     steps:
       - uses: actions/checkout@v4
         with:
@@ -59,6 +59,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: kaigo-source-evidence
-          path: ${{ runner.temp }}/kaigo-evidence/
+          path: /tmp/kaigo-evidence/
           if-no-files-found: ignore
           retention-days: 7
