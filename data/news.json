@@ -1,10 +1,10 @@
 {
   "schema_version": 2,
   "mode": "newspaper",
-  "updated_at": "2026-10-11T11:23:39.288129+09:00",
-  "updated_label": "10/11 11:23",
+  "updated_at": "2026-10-12T06:29:30.406653+09:00",
+  "updated_label": "10/12 06:29",
   "latest_article_date": "2026-10-10",
-  "new_count": 10,
+  "new_count": 0,
   "important_ids": [
     "10c306bd4e79feed",
     "3e43d3e6f8bb4123",
@@ -455,7 +455,12 @@
       "body_sha256": "e635ca05ae918310059fa3d2b59b6bfd0ad13648b10796c1179e2b84c602ca61"
     }
   ],
-  "source_errors": [],
-  "source_count": 3,
+  "source_errors": [
+    {
+      "source": "mofa",
+      "message": "取得できなかったため、確認済みの記事を保持しています。"
+    }
+  ],
+  "source_count": 2,
   "window_days": 7
 }
