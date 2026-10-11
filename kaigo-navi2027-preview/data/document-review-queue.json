@@ -97,6 +97,62 @@
       "readable_page_rate": 0.91,
       "sha256": "db4c9cfbc29e39501181712f0737a84dcb8153c5b28d6799b6685d2b35d9d50e",
       "checked_at": "2026-10-10"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001716096.pdf",
+      "label": "【資料４】訪問リハビリテーション［2.8MB］",
+      "meeting_date": "2026-06-29",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_74005.html",
+      "status": "本文取得・解説未審査",
+      "pages": 47,
+      "chars": 88239,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 32,
+      "notes_and_exceptions_candidates": 63,
+      "sha256": "00a4745d359aa1c9bd8f736a0445d3094560e8f5f675fe603c8cff0b6fcdc65e",
+      "checked_at": "2026-10-11"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001716095.pdf",
+      "label": "【資料３】訪問看護［4.0MB］",
+      "meeting_date": "2026-06-29",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_74005.html",
+      "status": "本文取得・解説未審査",
+      "pages": 58,
+      "chars": 122256,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 87,
+      "notes_and_exceptions_candidates": 77,
+      "sha256": "29d91f5bb6c85e96b161c67c88300b21a34c9d00abf55b4dbb567b71982bd757",
+      "checked_at": "2026-10-11"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001716094.pdf",
+      "label": "【資料２】訪問入浴介護［2.5MB］",
+      "meeting_date": "2026-06-29",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_74005.html",
+      "status": "本文取得・解説未審査",
+      "pages": 35,
+      "chars": 51252,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 16,
+      "notes_and_exceptions_candidates": 47,
+      "sha256": "1f34e4aab03636dd90b47f70c11cc9072bcd713dc33e266864b43397759684ea",
+      "checked_at": "2026-10-11"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001716093.pdf",
+      "label": "【資料１】訪問介護［3.7MB］",
+      "meeting_date": "2026-06-29",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_74005.html",
+      "status": "本文取得・解説未審査",
+      "pages": 49,
+      "chars": 85943,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 56,
+      "notes_and_exceptions_candidates": 133,
+      "sha256": "f9a3f5e3531e93ecfd3ba8167911d1b0f38f94b3572a9cab35e8a80a7aff3651",
+      "checked_at": "2026-10-11"
     }
   ]
 }
