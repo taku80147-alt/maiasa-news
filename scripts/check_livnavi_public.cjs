@@ -18,6 +18,7 @@ async function officialCheck(){
  if(!resp.ok)throw Error("Cannot verify MHLW scheduled collector: HTTP "+resp.status);
  const runs=(await resp.json()).workflow_runs||[];
  const recent=runs.filter(r=>Date.now()-Date.parse(r.created_at)<48*3600000);
+ console.log("MHLW_SCHEDULED_RUNS",JSON.stringify(runs.slice(0,8).map(r=>({created_at:r.created_at,status:r.status,conclusion:r.conclusion,event:r.event,url:r.html_url}))));
  if(!recent.some(r=>r.conclusion==="success"))throw Error("No successful MHLW scheduled collector in the past 48 hours");
  if(runs[0]?.conclusion==="failure"&&Date.now()-Date.parse(runs[0].created_at)<36*3600000)
   throw Error("Newest MHLW collector failed: "+runs[0].html_url);
@@ -48,12 +49,15 @@ async function liveCheck(browser){
  }finally{await page.close()}
 }
 (async()=>{
- await officialCheck();
+ const errors=[];
+ try{await officialCheck()}catch(e){errors.push("OFFICIAL_COLLECTOR: "+(e.stack||e))}
  const browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
  try{
   for(let n=1;n<=3;n++){
-   try{await liveCheck(browser);return}
-   catch(e){console.error("Live check "+n+"/3:",e.stack||e);if(n===3)throw e;await new Promise(r=>setTimeout(r,20000))}
+   try{await liveCheck(browser);break}
+   catch(e){console.error("Live check "+n+"/3:",e.stack||e);if(n===3)errors.push("PUBLIC_SITE: "+(e.stack||e));else await new Promise(r=>setTimeout(r,20000))}
   }
  }finally{await browser.close()}
+ if(errors.length)throw Error(errors.join("\\n\\n"));
+ console.log("LIVNAVI_ALL_CHECKS_PASSED");
 })().catch(e=>{console.error("LIVNAVI_MONITOR_FAILED",e.stack||e);process.exitCode=1});
