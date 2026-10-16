@@ -83,7 +83,7 @@ let autoSalesGuides=new Map();
 function autoSalesArticle(a){
  if(reviewedExplainers.has(a.id))return '';
  const guide=autoSalesGuides.get(a.id);
- if(!guide)return '';
+ if(!guide||guide.date!==a.date||guide.source_url!==a.source_url)return '';
  const topics=guide.topics.map(t=>'<div class="auto-topic"><h4>📍 '+esc(t.label)+'</h4>'+
  '<p><b>聞いてみる：</b>'+esc(t.question)+'</p><p><b>次の一手：</b>'+esc(t.next)+'</p></div>').join('');
  return '<section class="sales-auto" aria-label="議題から自動作成した営業ガイド">'+
@@ -103,13 +103,12 @@ async function loadAutoSalesGuides(){
   if(!resp.ok)throw Error('HTTP '+resp.status);
   const json=await resp.json();
   if(!Array.isArray(json.guides)||json.schema_version!==1)throw Error('Invalid sales guides');
-  const newGuides=json.guides.filter(g=>{
-   const a=items.find(x=>x.id===g.id);
-   return a && g.source_url===a.source_url && g.date===a.date &&
+  const newGuides=json.guides.filter(g=>
+    typeof g.id==='string'&&/^n-[a-z0-9-]+$/.test(g.id)&&
+    /^20\d{2}-\d\d-\d\d$/.test(g.date)&&
     typeof g.first_phrase==='string' && Array.isArray(g.topics) && g.topics.length>0 &&
     g.topics.every(t=>typeof t.question==='string'&&typeof t.next==='string') &&
-    /^https:\/\/www\.mhlw\.go\.jp\//.test(g.source_url);
-  });
+    /^https:\/\/www\.mhlw\.go\.jp\//.test(g.source_url));
   autoSalesGuides=new Map(newGuides.map(g=>[g.id,g]));
   if(mode!=='home')render();
  }catch(err){console.info('営業ガイドの読み込みに失敗しました',err.message)}
