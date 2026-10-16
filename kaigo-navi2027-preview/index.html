@@ -37,6 +37,19 @@ button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus
 
 .toast{position:fixed;left:50%;bottom:78px;transform:translateX(-50%);width:calc(100% - 30px);max-width:520px;border-radius:13px;background:#143968;color:white;padding:12px 15px;font-size:13px;z-index:20;box-shadow:var(--shadow)}
 .livnavi-wordmark{display:block;height:32px;width:auto;max-width:100%;overflow:hidden}
+
+/* 会議議題に基づく営業ガイド。精読済み解説とはラベルで区別する。 */
+.sales-auto{margin:15px 0 0;padding:15px;border:1px solid #b5d9fd;background:linear-gradient(140deg,#f3faff,#fff);border-radius:18px}
+.sales-auto h3{font-size:18px;color:#103e74;margin:9px 0}
+.sales-auto h4{font-size:14px;color:#215688;margin:8px 0}
+.sales-auto p{font-size:13px;line-height:1.75;color:#405975}
+.sales-auto .auto-tag{display:inline-block;background:#dceeff;border-radius:99px;color:#195d99;padding:5px 9px;font-size:11px;font-weight:850}
+.sales-auto .auto-quote{background:#fff;border-left:4px solid #4096ee;border-radius:9px;padding:12px;color:#15467e;font-size:14px;font-weight:750;line-height:1.7}
+.sales-auto .auto-topic{border-top:1px solid #d7e8fa;padding:10px 0}
+.sales-auto .auto-topic p{margin:5px 0}
+.sales-auto .auto-caution{background:#fff6e8;border:1px solid #ffe0b4;padding:11px;border-radius:11px;color:#855619;font-size:12px;line-height:1.7}
+.sales-auto a{color:#125dc4;font-weight:800}
+
 </style></head><body><div class="app">
 <section id="home" class="pane current">
 <header class="top"><div class="brand"><h1 class="brand-title" aria-label="LivNavi 2027"><svg class="livnavi-wordmark" viewBox="240 240 1345 290" width="1345" height="290" aria-hidden="true" focusable="false"><image href="assets/livnavi-2027.png" width="1774" height="887"/></svg></h1><p class="brand-sub">介護制度改正ガイド</p></div><div class="head-actions"><button data-go="search" aria-label="検索">⌕</button><button data-go="categories" aria-label="メニュー">☰</button></div></header>
@@ -66,6 +79,42 @@ function showToast(message){let el=document.getElementById('toast');if(!el){el=d
 const $=id=>document.getElementById(id);const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 let reviewedExplainers=new Map();
+let autoSalesGuides=new Map();
+function autoSalesArticle(a){
+ if(reviewedExplainers.has(a.id))return '';
+ const guide=autoSalesGuides.get(a.id);
+ if(!guide)return '';
+ const topics=guide.topics.map(t=>'<div class="auto-topic"><h4>📍 '+esc(t.label)+'</h4>'+
+ '<p><b>聞いてみる：</b>'+esc(t.question)+'</p><p><b>次の一手：</b>'+esc(t.next)+'</p></div>').join('');
+ return '<section class="sales-auto" aria-label="議題から自動作成した営業ガイド">'+
+ '<span class="auto-tag">💼 営業向け・議題ベースの自動ガイド</span>'+
+ '<h3>お客様への説明・ヒアリング例</h3>'+
+ '<p>'+esc(guide.intro)+'</p>'+
+ '<h4>最初のひと言</h4><div class="auto-quote">'+esc(guide.first_phrase)+'</div>'+
+ '<h4>サービス別の聞き方</h4>'+topics+
+ '<div class="auto-caution"><b>⚠️ 判断の範囲：</b>'+esc(guide.check_first)+
+ '<br>このガイドは会議の議題と開催日から自動作成。PDF本文・個別の算定要件まで精読した解説ではありません。</div>'+
+ '<p><small>資料の日付：'+esc(guide.date)+'　／　'+esc(guide.source_name||'厚労省公式資料')+'</small><br>'+
+ '<a href="'+esc(guide.source_url)+'" target="_blank" rel="noopener noreferrer">厚労省の原文・会議資料を確認 ↗</a></p></section>';
+}
+async function loadAutoSalesGuides(){
+ try{
+  const resp=await fetch('data/sales-guides.json?v='+Date.now(),{cache:'no-store'});
+  if(!resp.ok)throw Error('HTTP '+resp.status);
+  const json=await resp.json();
+  if(!Array.isArray(json.guides)||json.schema_version!==1)throw Error('Invalid sales guides');
+  const newGuides=json.guides.filter(g=>{
+   const a=items.find(x=>x.id===g.id);
+   return a && g.source_url===a.source_url && g.date===a.date &&
+    typeof g.first_phrase==='string' && Array.isArray(g.topics) && g.topics.length>0 &&
+    g.topics.every(t=>typeof t.question==='string'&&typeof t.next==='string') &&
+    /^https:\/\/www\.mhlw\.go\.jp\//.test(g.source_url);
+  });
+  autoSalesGuides=new Map(newGuides.map(g=>[g.id,g]));
+  if(mode!=='home')render();
+ }catch(err){console.info('営業ガイドの読み込みに失敗しました',err.message)}
+}
+
 function safePDF(a){return a&&typeof a.source_pdf==='string'&&a.source_pdf.startsWith('https://www.mhlw.go.jp/content/')?a.source_pdf:null}
 function explainArticle(a){
  const ex=reviewedExplainers.get(a.id);if(!ex)return '';
@@ -91,14 +140,14 @@ function row(a){return '<article class="card"><span class="tag">'+esc(a.category
 function render(){const heading={news:'最新情報',topics:'いま注目の法改正',today:'今日の発見',talk:'今日の営業ネタ',categories:'分野から探す',ai:'制度を調べる',favorites:'お気に入り',search:'記事を検索',detail:'記事詳細',category:'分野別の記事'}[mode];let content='<h1 class="vtitle">'+heading+'</h1>';
 if(mode==='news'||mode==='topics'){let choices=items.filter(x=>x.id.startsWith('n')&&(mode==='news'||reviewedExplainers.has(x.id)));content+='<p class="vsub">厚労省の公式会議資料と確認できた議題です。資料の公開と制度の正式決定は異なります。</p><div class="filters">'+['すべて',...new Set(choices.map(x=>x.category))].map(f=>'<button class="filter '+(filter===f?'selected':'')+'" data-filter="'+f+'">'+f+'</button>').join('')+'</div><div class="cards">'+choices.filter(x=>filter==='すべて'||x.category===filter).map(row).join('')+'</div>'}
 if(mode==='detail'){const a=items.find(x=>x.id===selected);if(a){const source=typeof a.source_url==='string'&&a.source_url.startsWith('https://www.mhlw.go.jp/')?a.source_url:null;content+='<div class="card"><span class="tag">'+(source?'厚労省・公式資料':'制度解説')+'</span><h3>'+esc(a.title)+'</h3><p>'+esc(a.detail||a.summary)+'</p>'+(a.date?'<p><b>資料の日付：</b>'+esc(a.date)+'</p>':'')+'<h3>現在の扱い</h3><p>'+esc(a.status||'会議資料')+'。資料公表と改正の正式決定・施行は区別します。</p>'+(a.sales_tip?'<h3>営業での確認ポイント</h3><p>'+esc(a.sales_tip)+'</p>':'')+(source?'<p><b>出典：</b>'+esc(a.source_name||'厚生労働省')+'</p><p><a class="primary" href="'+esc(source)+'" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:11px 15px;border-radius:11px;color:#fff;text-decoration:none">厚労省の元資料を確認 ↗</a></p>':'')+'<div class="card-actions"><button class="secondary" data-save="'+a.id+'">'+(saved.has(a.id)?'♥ 保存済み':'♡ お気に入り')+'</button></div></div>'}}
-if(mode==='detail'){const a=items.find(x=>x.id===selected);if(a){content+=explainArticle(a);content+='<div class="card-actions" style="margin-top:13px"><button class="secondary" data-share="'+esc(a.id)+'">🔗 記事リンクをコピー</button></div>';}}
-if(mode==='detail' && !reviewedExplainers.has(selected) && selected!=='n-pay-269' && String(selected||'').startsWith('n-'))content+='<p class="exp-alert">この記事は現在、概要版です。本文・数値・適用条件まで確認した3段階の解説が整い次第、ここに追加します。</p>'; 
+if(mode==='detail'){const a=items.find(x=>x.id===selected);if(a){content+=explainArticle(a);content+=autoSalesArticle(a);content+='<div class="card-actions" style="margin-top:13px"><button class="secondary" data-share="'+esc(a.id)+'">🔗 記事リンクをコピー</button></div>';}}
+if(mode==='detail' && !reviewedExplainers.has(selected) && !autoSalesGuides.has(selected) && selected!=='n-pay-269' && String(selected||'').startsWith('n-'))content+='<p class="exp-alert">この情報は現在概要版です。営業向けガイドも未取得のため、会議資料の原文をご確認ください。</p>'; 
 if(mode==='detail' && selected==='n-pay-269') {
   const links=[['n-pay-269-gh','認知症グループホームの解説'],['n-pay-269-sm','小規模多機能の解説'],['n-pay-269-nm','看護小規模多機能の解説'],['n-pay-269-dn','定期巡回・夜間対応型訪問介護の解説']];
   content+='<section class="card"><h3>📘 分科会の個別解説を読む</h3><p>本日の会議には複数のテーマがあります。詳しい本文と営業向けの説明は、次の記事で確認できます。</p>'+links.map(x=>'<p><button class="primary" type="button" data-id="'+x[0]+'" style="width:100%;text-align:left;padding:13px;margin:2px 0;border-radius:12px;">'+x[1]+' →</button></p>').join('')+'</section>';
 }
 if(mode==='today')content+='<div class="card"><h3>5分で学ぶ、制度の読み方</h3><p>「検討中」は変更案、「決定」は公布・通知などで内容が定まった段階、「施行」は効力が生じる段階です。成立しても、すべてがその日から変わるとは限りません。記事では現行の扱いと変更案を分けて確認します。</p></div><h2>現行制度を学ぶ</h2><div class="cards">'+items.filter(x=>x.article_kind==='learning').map(row).join('')+'</div>';
-if(mode==='talk'){const entries=[...reviewedExplainers.values()];const day=Math.floor(Date.now()/86400000);const ex=entries.length?entries[day%entries.length]:null;content+='<div class="card"><span class="tag">今日の聞き方</span><h3>'+esc(ex?ex.title:'お客様の課題を聞く')+'</h3><p>'+esc(ex?ex.sales.approach:'最近、事業所の運営で困っていることはありますか？')+'</p>'+(ex?'<button class="primary" data-id="'+esc(ex.id)+'">根拠と説明例を読む →</button>':'')+'</div>'}
+if(mode==='talk'){const recent=items.find(a=>autoSalesGuides.has(a.id)&&!reviewedExplainers.has(a.id));const guide=recent?autoSalesGuides.get(recent.id):null;const entries=[...reviewedExplainers.values()];const day=Math.floor(Date.now()/86400000);const ex=entries.length?entries[day%entries.length]:null;content+='<div class="card"><span class="tag">'+(guide?'直近の公式会議から':'今日の聞き方')+'</span><h3>'+esc(guide?recent.title:ex?ex.title:'お客様の課題を聞く')+'</h3><p>'+esc(guide?guide.first_phrase:ex?ex.sales.approach:'最近、事業所の運営で困っていることはありますか？')+'</p>'+(guide?'<p class="vsub">※会議の議題に基づく会話例。制度変更の決定ではありません。</p>':'')+(guide||ex?'<button class="primary" data-id="'+esc(guide?guide.id:ex.id)+'">元資料と説明例を見る →</button>':'')+'</div>'}
 if(mode==='categories')content+='<div class="cards">'+categories.map(c=>'<button class="card" style="text-align:left" data-cat="'+esc(c[1])+'"><h3>'+c[0]+' '+esc(c[1])+' →</h3></button>').join('')+'</div>';
 if(mode==='category')content+='<h2>'+esc(selected)+'</h2><div class="cards">'+(items.filter(x=>x.category===selected||(x.related_categories||[]).includes(selected)).map(row).join('')||'<div class="empty">該当する記事はありません。</div>')+'</div>';
 if(mode==='search'||mode==='ai')content+='<p class="vsub">'+(mode==='ai'?'疑問の言葉を入れると、根拠付きの記事を探せます。回答を自動生成する機能ではありません。':'掲載記事をキーワードで探せます。')+'</p><label for="q" class="vsub">キーワード</label><input class="input" id="q" type="search" placeholder="例：歩行車 / 2割負担 / 夜勤"><p id="resultCount" class="vsub" role="status"></p><div class="cards" id="results"></div>';
@@ -144,6 +193,7 @@ async function loadOfficialFeed(){
  }catch(e){const label=document.querySelector('.updatetag');if(label)label.textContent='● 最新情報の取得に失敗';const box=document.querySelector('.demobox');if(box)box.textContent='最新情報を取得できませんでした。組み込み記事を表示しています。通信が戻ったら開き直してください。';console.warn('公式資料データの取得失敗',e)}
 }
 loadOfficialFeed().then(openDeepLink);
+loadAutoSalesGuides();
 
 document.addEventListener('click',function(e){
  const tab=e.target.closest('[data-exp-tab]');
