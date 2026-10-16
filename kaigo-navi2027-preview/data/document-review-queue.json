@@ -87,6 +87,20 @@
       "checked_at": "2026-10-14"
     },
     {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001758851.pdf",
+      "label": "【資料４】認知症対応型共同生活介護［2.1MB］",
+      "meeting_date": "2026-10-09",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76456.html",
+      "status": "本文取得・解説未審査",
+      "pages": 36,
+      "chars": 51911,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 51,
+      "notes_and_exceptions_candidates": 58,
+      "sha256": "435c1c62522d4fa6549df4516c3cc57c7dc9085af3ad81ae7c44b5bb46a8a083",
+      "checked_at": "2026-10-16"
+    },
+    {
       "pdf_url": "https://www.mhlw.go.jp/content/12300000/001758850.pdf",
       "label": "【資料２】小規模多機能型居宅介護［1.7MB］",
       "meeting_date": "2026-10-09",
