@@ -8,6 +8,9 @@ on:
     paths:
       - '.github/workflows/check-livnavi-public.yml'
       - 'scripts/check_livnavi_public.cjs'
+      - 'kaigo-navi2027-preview/data/explainers-verified.json'
+      - 'kaigo-navi2027-preview/data/pdf-evidence.json'
+      - 'kaigo-navi2027-preview/index.html'
 permissions:
   contents: read
 jobs:
