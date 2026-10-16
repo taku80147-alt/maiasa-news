@@ -64,7 +64,7 @@ async function liveCheck(browser){
    await page.locator(".sales-auto").waitFor({state:"visible",timeout:15000});
    const guideText=await page.locator(".sales-auto").innerText();
    assert.ok(guideText.includes(guide.topics[0].question),"Live sales guide missing latest conversation questions");
-   assert.ok(guideText.includes("資料本文の精読"),"Auto-created advice must disclose its verification limits");
+   assert.ok(guideText.includes("精読した解説ではありません"),"Auto-created advice must disclose its verification limits");
    assert.ok((await page.locator(".sales-auto a[href='"+guide.source_url+"']").count())===1,
      "Sales card must link to its official MHLW source");
   }
