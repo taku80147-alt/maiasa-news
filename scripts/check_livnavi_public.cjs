@@ -6,6 +6,7 @@ const assert=require("node:assert/strict");
 const {chromium}=require("playwright");
 const BASE="https://taku80147-alt.github.io/maiasa-news/kaigo-navi2027-preview/";
 const source=JSON.parse(fs.readFileSync("kaigo-navi2027-preview/data/latest.json","utf8"));
+const sales=JSON.parse(fs.readFileSync("kaigo-navi2027-preview/data/sales-guides.json","utf8"));
 assert.ok(Array.isArray(source.articles)&&source.articles.length>0,"Repository feed is empty");
 const first=[...source.articles].filter(a=>/^n-[a-z0-9-]+$/.test(a.id))
  .sort((a,b)=>b.date.localeCompare(a.date)||a.id.localeCompare(b.id))[0];
@@ -48,6 +49,25 @@ async function liveCheck(browser){
   });
   assert.deepEqual(publicFeed.articles,source.articles,"Published article feed differs from GitHub main");
   assert.equal(publicFeed.verified_on,source.verified_on,"Published metadata differs from GitHub main");
+  const publishedGuides=await page.evaluate(async()=>{
+   const url=new URL("data/sales-guides.json",location.href);
+   url.searchParams.set("monitor",String(Date.now()));
+   const response=await fetch(url,{cache:"no-store"});
+   if(!response.ok)throw Error("Live sales guidance: HTTP "+response.status);
+   return response.json();
+  });
+  assert.deepEqual(publishedGuides.guides,sales.guides,"Published sales guides differ from GitHub main");
+  const guide=sales.guides.find(g=>g.id===first.id);
+  if(guide){
+   await page.locator("#homeNews .news").first().click();
+   await page.locator(".sales-auto").waitFor({state:"visible",timeout:15000});
+   const guideText=await page.locator(".sales-auto").innerText();
+   assert.ok(guideText.includes(guide.topics[0].question),"Live sales guide missing latest conversation questions");
+   assert.ok(guideText.includes("資料本文の精読"),"Auto-created advice must disclose its verification limits");
+   assert.ok((await page.locator(".sales-auto a[href='"+guide.source_url+"']").count())===1,
+     "Sales card must link to its official MHLW source");
+  }
+
   await page.waitForFunction(id=>document.querySelector("#homeNews .news[data-id]")?.dataset.id===id,first.id,{timeout:15000});
   const card=page.locator("#homeNews .news").first();
   assert.equal(await card.getAttribute("data-id"),first.id,"Displayed first article is old");
