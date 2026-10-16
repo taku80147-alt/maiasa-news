@@ -23,39 +23,51 @@ OUTPUT = DATA / 'pdf-evidence.json'
 MAX_NEW_DOCUMENTS = 5
 MAX_ITEMS_PER_DOC = 5
 MAX_READING_PAGES = 240
+EXTRACTOR_VERSION = 2
 
 def norm(s):
     return re.sub(r'\s+', '', s).replace('　','').strip()
 
 def headings_from_page(text, page_number):
-    lines = [s.strip() for s in text.splitlines() if s.strip()]
-    indices = [i for i, s in enumerate(lines) if s in ('対応案','＜対応案＞','【対応案】')]
-    if not indices:
-        return []
+    lines = [line.strip() for line in text.splitlines() if line.strip()]
+    indices = [i for i, line in enumerate(lines) if line in ('対応案','＜対応案＞','【対応案】')]
+    if not indices: return []
     result=[]
+    def original_sentence(i):
+        for ix in range(i,min(len(lines),i+9)):
+            if not lines[ix].startswith(('◼','■','●','○','・')):continue
+            parts=[re.sub(r'^[◼■●○・]\\s*','',lines[ix])]
+            for line in lines[ix+1:ix+6]:
+                if line.startswith(('◼','■','●','○','論点','対応案')):break
+                parts.append(line)
+                if '。' in line:break
+            sentence=''.join(parts).split('。')[0].strip()+'。'
+            if 25<=len(sentence)<=170 and norm(sentence[:-1]) in norm(text):
+                return sentence
+            return ''
+        return ''
     for start in indices:
-        for i in range(start + 1, min(len(lines), start + 34)):
+        found=0
+        for i in range(start+1,min(len(lines),start+36)):
             line=lines[i]
-            if line.startswith(('論点','参考資料','参考文献')) and i>start+3:
-                break
-            match = re.fullmatch(r'[（(]([^()（）]{4,44})[）)]', line)
+            if line.startswith(('論点','参考資料','参考文献')) and i>start+3: break
+            match=re.fullmatch(r'[（(]([^()（）]{4,44})[）)]',line)
             if not match:continue
-            subject=match.group(1).strip()
-            if '改定' in subject and '令和' in subject:continue
-            evidence=''
-            for candidate in lines[i+1:i+8]:
-                if candidate.startswith(('◼','■','●','○','・')):
-                    idx=i+1+lines[i+1:i+8].index(candidate)
-                    bit=[re.sub(r'^[◼■●○・]\s*','',candidate)]
-                    for nextline in lines[idx+1:idx+5]:
-                        if nextline.startswith(('◼','■','●','○','論点','対応案')):break
-                        bit.append(nextline)
-                        if '。' in nextline:break
-                    sentence=''.join(bit).split('。')[0].strip()+'。'
-                    if 25<=len(sentence)<=170 and norm(sentence[:-1]) in norm(text):
-                        evidence=sentence
-                    break
-            result.append({'heading':subject,'pdf_page':page_number,'evidence':evidence})
+            topic=match.group(1).strip()
+            if '改定' in topic and '令和' in topic:continue
+            result.append({'heading':topic,'pdf_page':page_number,
+                           'evidence':original_sentence(i+1)})
+            found+=1
+            if len(result)>=MAX_ITEMS_PER_DOC:return result
+        if found:continue
+        # Some official PDFs put a direct proposal under 論点① without a parenthesized subheading.
+        near=lines[max(0,start-6):start]
+        options=[re.sub(r'^論点[①-⑳0-9]+\\s*','',line).strip() for line in near
+                 if re.match(r'^論点[①-⑳0-9]+\\s*\\S',line) and '・・・' not in line]
+        topic=options[-1] if options else ''
+        if 5<=len(topic)<=60:
+            result.append({'heading':topic,'pdf_page':page_number,
+                           'evidence':original_sentence(start+1)})
             if len(result)>=MAX_ITEMS_PER_DOC:return result
     unique={}
     for item in result:unique.setdefault(item['heading'],item)
@@ -103,6 +115,7 @@ def inspect_document(doc):
     if not pages_seen or readable==0:raise ValueError('Unreadable source document')
     return {
         'pdf_url':doc['pdf_url'],'pdf_sha256':digest,'label':doc['label'],
+        'extractor_version':EXTRACTOR_VERSION,
         'pdf_pages':pages_seen,'checked_at':dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%d'),
         'topics':items[:MAX_ITEMS_PER_DOC]
     }
@@ -114,7 +127,8 @@ def build():
     known={}
     for row in old.get('articles',[]):
         for d in row.get('documents',[]):
-            known[(d.get('pdf_url'),d.get('pdf_sha256'))]=d
+            if d.get('extractor_version')==EXTRACTOR_VERSION:
+                known[(d.get('pdf_url'),d.get('pdf_sha256'))]=d
     articles=[]
     read=0
     eligible=[a for a in feed['articles'] if re.fullmatch(r'n-(pay|ins|econ)-[0-9]+',a['id']) and
