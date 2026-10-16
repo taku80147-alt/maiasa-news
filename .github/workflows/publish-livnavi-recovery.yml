@@ -7,6 +7,8 @@ on:
       - 'kaigo-navi2027-preview/index.html'
       - 'kaigo-navi2027-preview/data/latest.json'
       - 'kaigo-navi2027-preview/data/sales-guides.json'
+      - 'kaigo-navi2027-preview/data/pdf-evidence.json'
+      - 'kaigo-navi2027-preview/data/explainers-verified.json'
   schedule:
     - cron: '0 23 * * *' # 日本時間 毎朝08:00、通常の情報取得後に公開を再確認
   workflow_dispatch:
