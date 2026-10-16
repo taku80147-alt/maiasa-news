@@ -35,7 +35,7 @@ const buildGuides = function buildGuides(feed) {
     "介護保険制度":["介護保険制度","制度の変更予定について、利用者やご家族からどんな質問が多いですか？","現行制度に関する回答は正式通知を確認する。"],
     "人員配置":["人材・配置","人手不足や業務負担の中で優先的に改善したい課題は何ですか？","現行配置基準を前提に聞き、検討中の案を確定事項と扱わない。"]
   };
-  const valid = feed.articles.filter(a=>a&&/^n-[a-z0-9-]+$/.test(a.id||"")&&/^20\d{2}-\d\d-\d\d$/.test(a.date||"")&& /^https:\/\/www\.mhlw\.go\.jp\//.test(a.source_url||""));
+  const valid = feed.articles.filter(a=>a&&/^n-[a-z0-9-]+$/.test(a.id||"")&&/^20\d{2}-\d\d-\d\d$/.test(a.date||"")&& /^https:\/\/www\.mhlw\.go\.jp\//.test(a.source_url||"")&&!/^n-law/.test(a.id)&&!String(a.status||"").startsWith("決定"));
   const guides=valid.map(a=>{
     const agenda=String(a.summary||"").split("議題：").slice(1).join("議題：")||String(a.summary||"");
     // The agenda is the only confirmed source for auto-generated guidance; no PDF reading is claimed.
