@@ -73,7 +73,7 @@ async function main() {
         const guideText=await page.locator(".sales-auto").innerText();
         assert.ok(guideText.includes(autoGuide.topics[0].question),
           "Latest article must show its concrete sales question");
-        assert.ok(guideText.includes("資料本文の精読"),"Automatic guide must disclose its limitations");
+        assert.ok(guideText.includes("精読した解説ではありません"),"Automatic guide must disclose its limitations");
         await page.locator(".bottom [data-go='home']").click();
       }
       // Parent Oct 9 overview: all four newly reviewed services must be navigable.
