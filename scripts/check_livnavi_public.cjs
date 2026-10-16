@@ -7,6 +7,7 @@ const {chromium}=require("playwright");
 const BASE="https://taku80147-alt.github.io/maiasa-news/kaigo-navi2027-preview/";
 const source=JSON.parse(fs.readFileSync("kaigo-navi2027-preview/data/latest.json","utf8"));
 const sales=JSON.parse(fs.readFileSync("kaigo-navi2027-preview/data/sales-guides.json","utf8"));
+const reviewedIds=new Set(JSON.parse(fs.readFileSync("kaigo-navi2027-preview/data/explainers-verified.json","utf8")).articles.map(a=>a.id));
 assert.ok(Array.isArray(source.articles)&&source.articles.length>0,"Repository feed is empty");
 const first=[...source.articles].filter(a=>/^n-[a-z0-9-]+$/.test(a.id))
  .sort((a,b)=>b.date.localeCompare(a.date)||a.id.localeCompare(b.id))[0];
@@ -58,7 +59,7 @@ async function liveCheck(browser){
   });
   assert.deepEqual(publishedGuides.guides,sales.guides,"Published sales guides differ from GitHub main");
   const guide=sales.guides.find(g=>g.id===first.id);
-  if(guide){
+  if(guide&&!reviewedIds.has(first.id)){
    await page.locator("#homeNews .news").first().click();
    await page.locator(".sales-auto").waitFor({state:"visible",timeout:15000});
    const guideText=await page.locator(".sales-auto").innerText();
