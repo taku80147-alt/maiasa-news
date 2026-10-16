@@ -8,6 +8,8 @@ on:
     paths:
       - '.github/workflows/update-kaigo-reform.yml'
       - 'scripts/update_kaigo_reform.py'
+      - 'scripts/build_kaigo_sales_guides.cjs'
+      - 'scripts/test_kaigo_sales_guides.cjs'
 permissions:
   contents: write
   pages: write
@@ -32,11 +34,15 @@ jobs:
         run: pip install beautifulsoup4==4.13.4 pymupdf==1.26.5
       - name: 厚生労働省の介護関連審議会を確認
         run: python scripts/update_kaigo_reform.py
+      - name: 公開済みの会議議題から営業向け会話ガイドを作成
+        run: |
+          node scripts/build_kaigo_sales_guides.cjs
+          node scripts/test_kaigo_sales_guides.cjs
       - name: 公開データの変更のみ保存
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add kaigo-navi2027-preview/data/latest.json
+          git add kaigo-navi2027-preview/data/latest.json kaigo-navi2027-preview/data/sales-guides.json
           if git diff --cached --quiet; then
             echo 'No new official meeting information'
           else
