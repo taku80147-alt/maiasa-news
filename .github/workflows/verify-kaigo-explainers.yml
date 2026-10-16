@@ -96,3 +96,23 @@ jobs:
             const found=list.find(i=>!i.pull_request&&i.title===title);
             if(found)await github.rest.issues.update({owner,repo,issue_number:found.number,body});
             else await github.rest.issues.create({owner,repo,title,body});
+  notify-successful-verification:
+    needs: verify
+    if: ${{ needs.verify.result == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: 原文検証の復旧を記録
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const {owner,repo}=context.repo;
+            const title='[LivNavi監視] 制度解説のPDF原文検証に失敗';
+            const {data:list}=await github.rest.issues.listForRepo({owner,repo,state:'open',per_page:100});
+            const found=list.find(i=>!i.pull_request&&i.title===title);
+            if(found){
+              await github.rest.issues.createComment({owner,repo,issue_number:found.number,body:
+                '厚労省PDF全文・ページ根拠・記事の再検証に成功: '+context.serverUrl+'/'+owner+'/'+repo+'/actions/runs/'+context.runId});
+              await github.rest.issues.update({owner,repo,issue_number:found.number,state:'closed',state_reason:'completed'});
+            }
