@@ -71,7 +71,10 @@ def source_for_article(article,documents):
         if d.get('status')!='本文取得・解説未審査':continue
         if d.get('readable_page_rate',0)<.75:continue
         if not re.fullmatch(r'[0-9a-f]{64}',d.get('sha256','')):continue
-        official_url(d['pdf_url'])
+        try:
+            official_url(d['pdf_url'])
+        except ValueError:
+            continue
         linked.append(d)
     return sorted(linked,key=lambda x:x['pdf_url'])
 
