@@ -23,14 +23,14 @@ OUTPUT = DATA / 'pdf-evidence.json'
 MAX_NEW_DOCUMENTS = 5
 MAX_ITEMS_PER_DOC = 5
 MAX_READING_PAGES = 240
-EXTRACTOR_VERSION = 2
+EXTRACTOR_VERSION = 3
 
 def norm(s):
     return re.sub(r'\s+', '', s).replace('　','').strip()
 
 def headings_from_page(text, page_number):
     lines = [line.strip() for line in text.splitlines() if line.strip()]
-    indices = [i for i, line in enumerate(lines) if line in ('対応案','＜対応案＞','【対応案】')]
+    indices = [i for i, line in enumerate(lines) if norm(line) in ('対応案','＜対応案＞','【対応案】') or (norm(line).endswith('対応案') and len(norm(line))<=12)]
     if not indices: return []
     result=[]
     def original_sentence(i):
@@ -65,6 +65,8 @@ def headings_from_page(text, page_number):
         options=[re.sub(r'^論点[①-⑳0-9]+\\s*','',line).strip() for line in near
                  if re.match(r'^論点[①-⑳0-9]+\\s*\\S',line) and '・・・' not in line]
         topic=options[-1] if options else ''
+        if not (5<=len(topic)<=60):
+            topic='このページの対応案（本文の確認が必要）'
         if 5<=len(topic)<=60:
             result.append({'heading':topic,'pdf_page':page_number,
                            'evidence':original_sentence(start+1)})
