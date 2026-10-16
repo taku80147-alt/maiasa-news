@@ -1,0 +1,70 @@
+name: LivNavi 公開画面・更新監視
+on:
+  schedule:
+    - cron: '30 0 * * *' # 日本時間09:30、07:10公式資料確認・08:00公開の後
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/check-livnavi-public.yml'
+      - 'scripts/check_livnavi_public.cjs'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: スマートフォン用ブラウザ
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: 取得履歴と公開JSONと実際のスマホ画面を照合
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/check_livnavi_public.cjs
+  alert:
+    needs: verify
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: 異常時はIssueを開き復旧時は閉じる
+        uses: actions/github-script@v7
+        env:
+          CHECK_RESULT: ${{ needs.verify.result }}
+        with:
+          script: |
+            const {owner,repo}=context.repo;
+            const title='[LivNavi監視] 更新・公開に異常があります';
+            const result=process.env.CHECK_RESULT;
+            const {data:all}=await github.rest.issues.listForRepo({owner,repo,state:'open',per_page:100});
+            const issue=all.find(i=>!i.pull_request && i.title===title);
+            if(result==='success'){
+              if(issue){
+                await github.rest.issues.createComment({owner,repo,issue_number:issue.number,
+                  body:'自動監視で復旧を確認しました: '+context.serverUrl+'/'+owner+'/'+repo+'/actions/runs/'+context.runId});
+                await github.rest.issues.update({owner,repo,issue_number:issue.number,state:'closed',state_reason:'completed'});
+              }
+              return;
+            }
+            if(result==='cancelled'||result==='skipped')return;
+            const body=[
+              'LivNavi の自動監視が異常を検知しました。',
+              '検査対象: 厚労省公式会議資料チェックの実行履歴、GitHubと公開サイトのデータ一致、実際のスマホ画面に表示される先頭記事。',
+              '詳細・失敗理由: '+context.serverUrl+'/'+owner+'/'+repo+'/actions/runs/'+context.runId,
+              '公式の新着資料がない日は、記事の日付が古いことだけを理由に異常扱いしません。'
+            ].join(String.fromCharCode(10,10));
+            if(issue)await github.rest.issues.update({owner,repo,issue_number:issue.number,body});
+            else await github.rest.issues.create({owner,repo,title,body});
