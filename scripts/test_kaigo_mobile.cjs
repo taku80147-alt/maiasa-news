@@ -12,6 +12,7 @@ const path = require("node:path");
 const BASE = "http://127.0.0.1:8765/kaigo-navi2027-preview/";
 const widths = [320, 360, 390, 430];
 const release = JSON.parse(fs.readFileSync("kaigo-navi2027-preview/data/explainers-verified.json","utf8"));
+const autoSales = JSON.parse(fs.readFileSync("kaigo-navi2027-preview/data/sales-guides.json","utf8"));
 const four = ["n-pay-269-gh","n-pay-269-sm","n-pay-269-nm","n-pay-269-dn"];
 
 async function noHorizontalOverflow(page, stage, width) {
@@ -62,6 +63,18 @@ async function main() {
         }
         await hideFooter.evaluate(el=>el.remove());
         await baseline.close();
+      }
+      // A newly added official meeting must have a visible, explicitly provisional sales guide.
+      const homeFirstId=await page.locator("#homeNews .news").first().getAttribute("data-id");
+      const autoGuide=autoSales.guides.find(g=>g.id===homeFirstId);
+      if(autoGuide && !release.articles.some(a=>a.id===homeFirstId)){
+        await page.locator("#homeNews .news").first().click();
+        await page.locator(".sales-auto").waitFor({state:"visible",timeout:14000});
+        const guideText=await page.locator(".sales-auto").innerText();
+        assert.ok(guideText.includes(autoGuide.topics[0].question),
+          "Latest article must show its concrete sales question");
+        assert.ok(guideText.includes("資料本文の精読"),"Automatic guide must disclose its limitations");
+        await page.locator(".bottom [data-go='home']").click();
       }
       // Parent Oct 9 overview: all four newly reviewed services must be navigable.
       await page.locator('.bottom [data-go="news"]').first().click();
