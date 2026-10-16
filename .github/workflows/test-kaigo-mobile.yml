@@ -30,9 +30,9 @@ jobs:
       - name: 採用済み画面の比較元を準備
         run: |
           mkdir -p .qa-baseline/data
-          git show cfbda0d4dd6d5cf261bfd7e563941519bc64902e:kaigo-navi2027-preview/index.html > .qa-baseline/index.html
+          git show 4070f5f04a8c170615443d9192954ef4afa094e0:kaigo-navi2027-preview/index.html > .qa-baseline/index.html
           for file in latest.json explainers-verified.json; do
-            git show cfbda0d4dd6d5cf261bfd7e563941519bc64902e:kaigo-navi2027-preview/data/$file > .qa-baseline/data/$file
+            git show 4070f5f04a8c170615443d9192954ef4afa094e0:kaigo-navi2027-preview/data/$file > .qa-baseline/data/$file
           done
       - name: Chromium テスト環境の準備
         run: |
