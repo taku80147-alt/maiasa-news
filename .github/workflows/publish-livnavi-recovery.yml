@@ -6,6 +6,7 @@ on:
       - '.github/workflows/publish-livnavi-recovery.yml'
       - 'kaigo-navi2027-preview/index.html'
       - 'kaigo-navi2027-preview/data/latest.json'
+      - 'kaigo-navi2027-preview/data/sales-guides.json'
   schedule:
     - cron: '0 23 * * *' # 日本時間 毎朝08:00、通常の情報取得後に公開を再確認
   workflow_dispatch:
@@ -52,6 +53,8 @@ jobs:
               subprocess.run(['node', '--check', str(target)], check=True)
           print('記事数:', len(articles), '最新資料:', latest['date'], latest['title'])
           PY
+      - name: 営業ガイドの元資料・説明範囲の一致を確認
+        run: node scripts/test_kaigo_sales_guides.cjs
       - uses: actions/configure-pages@v5
         with:
           enablement: true
