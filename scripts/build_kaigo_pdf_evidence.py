@@ -76,7 +76,11 @@ def source_for_article(article,documents):
         except ValueError:
             continue
         linked.append(d)
-    return sorted(linked,key=lambda x:x['pdf_url'])
+    def material_order(row):
+        label=row.get('label','').translate(str.maketrans('０１２３４５６７８９','0123456789'))
+        match=re.search(r'資料\s*(\d+)',label)
+        return (int(match.group(1)) if match else 99,row.get('pdf_url',''))
+    return sorted(linked,key=material_order)
 
 def inspect_document(doc):
     raw=fetch(doc['pdf_url'],limit=15*1024*1024)
