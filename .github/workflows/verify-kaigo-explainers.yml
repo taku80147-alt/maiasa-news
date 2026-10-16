@@ -77,3 +77,22 @@ jobs:
     uses: ./.github/workflows/pages.yml
     with:
       ref: ${{ needs.verify.outputs.revision }}
+  notify-failed-verification:
+    needs: verify
+    if: ${{ failure() }}
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: 原文の検証失敗を記録
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const {owner,repo}=context.repo;
+            const title='[LivNavi監視] 制度解説のPDF原文検証に失敗';
+            const body='PDF原本のダウンロード・ハッシュ・ページ根拠・精読記事の一貫性に問題があり、誤った解説の公開を中止しました。'+
+              String.fromCharCode(10,10)+'確認用実行記録: '+context.serverUrl+'/'+owner+'/'+repo+'/actions/runs/'+context.runId;
+            const {data:list}=await github.rest.issues.listForRepo({owner,repo,state:'open',per_page:100});
+            const found=list.find(i=>!i.pull_request&&i.title===title);
+            if(found)await github.rest.issues.update({owner,repo,issue_number:found.number,body});
+            else await github.rest.issues.create({owner,repo,title,body});
