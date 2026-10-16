@@ -15,7 +15,7 @@ permissions:
   pages: write
   id-token: write
 concurrency:
-  group: pages
+  group: livnavi-fast-publish
   cancel-in-progress: false
 jobs:
   publish:
