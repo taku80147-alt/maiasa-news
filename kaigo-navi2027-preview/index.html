@@ -50,6 +50,20 @@ button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus
 .sales-auto .auto-caution{background:#fff6e8;border:1px solid #ffe0b4;padding:11px;border-radius:11px;color:#855619;font-size:12px;line-height:1.7}
 .sales-auto a{color:#125dc4;font-weight:800}
 
+
+/* Original-PDF evidence viewer: labels are deliberately different from verified legal articles. */
+.pdf-evidence{margin:13px 0;padding:15px;background:#fcfdff;border:1px solid #c8d9ec;border-radius:16px}
+.pdf-evidence h3{font-size:18px;line-height:1.45;color:#164379;margin:9px 0}
+.pdf-evidence h4{font-size:14px;margin:9px 0 7px;color:#2b5683}
+.pdf-evidence .pdf-t{font-size:11px;font-weight:850;background:#e9eef7;color:#355a85;padding:5px 9px;border-radius:99px}
+.pdf-evidence p,.pdf-evidence li{font-size:13px;line-height:1.7;color:#405a74}
+.pdf-evidence details{border-top:1px solid #e1ebf5;padding:10px 0}
+.pdf-evidence summary{font-size:14px;font-weight:850;color:#164779;cursor:pointer;line-height:1.55}
+.pdf-evidence ul{padding-left:18px;margin:6px 0}
+.pdf-evidence li{margin:10px 0}
+.pdf-evidence a{font-weight:750;color:#1769b7}
+.pdf-evidence .pdf-alert{padding:11px;border-radius:11px;background:#fff3e8;color:#865719;font-size:12px;line-height:1.65}
+
 </style></head><body><div class="app">
 <section id="home" class="pane current">
 <header class="top"><div class="brand"><h1 class="brand-title" aria-label="LivNavi 2027"><svg class="livnavi-wordmark" viewBox="240 240 1345 290" width="1345" height="290" aria-hidden="true" focusable="false"><image href="assets/livnavi-2027.png" width="1774" height="887"/></svg></h1><p class="brand-sub">介護制度改正ガイド</p></div><div class="head-actions"><button data-go="search" aria-label="検索">⌕</button><button data-go="categories" aria-label="メニュー">☰</button></div></header>
@@ -79,6 +93,44 @@ function showToast(message){let el=document.getElementById('toast');if(!el){el=d
 const $=id=>document.getElementById(id);const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 let reviewedExplainers=new Map();
+let pdfEvidence=new Map();
+function pdfEvidenceArticle(a){
+ if(reviewedExplainers.has(a.id))return '';
+ const brief=pdfEvidence.get(a.id);
+ if(!brief || brief.meeting_date!==a.date || brief.source_url!==a.source_url)return '';
+ const documents=brief.documents.filter(d=>Array.isArray(d.topics)&&d.topics.length);
+ if(!documents.length)return '';
+ const content=documents.map((d,j)=>{
+  const subjects=d.topics.map(t=>{
+   const href=d.pdf_url+'#page='+Number(t.pdf_page);
+   return '<li><b>'+esc(t.heading)+'</b> <a href="'+esc(href)+'" target="_blank" rel="noopener noreferrer">PDF '+Number(t.pdf_page)+'ページ ↗</a>'+
+    (t.evidence?'<br><span>原文の抜粋：'+esc(t.evidence)+'</span>':'')+'</li>';
+  }).join('');
+  return '<details '+(j===0?'open':'')+'><summary>'+esc(d.label)+'（'+d.topics.length+'項目）</summary><ul>'+subjects+'</ul></details>';
+ }).join('');
+ return '<section class="pdf-evidence"><span class="pdf-t">📚 厚労省PDF・原文確認の手がかり（自動抽出／未審査）</span>'+
+ '<h3>具体的に何が検討されている？</h3>'+
+ '<p>会議資料の「対応案」に書かれた検討項目を、原文のページへ直接移動できる形で整理しました。見出し・原文の抜粋であり、正式な制度解説として確認済みの文章ではありません。</p>'+
+ content+
+ '<h4>現行制度と今後の違い</h4><p><b>現行：</b>現在有効な法令・通知・介護報酬の条件に従います。</p>'+
+ '<p><b>今後：</b>ここにある項目は会議の「対応案」であり、決定・施行を意味しません。変更の有無・時期・金額・算定要件は、正式資料を確認してから判断してください。</p>'+
+ '<div class="pdf-alert">⚠️ 本文を機械的に抽出したもので、例外・但し書き・他ページとの関係まで精査していません。実際の請求・指導・説明に使う前に元資料をご確認ください。</div></section>';
+}
+async function loadPdfEvidence(){
+ try{
+  const resp=await fetch('data/pdf-evidence.json?v='+Date.now(),{cache:'no-store'});
+  if(!resp.ok)throw Error('HTTP '+resp.status);
+  const data=await resp.json();
+  if(data.schema_version!==1||!Array.isArray(data.articles))throw Error('Invalid PDF evidence');
+  pdfEvidence=new Map(data.articles.filter(b=>b.id&&Array.isArray(b.documents)&&b.documents.every(d=>
+    /^https:\/\/www\.mhlw\.go\.jp\/content\//.test(d.pdf_url)&&
+    /^[a-f0-9]{64}$/.test(d.pdf_sha256)&&
+    d.topics.every(t=>Number.isInteger(t.pdf_page)&&t.pdf_page>0&&typeof t.heading==='string')
+  )).map(b=>[b.id,b]));
+  if(mode!=='home')render();
+ }catch(e){console.info('原文PDFの自動解析は取得できませんでした:',e.message)}
+}
+
 let autoSalesGuides=new Map();
 function autoSalesArticle(a){
  if(reviewedExplainers.has(a.id))return '';
@@ -139,7 +191,7 @@ function row(a){return '<article class="card"><span class="tag">'+esc(a.category
 function render(){const heading={news:'最新情報',topics:'いま注目の法改正',today:'今日の発見',talk:'今日の営業ネタ',categories:'分野から探す',ai:'制度を調べる',favorites:'お気に入り',search:'記事を検索',detail:'記事詳細',category:'分野別の記事'}[mode];let content='<h1 class="vtitle">'+heading+'</h1>';
 if(mode==='news'||mode==='topics'){let choices=items.filter(x=>x.id.startsWith('n')&&(mode==='news'||reviewedExplainers.has(x.id)));content+='<p class="vsub">厚労省の公式会議資料と確認できた議題です。資料の公開と制度の正式決定は異なります。</p><div class="filters">'+['すべて',...new Set(choices.map(x=>x.category))].map(f=>'<button class="filter '+(filter===f?'selected':'')+'" data-filter="'+f+'">'+f+'</button>').join('')+'</div><div class="cards">'+choices.filter(x=>filter==='すべて'||x.category===filter).map(row).join('')+'</div>'}
 if(mode==='detail'){const a=items.find(x=>x.id===selected);if(a){const source=typeof a.source_url==='string'&&a.source_url.startsWith('https://www.mhlw.go.jp/')?a.source_url:null;content+='<div class="card"><span class="tag">'+(source?'厚労省・公式資料':'制度解説')+'</span><h3>'+esc(a.title)+'</h3><p>'+esc(a.detail||a.summary)+'</p>'+(a.date?'<p><b>資料の日付：</b>'+esc(a.date)+'</p>':'')+'<h3>現在の扱い</h3><p>'+esc(a.status||'会議資料')+'。資料公表と改正の正式決定・施行は区別します。</p>'+(a.sales_tip?'<h3>営業での確認ポイント</h3><p>'+esc(a.sales_tip)+'</p>':'')+(source?'<p><b>出典：</b>'+esc(a.source_name||'厚生労働省')+'</p><p><a class="primary" href="'+esc(source)+'" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:11px 15px;border-radius:11px;color:#fff;text-decoration:none">厚労省の元資料を確認 ↗</a></p>':'')+'<div class="card-actions"><button class="secondary" data-save="'+a.id+'">'+(saved.has(a.id)?'♥ 保存済み':'♡ お気に入り')+'</button></div></div>'}}
-if(mode==='detail'){const a=items.find(x=>x.id===selected);if(a){content+=explainArticle(a);content+=autoSalesArticle(a);content+='<div class="card-actions" style="margin-top:13px"><button class="secondary" data-share="'+esc(a.id)+'">🔗 記事リンクをコピー</button></div>';}}
+if(mode==='detail'){const a=items.find(x=>x.id===selected);if(a){content+=explainArticle(a);content+=pdfEvidenceArticle(a);content+=autoSalesArticle(a);content+='<div class="card-actions" style="margin-top:13px"><button class="secondary" data-share="'+esc(a.id)+'">🔗 記事リンクをコピー</button></div>';}}
 if(mode==='detail' && !reviewedExplainers.has(selected) && !autoSalesGuides.has(selected) && selected!=='n-pay-269' && String(selected||'').startsWith('n-'))content+='<p class="exp-alert">この情報は現在概要版です。営業向けガイドも未取得のため、会議資料の原文をご確認ください。</p>'; 
 if(mode==='detail' && selected==='n-pay-269') {
   const links=[['n-pay-269-gh','認知症グループホームの解説'],['n-pay-269-sm','小規模多機能の解説'],['n-pay-269-nm','看護小規模多機能の解説'],['n-pay-269-dn','定期巡回・夜間対応型訪問介護の解説']];
@@ -154,7 +206,7 @@ if(mode==='favorites')content+='<div class="cards">'+(items.filter(x=>saved.has(
 content+='<div class="notice">厚労省の公式資料をもとに、現行制度と検討案を分けて掲載しています。詳細解説は記事内で確認できます。個別の適用は最新の法令・通知と指定権者の案内を確認してください。</div>';$('viewbody').innerHTML=content;if(mode==='search'||mode==='ai'){$('q').value=searchQuery;$('q').addEventListener('input',e=>{searchQuery=e.target.value;paintSearch()});paintSearch()}}
 let searchQuery='';
 function normQuery(s){return String(s).normalize('NFKC').toLowerCase().replace(/\s+/g,' ').trim()}
-function paintSearch(){const words=normQuery(searchQuery).split(' ').filter(Boolean);const matches=words.length?items.filter(a=>{const ex=reviewedExplainers.get(a.id);const guide=autoSalesGuides.get(a.id);const hay=normQuery(a.title+' '+a.summary+' '+a.category+' '+(ex?JSON.stringify(ex):'')+' '+(guide?JSON.stringify(guide):''));return words.every(w=>hay.includes(w))}):[];$('resultCount').textContent=words.length?matches.length+'件見つかりました':'';$('results').innerHTML=words.length?(matches.map(row).join('')||'<div class="empty">該当する記事がありません。短い言葉に変えて探してみてください。</div>'):'<div class="empty">例：「歩行車」「夜勤」「保険料」で探せます。</div>'}
+function paintSearch(){const words=normQuery(searchQuery).split(' ').filter(Boolean);const matches=words.length?items.filter(a=>{const ex=reviewedExplainers.get(a.id);const guide=autoSalesGuides.get(a.id);const evidence=pdfEvidence.get(a.id);const hay=normQuery(a.title+' '+a.summary+' '+a.category+' '+(ex?JSON.stringify(ex):'')+' '+(guide?JSON.stringify(guide):'')+' '+(evidence?JSON.stringify(evidence.documents.map(d=>d.topics)):''));return words.every(w=>hay.includes(w))}):[];$('resultCount').textContent=words.length?matches.length+'件見つかりました':'';$('results').innerHTML=words.length?(matches.map(row).join('')||'<div class="empty">該当する記事がありません。短い言葉に変えて探してみてください。</div>'):'<div class="empty">例：「歩行車」「夜勤」「保険料」で探せます。</div>'}
 
 const detailHistory=[];
 function openArticle(id){if(mode==='detail'){if(selected)detailHistory.push(selected)}else{detailHistory.length=0;from=mode}selected=id;go('detail');history.replaceState(null,'',location.pathname+location.search+'#article='+encodeURIComponent(id))}
@@ -193,6 +245,7 @@ async function loadOfficialFeed(){
 }
 loadOfficialFeed().then(openDeepLink);
 loadAutoSalesGuides();
+loadPdfEvidence();
 
 document.addEventListener('click',function(e){
  const tab=e.target.closest('[data-exp-tab]');
