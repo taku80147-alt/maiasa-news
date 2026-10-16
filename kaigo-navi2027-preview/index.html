@@ -98,7 +98,7 @@ function pdfEvidenceArticle(a){
  if(reviewedExplainers.has(a.id))return '';
  const brief=pdfEvidence.get(a.id);
  if(!brief || brief.meeting_date!==a.date || brief.source_url!==a.source_url)return '';
- const documents=brief.documents.filter(d=>Array.isArray(d.topics)&&d.topics.length);
+ const documents=brief.documents.filter(d=>Array.isArray(d.topics)&&typeof d.pdf_url==='string');
  if(!documents.length)return '';
  const content=documents.map((d,j)=>{
   const subjects=d.topics.map(t=>{
@@ -106,7 +106,7 @@ function pdfEvidenceArticle(a){
    return '<li><b>'+esc(t.heading)+'</b> <a href="'+esc(href)+'" target="_blank" rel="noopener noreferrer">PDF '+Number(t.pdf_page)+'ページ ↗</a>'+
     (t.evidence?'<br><span>原文の抜粋：'+esc(t.evidence)+'</span>':'')+'</li>';
   }).join('');
-  return '<details '+(j===0?'open':'')+'><summary>'+esc(d.label)+'（'+d.topics.length+'項目）</summary><ul>'+subjects+'</ul></details>';
+  return '<details '+(j===0?'open':'')+'><summary>'+esc(d.label)+'（'+d.topics.length+'項目）</summary>'+(subjects?'<ul>'+subjects+'</ul>':'<p>この資料からは「対応案」の項目を自動抽出できませんでした。<a href="'+esc(d.pdf_url)+'#page=1" target="_blank" rel="noopener noreferrer">資料の原文を読む ↗</a></p>')+'</details>';
  }).join('');
  return '<section class="pdf-evidence"><span class="pdf-t">📚 厚労省PDF・原文確認の手がかり（自動抽出／未審査）</span>'+
  '<h3>具体的に何が検討されている？</h3>'+
