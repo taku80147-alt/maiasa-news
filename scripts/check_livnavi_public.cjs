@@ -7,7 +7,8 @@ const {chromium}=require("playwright");
 const BASE="https://taku80147-alt.github.io/maiasa-news/kaigo-navi2027-preview/";
 const source=JSON.parse(fs.readFileSync("kaigo-navi2027-preview/data/latest.json","utf8"));
 const sales=JSON.parse(fs.readFileSync("kaigo-navi2027-preview/data/sales-guides.json","utf8"));
-const reviewedIds=new Set(JSON.parse(fs.readFileSync("kaigo-navi2027-preview/data/explainers-verified.json","utf8")).articles.map(a=>a.id));
+const reviewedRelease=JSON.parse(fs.readFileSync("kaigo-navi2027-preview/data/explainers-verified.json","utf8"));
+const reviewedIds=new Set(reviewedRelease.articles.map(a=>a.id));
 assert.ok(Array.isArray(source.articles)&&source.articles.length>0,"Repository feed is empty");
 const first=[...source.articles].filter(a=>/^n-[a-z0-9-]+$/.test(a.id))
  .sort((a,b)=>b.date.localeCompare(a.date)||a.id.localeCompare(b.id))[0];
@@ -58,6 +59,18 @@ async function liveCheck(browser){
    return response.json();
   });
   assert.deepEqual(publishedGuides.guides,sales.guides,"Published sales guides differ from GitHub main");
+  const publishedReviewed=await page.evaluate(async()=>{
+   const u=new URL("data/explainers-verified.json",location.href);
+   u.searchParams.set("monitor",String(Date.now()));
+   const response=await fetch(u,{cache:"no-store"});
+   if(!response.ok)throw Error("Reviewed explanations HTTP "+response.status);
+   return response.json();
+  });
+  assert.deepEqual(publishedReviewed.articles,reviewedRelease.articles,
+    "Published full explanations differ from verified articles on GitHub main");
+  assert.deepEqual(publishedReviewed.source_audits,reviewedRelease.source_audits,
+    "Published source audits differ from the verified original PDF checks");
+
   const localEvidence="kaigo-navi2027-preview/data/pdf-evidence.json";
   if(fs.existsSync(localEvidence)){
    const expected=JSON.parse(fs.readFileSync(localEvidence,"utf8"));
@@ -88,6 +101,20 @@ async function liveCheck(browser){
   const card=page.locator("#homeNews .news").first();
   assert.equal(await card.getAttribute("data-id"),first.id,"Displayed first article is old");
   assert.ok((await card.innerText()).includes(first.title),"Displayed headline is stale");
+  const reviewedItem=reviewedRelease.articles.find(r=>r.id===first.id);
+  if(reviewedItem){
+    await page.locator("#homeNews .news").first().click();
+    await page.locator(".exp-card .exp-tabs").waitFor({state:"visible",timeout:16000});
+    for(const tab of ["quick","deep","sales"]){
+      await page.locator('[data-exp-tab="'+tab+'"]').click();
+      const panel=page.locator('[data-exp-panel="'+tab+'"]');
+      assert.ok(await panel.isVisible(),"Reviewed reader tab not visible: "+tab);
+      assert.ok((await panel.innerText()).length>70,"Reviewed reader panel unexpectedly blank: "+tab);
+    }
+    const text=await page.locator(".exp-card").innerText();
+    assert.ok(text.includes(reviewedItem.one_liner),"Reviewed explanation is not rendered for latest article");
+    console.log("LIVNAVI_REVIEWED_READER_OK",reviewedItem.id,reviewedRelease.articles.length);
+  }
   assert.equal(await page.locator("#homeNews .news").count(),3,"Expected 3 visible homepage news cards");
   assert.deepEqual(errors,[],"Homepage JavaScript errors");
   console.log("LIVNAVI_OK",JSON.stringify({latest_date:first.date,first_id:first.id,articles:publicFeed.articles.length,verified_on:publicFeed.verified_on}));
