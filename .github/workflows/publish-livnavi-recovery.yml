@@ -1,0 +1,63 @@
+name: LivNavi 公開復旧と定期同期
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-livnavi-recovery.yml'
+      - 'kaigo-navi2027-preview/index.html'
+      - 'kaigo-navi2027-preview/data/latest.json'
+  schedule:
+    - cron: '0 23 * * *' # 日本時間 毎朝08:00、通常の情報取得後に公開を再確認
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: 公開用データ・リンク・HTML内JavaScriptを検査
+        run: |
+          python3 - <<'PY'
+          import json, re, subprocess
+          from pathlib import Path
+          root = Path('kaigo-navi2027-preview')
+          data = json.loads((root/'data/latest.json').read_text(encoding='utf-8'))
+          articles = data.get('articles', [])
+          assert len(articles) > 0, '公開対象の公式記事が空です'
+          ids = [a['id'] for a in articles]
+          assert len(ids) == len(set(ids)), '重複した記事ID'
+          assert all(re.fullmatch(r'n-[a-z0-9-]+', a['id']) for a in articles), '不正な記事ID'
+          assert all(re.fullmatch(r'20\d{2}-\d{2}-\d{2}', a['date']) for a in articles), '不正な記事日付'
+          assert all(a['source_url'].startswith('https://www.mhlw.go.jp/') for a in articles), '非公式な出典'
+          latest = max(articles, key=lambda a: a['date'])
+          html = (root/'index.html').read_text(encoding='utf-8')
+          assert 'data/latest.json' in html and 'loadOfficialFeed' in html, 'ライブデータの読込がありません'
+          matches = re.findall(r'<script\b[^>]*>(.*?)</script>', html, re.DOTALL)
+          assert matches, 'JavaScriptがありません'
+          for i, script in enumerate(matches):
+              target = Path('/tmp/livnavi-inline-'+str(i)+'.js')
+              target.write_text(script, encoding='utf-8')
+              subprocess.run(['node', '--check', str(target)], check=True)
+          print('記事数:', len(articles), '最新資料:', latest['date'], latest['title'])
+          PY
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - name: LivNavi を GitHub Pages に反映
+        id: deployment
+        uses: actions/deploy-pages@v4
