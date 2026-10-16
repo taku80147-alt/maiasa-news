@@ -58,6 +58,21 @@ async function liveCheck(browser){
    return response.json();
   });
   assert.deepEqual(publishedGuides.guides,sales.guides,"Published sales guides differ from GitHub main");
+  const localEvidence="kaigo-navi2027-preview/data/pdf-evidence.json";
+  if(fs.existsSync(localEvidence)){
+   const expected=JSON.parse(fs.readFileSync(localEvidence,"utf8"));
+   const published=await page.evaluate(async()=>{
+    const url=new URL("data/pdf-evidence.json",location.href);
+    url.searchParams.set("monitor",String(Date.now()));
+    const response=await fetch(url,{cache:"no-store"});
+    if(!response.ok)throw Error("PDF evidence HTTP "+response.status);
+    return response.json();
+   });
+   assert.deepEqual(published.articles,expected.articles,
+     "Published source-PDF evidence differs from repository");
+   console.log("PDF_EVIDENCE_PUBLICATION_OK",expected.articles.length);
+  }
+
   const guide=sales.guides.find(g=>g.id===first.id);
   if(guide&&!reviewedIds.has(first.id)){
    await page.locator("#homeNews .news").first().click();
