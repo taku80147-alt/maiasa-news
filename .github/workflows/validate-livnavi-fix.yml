@@ -34,7 +34,10 @@ jobs:
       - name: PDF根拠データの作成
         run: python scripts/build_kaigo_pdf_evidence.py
       - name: 全オフライン検査
-        run: python -m unittest discover -s scripts -p 'test_kaigo_*.py' -v
+        run: |
+          python -m unittest discover -s scripts -p 'test_kaigo_*.py' -v
+          node --check scripts/check_livnavi_public.cjs
+          node --test scripts/test_livnavi_monitor.cjs
       - name: 原本・全文・生成データの保存
         if: always()
         uses: actions/upload-artifact@v4
