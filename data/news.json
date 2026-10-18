@@ -1,16 +1,39 @@
 {
   "schema_version": 2,
   "mode": "newspaper",
-  "updated_at": "2026-10-18T06:38:48.045535+09:00",
-  "updated_label": "10/18 06:38",
-  "latest_article_date": "2026-10-16",
-  "new_count": 0,
+  "updated_at": "2026-10-19T06:39:46.343219+09:00",
+  "updated_label": "10/19 06:39",
+  "latest_article_date": "2026-10-19",
+  "new_count": 1,
   "important_ids": [
+    "aebdeee4df48db63",
     "5104310ccdcc522c",
-    "43f0d1993cebca00",
-    "36c5b07a5f658c7b"
+    "43f0d1993cebca00"
   ],
   "items": [
+    {
+      "title": "【先着順】常時公募方式による市有地売却を行います（令和8年11月30日（月）申込締切）",
+      "url": "https://www.city.sendai.jp/zaise-kokyo/kurashi/machi/sumai/shiyuchi/baikyakujoujikoubor810.html",
+      "published": "2026-10-19",
+      "category": "local",
+      "id": "aebdeee4df48db63",
+      "source": "仙台市",
+      "source_id": "sendai",
+      "source_type": "official",
+      "primary": true,
+      "verified_source": true,
+      "date_label": "掲載・更新",
+      "summary": "本文は出典のページで読めます。掲載・更新日と開催日を分けてご確認ください。",
+      "detail": "",
+      "key_points": [],
+      "link_only": true,
+      "status": "見出し",
+      "distribution_allowed": false,
+      "distribution_policy_url": "",
+      "distribution_note": "出典のページで本文を読めます。",
+      "fact_note": "掲載・更新日は情報源の配信日時です。開催日とは異なります。",
+      "body_sha256": "079167d17eb2dd7a9a37597ed73b0b001528d08fcc7ed49974a4896a72307e02"
+    },
     {
       "title": "「おてつたび」を活用した交流イベントを開催します",
       "url": "https://www.city.sendai.jp/tohokurenke-kikaku/ninaitekoryu2026_02.html",
