@@ -4,6 +4,9 @@ import json
 import re
 import urllib.parse
 import urllib.request
+import urllib.error
+import socket
+import time
 from pathlib import Path
 
 import fitz
@@ -29,14 +32,27 @@ class OfficialRedirect(urllib.request.HTTPRedirectHandler):
 def fetch(url, limit=MAX_PDF):
     official_url(url)
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (KaigoNavi2027/1.0)'})
-    with urllib.request.build_opener(OfficialRedirect()).open(req, timeout=35) as response:
-        official_url(response.url)
-        if int(response.headers.get('Content-Length', '0')) > limit:
-            raise ValueError('Source exceeds size limit')
-        raw = response.read(limit + 1)
-    if len(raw) > limit:
-        raise ValueError('Source exceeds size limit')
-    return raw
+    # Retry only transport failures; all source, size and content checks still fail closed.
+    opener = urllib.request.build_opener(OfficialRedirect())
+    for attempt in range(3):
+        try:
+            with opener.open(req, timeout=35) as response:
+                official_url(response.url)
+                if int(response.headers.get('Content-Length', '0')) > limit:
+                    raise ValueError('Source exceeds size limit')
+                raw = response.read(limit + 1)
+            if len(raw) > limit:
+                raise ValueError('Source exceeds size limit')
+            return raw
+        except urllib.error.HTTPError as err:
+            if err.code not in (408, 429, 500, 502, 503, 504) or attempt == 2:
+                raise
+            err.close()
+        except (urllib.error.URLError, TimeoutError, socket.timeout):
+            if attempt == 2:
+                raise
+        time.sleep(2 ** attempt)
+
 
 
 def extract_pdf(raw):

@@ -26,7 +26,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: 無料のPDF取得・解析環境
-        run: python -m pip install pymupdf==1.26.5 beautifulsoup4==4.14.2
+        run: python -m pip install pymupdf==1.26.5 beautifulsoup4==4.13.4
       - name: 公式資料の収集（ブランチ・公開サイトは更新しない）
         run: python scripts/collect_kaigo_documents.py
       - name: 制度解説の全原文PDF・ハッシュ・根拠検証

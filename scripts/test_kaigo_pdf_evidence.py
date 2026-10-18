@@ -32,6 +32,27 @@ class EvidenceBriefTests(unittest.TestCase):
         result=x.source_for_article(article,[row,{**row,'label':'【参考資料】'},{
           **row,'pdf_url':'https://www.mhlw.go.jp.evil.example/evil.pdf'}])
         self.assertEqual(len(result),1)
+    def test_fetch_failure_preserves_complete_previous_evidence(self):
+        article={'id':'n-pay-270','date':'2026-10-14',
+                 'source_url':'https://www.mhlw.go.jp/stf/newpage_76633.html'}
+        row=dict(meeting_url=article['source_url'],meeting_date=article['date'],
+                 pdf_url='https://www.mhlw.go.jp/content/12300000/test.pdf',
+                 label='【資料１】通所介護',sha256='f'*64,
+                 status='本文取得・解説未審査',readable_page_rate=1)
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder)
+            news=root/'latest.json'; queue=root/'queue.json'; output=root/'evidence.json'
+            news.write_text(json.dumps({'articles':[article]}))
+            queue.write_text(json.dumps({'documents':[row]}))
+            prior='{"articles":[{"id":"previous","documents":[]}]}'
+            output.write_text(prior)
+            with patch.object(x,'NEWS',news), patch.object(x,'QUEUE',queue), \
+                 patch.object(x,'OUTPUT',output), \
+                 patch.object(x,'inspect_document',side_effect=OSError('network unavailable')):
+                with self.assertRaisesRegex(RuntimeError,'preserve prior evidence'):
+                    x.build()
+            self.assertEqual(output.read_text(),prior)
+
     def test_draft_and_approved_explainers_are_not_confused(self):
         data=Path(__file__).resolve().parents[1]/'kaigo-navi2027-preview'/'data'
         draft=json.loads((data/'explainers.json').read_text(encoding='utf-8'))

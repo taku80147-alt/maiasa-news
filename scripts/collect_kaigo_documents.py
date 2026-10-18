@@ -85,6 +85,8 @@ def run():
             errors.append({'pdf_url':item['pdf_url'],'message':type(e).__name__})
             continue
         processed+=1
+    if errors:
+        raise RuntimeError('Official document collection incomplete; preserve prior queue: '+json.dumps(errors,ensure_ascii=False))
     output={'schema_version':1,'disclaimer':'本文取得は解説の正確さを意味しません。原文の読込・確認待ちリストです。',
             'documents':sorted(docs.values(),key=lambda x:(x['meeting_date'],x['pdf_url']),reverse=True)[:MAX_QUEUED]}
     if output['documents']!=existing.get('documents',[]):
