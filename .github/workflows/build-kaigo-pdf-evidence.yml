@@ -11,6 +11,8 @@ on:
       - 'scripts/test_kaigo_pdf_evidence.py'
 permissions:
   contents: write
+  pages: write
+  id-token: write
 concurrency:
   group: kaigo-pdf-evidence
   cancel-in-progress: false
@@ -18,6 +20,8 @@ jobs:
   read-and-publish:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    outputs:
+      revision: ${{ steps.save.outputs.sha }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -32,6 +36,7 @@ jobs:
       - name: 抽出手順と誤情報防止のテスト
         run: python -m unittest discover -s scripts -p 'test_kaigo_pdf_evidence.py' -v
       - name: チェック済みの元資料インデックスのみ保存
+        id: save
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -43,3 +48,9 @@ jobs:
             git pull --rebase origin main
             git push origin main
           fi
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+  publish:
+    needs: read-and-publish
+    uses: ./.github/workflows/pages.yml
+    with:
+      ref: ${{ needs.read-and-publish.outputs.revision }}

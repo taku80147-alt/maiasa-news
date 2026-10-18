@@ -20,12 +20,11 @@ concurrency:
   group: livnavi-fast-publish
   cancel-in-progress: false
 jobs:
-  publish:
+  preflight:
     runs-on: ubuntu-latest
     timeout-minutes: 12
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      revision: ${{ steps.revision.outputs.sha }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -57,12 +56,11 @@ jobs:
           PY
       - name: 営業ガイドの元資料・説明範囲の一致を確認
         run: node scripts/test_kaigo_sales_guides.cjs
-      - uses: actions/configure-pages@v5
-        with:
-          enablement: true
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-      - name: LivNavi を GitHub Pages に反映
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: 検査したコミットを固定
+        id: revision
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+  publish:
+    needs: preflight
+    uses: ./.github/workflows/pages.yml
+    with:
+      ref: ${{ needs.preflight.outputs.revision }}
