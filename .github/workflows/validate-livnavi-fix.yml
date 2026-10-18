@@ -1,0 +1,49 @@
+name: LivNavi 修正検証
+on:
+  push:
+    branches: [fix/livnavi-release-validation]
+  pull_request:
+    paths:
+      - '.github/workflows/**'
+      - 'scripts/**'
+      - 'kaigo-navi2027-preview/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  mobile:
+    uses: ./.github/workflows/test-kaigo-mobile.yml
+  news:
+    uses: ./.github/workflows/test-news-mobile.yml
+  sources:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      KAIGO_EVIDENCE_DIR: /tmp/kaigo-evidence
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 無料のPDF取得・解析環境
+        run: python -m pip install pymupdf==1.26.5 beautifulsoup4==4.13.4
+      - name: 公式資料の収集（ブランチ・公開サイトは更新しない）
+        run: python scripts/collect_kaigo_documents.py
+      - name: 制度解説の全原文PDF・ハッシュ・根拠検証
+        run: python scripts/build_kaigo_explainers.py
+      - name: PDF根拠データの作成
+        run: python scripts/build_kaigo_pdf_evidence.py
+      - name: 全オフライン検査
+        run: |
+          python -m unittest discover -s scripts -p 'test_kaigo_*.py' -v
+          node --check scripts/check_livnavi_public.cjs
+          node --test scripts/test_livnavi_monitor.cjs
+      - name: 原本・全文・生成データの保存
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: livnavi-source-validation
+          path: |
+            /tmp/kaigo-evidence/
+            kaigo-navi2027-preview/data/
+          retention-days: 7

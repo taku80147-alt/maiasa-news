@@ -133,6 +133,7 @@ def build():
                 known[(d.get('pdf_url'),d.get('pdf_sha256'))]=d
     articles=[]
     read=0
+    failures=[]
     eligible=[a for a in feed['articles'] if re.fullmatch(r'n-(pay|ins|econ)-[0-9]+',a['id']) and
               a['source_url'].startswith('https://www.mhlw.go.jp/stf/')]
     eligible=sorted(eligible,key=lambda a:a['date'],reverse=True)[:8]
@@ -151,7 +152,8 @@ def build():
                 docs.append(newdoc)
             except Exception as err:
                 warnings.append(source['label']+'：'+type(err).__name__)
-                print('WARNING PDF',source['pdf_url'],err,flush=True)
+                failures.append(source['pdf_url']+'：'+repr(err))
+                print('ERROR PDF',source['pdf_url'],err,flush=True)
                 # Changed / invalid official sources require a fresh editorial review.
                 if isinstance(err,ValueError) and 'changed' in str(err):
                     raise
@@ -162,6 +164,8 @@ def build():
             'status':'公式資料の「対応案」見出しを機械抽出（未審査）',
             'scope':'資料にある検討項目を探しやすくしたものです。新制度の決定・適用条件・数値を保証する解説ではありません。',
             'documents':docs,'warnings':warnings})
+    if failures:
+        raise RuntimeError('PDF retrieval or extraction failed; preserve prior evidence: '+'; '.join(failures))
     if not articles:
         raise RuntimeError('No PDF evidence available; keep last published version')
     output={'schema_version':1,'source_type':'厚生労働省・原文PDF',

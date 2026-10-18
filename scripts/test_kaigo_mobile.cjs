@@ -51,6 +51,8 @@ async function main() {
       if(process.env.KAIGO_BASELINE_URL) {
         const baseline = await browser.newPage({viewport:{width,height:844},deviceScaleFactor:1});
         await baseline.goto(process.env.KAIGO_BASELINE_URL,{waitUntil:"networkidle"});
+        await baseline.evaluate(()=>document.fonts.ready);
+        console.log("Visual document geometry", width, JSON.stringify(await page.evaluate(()=>({height:document.body.scrollHeight}))), JSON.stringify(await baseline.evaluate(()=>({height:document.body.scrollHeight}))));
         // A fixed footer must not cover the region being compared.
         const hideFooter=await page.addStyleTag({content:".bottom{visibility:hidden!important}"});
         await baseline.addStyleTag({content:".bottom{visibility:hidden!important}"});

@@ -13,17 +13,17 @@ assert.ok(Array.isArray(source.articles)&&source.articles.length>0,"Repository f
 const first=[...source.articles].filter(a=>/^n-[a-z0-9-]+$/.test(a.id))
  .sort((a,b)=>b.date.localeCompare(a.date)||a.id.localeCompare(b.id))[0];
 assert.ok(first,"No eligible official source articles");
-async function officialCheck(){
+async function officialCheck(workflow="update-kaigo-reform.yml",jobName="update",hours=48){
  const token=process.env.GITHUB_TOKEN,repo=process.env.GITHUB_REPOSITORY;
  if(!token||!repo)throw Error("GitHub monitoring credentials missing");
- const url="https://api.github.com/repos/"+repo+"/actions/workflows/update-kaigo-reform.yml/runs?event=schedule&per_page=12";
+ const url="https://api.github.com/repos/"+repo+"/actions/workflows/"+workflow+"/runs?event=schedule&per_page=12";
  const resp=await fetch(url,{headers:{Authorization:"Bearer "+token,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"},signal:AbortSignal.timeout(25000)});
  if(!resp.ok)throw Error("Cannot verify MHLW scheduled collector: HTTP "+resp.status);
  const runs=(await resp.json()).workflow_runs||[];
- const recent=runs.filter(r=>Date.now()-Date.parse(r.created_at)<48*3600000);
+ const recent=runs.filter(r=>Date.now()-Date.parse(r.created_at)<hours*3600000);
  console.log("MHLW_SCHEDULED_RUNS",JSON.stringify(runs.slice(0,8).map(r=>({created_at:r.created_at,status:r.status,conclusion:r.conclusion,event:r.event,url:r.html_url}))));
  const finished=recent.filter(r=>r.status==="completed");
- if(!finished.length)throw Error("No completed scheduled MHLW collector run in the past 48 hours");
+ if(!finished.length)throw Error("No completed scheduled run for "+workflow+" in the past "+hours+" hours");
  // The workflow can fail AFTER successful collection because publication has independent QA.
  // Check the actual update job instead of incorrectly treating failed publish as failed source collection.
  const latest=finished[0];
@@ -31,10 +31,10 @@ async function officialCheck(){
  const jobsResponse=await fetch(jobsUrl,{headers:{Authorization:"Bearer "+token,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"},signal:AbortSignal.timeout(25000)});
  if(!jobsResponse.ok)throw Error("Cannot inspect MHLW collection job: HTTP "+jobsResponse.status);
  const jobs=(await jobsResponse.json()).jobs||[];
- const update=jobs.find(j=>j.name==="update");
+ const update=jobs.find(j=>j.name===jobName);
  if(!update||update.conclusion!=="success")
-  throw Error("Latest official-source update job did not succeed: "+latest.html_url+" (status="+(update?.conclusion||"missing")+")");
- console.log("MHLW collector job healthy:",latest.html_url, "publish conclusion:",latest.conclusion);
+  throw Error("Latest "+workflow+" "+jobName+" job did not succeed: "+latest.html_url+" (status="+(update?.conclusion||"missing")+")");
+ console.log("MHLW pipeline job healthy:",workflow,jobName,latest.html_url, "publish conclusion:",latest.conclusion);
 }
 async function liveCheck(browser){
  const page=await browser.newPage({viewport:{width:390,height:844},locale:"ja-JP"});
@@ -122,7 +122,14 @@ async function liveCheck(browser){
 }
 (async()=>{
  const errors=[];
- try{await officialCheck()}catch(e){errors.push("OFFICIAL_COLLECTOR: "+(e.stack||e))}
+ for(const [workflow,jobName,hours] of [
+  ["update-kaigo-reform.yml","update",48],
+  ["collect-kaigo-documents.yml","collect",48],
+  ["build-kaigo-pdf-evidence.yml","read-and-publish",48],
+  ["verify-kaigo-explainers.yml","verify",9*24]
+ ]){
+  try{await officialCheck(workflow,jobName,hours)}catch(e){errors.push("OFFICIAL_PIPELINE "+workflow+": "+(e.stack||e))}
+ }
  const browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
  try{
   for(let n=1;n<=3;n++){

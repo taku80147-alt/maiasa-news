@@ -55,19 +55,8 @@ jobs:
             const {data:all}=await github.rest.issues.listForRepo({owner,repo,state:'all',per_page:100});
             const issue=all.find(i=>!i.pull_request && i.title===title && i.state==='open');
             if(result==='success'){
-              const okTitle='[LivNavi監視] 最終正常確認';
-              const heartbeat=all.find(i=>!i.pull_request && i.title===okTitle);
-              const okBody=[
-                'LivNavi の公式資料取得・公開データ・スマホ実画面の照合に合格。',
-                '最終成功: '+new Date().toISOString(),
-                '実行記録: '+context.serverUrl+'/'+owner+'/'+repo+'/actions/runs/'+context.runId,
-                '記事日付は公式会議が新たに公開されたときだけ進みます。'
-              ].join(String.fromCharCode(10,10));
-              if(heartbeat)await github.rest.issues.update({owner,repo,issue_number:heartbeat.number,body:okBody,state:'closed'});
-              else{
-                const created=await github.rest.issues.create({owner,repo,title:okTitle,body:okBody});
-                await github.rest.issues.update({owner,repo,issue_number:created.data.number,state:'closed',state_reason:'completed'});
-              }
+              core.summary.addRaw('公式資料取得・公開データ・スマホ画面の照合に合格。記事の古さだけでは異常扱いしません。');
+              await core.summary.write();
               if(issue){
                 await github.rest.issues.createComment({owner,repo,issue_number:issue.number,
                   body:'自動監視で復旧を確認しました: '+context.serverUrl+'/'+owner+'/'+repo+'/actions/runs/'+context.runId});
