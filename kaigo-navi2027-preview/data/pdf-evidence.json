@@ -244,13 +244,100 @@
               "evidence": "◼機械浴による入浴サービスを提供できない事業所の場合は、サービス提供量、利用者の納得感及び事業所の負担感等のバランスから、併算定可能なサービスを見直すとともに、費用のすべてを事業所負担とするのではなく、療養通所介護等の減算方法を参考に、利用者の状態像に応じて報酬の調整を行うこととしてはどうか。"
             }
           ]
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001758851.pdf",
+          "pdf_sha256": "435c1c62522d4fa6549df4516c3cc57c7dc9085af3ad81ae7c44b5bb46a8a083",
+          "label": "【資料４】認知症対応型共同生活介護［2.1MB］",
+          "extractor_version": 3,
+          "pdf_pages": 36,
+          "checked_at": "2026-10-18",
+          "topics": [
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 2,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 3,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 7,
+              "evidence": ""
+            },
+            {
+              "heading": "地域の拠点機能を評価",
+              "pdf_page": 14,
+              "evidence": ""
+            },
+            {
+              "heading": "計画作成担当者の配置の在り方",
+              "pdf_page": 27,
+              "evidence": "◼人材の確保が困難であり、かつ経営状況が厳しい１ユニットの事業所において、持続的なサービス提供を図る観点から、ケアの質の確保を前提としつつ、１事業所に配置することとされている計画作成担当者（介護支援専門員）の配置要件の見直しを検討してはどうか。"
+            }
+          ]
         }
       ],
-      "warnings": [
-        "【資料１】定期巡回・随時対応型訪問介護看護及び夜間対応型訪問介護［2.0MB］：HTTPError",
-        "【資料２】小規模多機能型居宅介護［1.7MB］：HTTPError",
-        "資料の本文解析は次回に繰り越し"
-      ]
+      "warnings": []
+    },
+    {
+      "id": "n-pay-268",
+      "meeting_date": "2026-09-30",
+      "source_url": "https://www.mhlw.go.jp/stf/newpage_76281.html",
+      "status": "公式資料の「対応案」見出しを機械抽出（未審査）",
+      "scope": "資料にある検討項目を探しやすくしたものです。新制度の決定・適用条件・数値を保証する解説ではありません。",
+      "documents": [
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001753962.pdf",
+          "pdf_sha256": "8b6857ef64bcc206c23a1683994bb7f3d4d06a6aecd42937b17120d87666e9aa",
+          "label": "【資料１】令和９年度介護報酬改定に向けた基本的な視点（案）［219KB］",
+          "extractor_version": 3,
+          "pdf_pages": 5,
+          "checked_at": "2026-10-18",
+          "topics": []
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001753963.pdf",
+          "pdf_sha256": "95b75dee1c1287e8eed1c0a8e03f2d772beea9628386c99515d2a61bb5a2983b",
+          "label": "【資料２】令和９年度介護報酬改定に向けた基本的な視点（案）概要［690KB］",
+          "extractor_version": 3,
+          "pdf_pages": 1,
+          "checked_at": "2026-10-18",
+          "topics": []
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "n-ins-136",
+      "meeting_date": "2026-09-18",
+      "source_url": "https://www.mhlw.go.jp/stf/newpage_76225.html",
+      "status": "公式資料の「対応案」見出しを機械抽出（未審査）",
+      "scope": "資料にある検討項目を探しやすくしたものです。新制度の決定・適用条件・数値を保証する解説ではありません。",
+      "documents": [
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001750951.pdf",
+          "pdf_sha256": "db4c9cfbc29e39501181712f0737a84dcb8153c5b28d6799b6685d2b35d9d50e",
+          "label": "資料１ 第１号保険料の在り方について［PDF形式：846KB］",
+          "extractor_version": 3,
+          "pdf_pages": 11,
+          "checked_at": "2026-10-18",
+          "topics": []
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001750952.pdf",
+          "pdf_sha256": "a0b2bedbfa05bcc47fea7768f6505c3b8e10dfc0b578b8ec1d5bd3b833b38333",
+          "label": "資料２ 持続可能性の確保（給付と負担）について［PDF形式：3.0MB］",
+          "extractor_version": 3,
+          "pdf_pages": 58,
+          "checked_at": "2026-10-18",
+          "topics": []
+        }
+      ],
+      "warnings": []
     }
   ]
 }
