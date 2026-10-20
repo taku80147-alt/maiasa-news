@@ -17,6 +17,20 @@
       "checked_at": "2026-10-19"
     },
     {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001760887.pdf",
+      "label": "・【資料６】居宅介護支援［3.9MB］",
+      "meeting_date": "2026-10-19",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76626.html",
+      "status": "本文取得・解説未審査",
+      "pages": 53,
+      "chars": 111301,
+      "readable_page_rate": 0.98,
+      "tables_extracted": 31,
+      "notes_and_exceptions_candidates": 102,
+      "sha256": "bd46ece0b0ceefb518fc3241cd7a2799e2e380b37762da341c0ff5082c547cc3",
+      "checked_at": "2026-10-20"
+    },
+    {
       "pdf_url": "https://www.mhlw.go.jp/content/12300000/001760459.pdf",
       "label": "・【資料１】訪問介護［2.2MB］",
       "meeting_date": "2026-10-19",
@@ -29,6 +43,48 @@
       "notes_and_exceptions_candidates": 110,
       "sha256": "571a63b7b3b7c0bfb356f38477a1e4cb7077df512345bf8bea8faa527ee4ee3e",
       "checked_at": "2026-10-19"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001760358.pdf",
+      "label": "・【濱田委員提出資料】［328KB］",
+      "meeting_date": "2026-10-19",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76626.html",
+      "status": "本文取得・解説未審査",
+      "pages": 6,
+      "chars": 7857,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 2,
+      "notes_and_exceptions_candidates": 22,
+      "sha256": "657fee994c8808367cd90a05ec9b74d00199f58ff9911953c655653f9c13a920",
+      "checked_at": "2026-10-20"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001760340.pdf",
+      "label": "・【志田委員提出資料】［221KB］",
+      "meeting_date": "2026-10-19",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76626.html",
+      "status": "本文取得・解説未審査",
+      "pages": 1,
+      "chars": 1317,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 1,
+      "notes_and_exceptions_candidates": 0,
+      "sha256": "0401b6649c004e0c67941b340500aee090d9d2d9efb1536899c3e4339fa095da",
+      "checked_at": "2026-10-20"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001760336.pdf",
+      "label": "・【資料５】居宅療養管理指導［2.4MB］",
+      "meeting_date": "2026-10-19",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76626.html",
+      "status": "本文取得・解説未審査",
+      "pages": 30,
+      "chars": 33399,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 40,
+      "notes_and_exceptions_candidates": 46,
+      "sha256": "b7944ee7ab312fe862e8490c0de04556c5bf1bf79cc2baf6d52991c53f288765",
+      "checked_at": "2026-10-20"
     },
     {
       "pdf_url": "https://www.mhlw.go.jp/content/12300000/001760335.pdf",
