@@ -4,6 +4,52 @@
   "disclaimer": "PDFの対応案見出しを機械抽出。資料全文の理解・法的な適用判断は人による確認が必要です。",
   "articles": [
     {
+      "id": "n-pay-33",
+      "meeting_date": "2026-10-26",
+      "source_url": "https://www.mhlw.go.jp/stf/newpage_76754.html",
+      "status": "公式資料の「対応案」見出しを機械抽出（未審査）",
+      "scope": "資料にある検討項目を探しやすくしたものです。新制度の決定・適用条件・数値を保証する解説ではありません。",
+      "documents": [
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001762663.pdf",
+          "pdf_sha256": "de34bdd64fae309d76de939e2ca5b95745fc617ed6c25f1b05173260d5d8f34e",
+          "label": "【資料１】【R８年度調査】検証・研究報告速報値（表紙）［322KB］",
+          "extractor_version": 3,
+          "pdf_pages": 2,
+          "checked_at": "2026-10-26",
+          "topics": []
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001762664.pdf",
+          "pdf_sha256": "382ff790c337eab3a85a9451c088f82e9be69431efbe43a43af46348c7361d6b",
+          "label": "【資料１－１】（１）高齢者施設等と医療機関の連携体制及び協定締結医療機関との連携状況等にかかる調査研究事業（速報値）（案）［2.6MB］",
+          "extractor_version": 3,
+          "pdf_pages": 56,
+          "checked_at": "2026-10-26",
+          "topics": []
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001762666.pdf",
+          "pdf_sha256": "bd98b0a0e6793f7494995de45b9bcfa681a46d8e6a878a6a2f9e71e10cda1b10",
+          "label": "【参考資料１】令和６年度介護報酬改定の効果検証及び調査研究に係る調査（令和８年度調査）の調査票の回収率等について［99KB］",
+          "extractor_version": 3,
+          "pdf_pages": 1,
+          "checked_at": "2026-10-26",
+          "topics": []
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001762947.pdf",
+          "pdf_sha256": "5bcf320b8b0610ceda6bf08d6a0cf8a3a3bf8150e8836b111b40f0fef3f2f3d0",
+          "label": "【資料１－２】（２）離島・中山間地域・豪雪地帯等における各種加算等の在り方の調査・検証研究事業（速報値）（案）［1.6MB］",
+          "extractor_version": 3,
+          "pdf_pages": 35,
+          "checked_at": "2026-10-26",
+          "topics": []
+        }
+      ],
+      "warnings": []
+    },
+    {
       "id": "n-pay-271",
       "meeting_date": "2026-10-19",
       "source_url": "https://www.mhlw.go.jp/stf/newpage_76626.html",
