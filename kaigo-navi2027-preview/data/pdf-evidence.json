@@ -45,6 +45,52 @@
           "pdf_pages": 35,
           "checked_at": "2026-10-26",
           "topics": []
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001762667.pdf",
+          "pdf_sha256": "6f9ba509628e5437162599565121ea8c5519cac1c5c0421d3587b961dd92aa2d",
+          "label": "【参考資料２】設置要綱・調査概要［492KB］",
+          "extractor_version": 3,
+          "pdf_pages": 6,
+          "checked_at": "2026-10-27",
+          "topics": []
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001762668.pdf",
+          "pdf_sha256": "96c0afbf2ce232b744822d14f6b8be5b49ae17151adf0cae22c5d58c1973cfd9",
+          "label": "【参考資料３】令和６年度介護報酬改定の効果検証及び調査研究にかかる調査（令和８年度調査）の進め方について（案）［115KB］",
+          "extractor_version": 3,
+          "pdf_pages": 1,
+          "checked_at": "2026-10-27",
+          "topics": []
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "n-ins-137",
+      "meeting_date": "2026-10-26",
+      "source_url": "https://www.mhlw.go.jp/stf/newpage_76887.html",
+      "status": "公式資料の「対応案」見出しを機械抽出（未審査）",
+      "scope": "資料にある検討項目を探しやすくしたものです。新制度の決定・適用条件・数値を保証する解説ではありません。",
+      "documents": [
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001762518.pdf",
+          "pdf_sha256": "e20d58e439578a1ebdb616ac83b9ab6b6adec92fc8d9e7c89481fcea681e9603",
+          "label": "資料１ 持続可能性の確保（給付と負担）について［PDF形式：4.6MB］",
+          "extractor_version": 3,
+          "pdf_pages": 82,
+          "checked_at": "2026-10-27",
+          "topics": []
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001762519.pdf",
+          "pdf_sha256": "ebd14cb69aadc28805817ca7d09a4327567a5cb5bcf3759224b0197182ee7adc",
+          "label": "資料２ 要介護認定について［PDF形式：2.1MB］",
+          "extractor_version": 3,
+          "pdf_pages": 53,
+          "checked_at": "2026-10-27",
+          "topics": []
         }
       ],
       "warnings": []
