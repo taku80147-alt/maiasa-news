@@ -17,6 +17,34 @@
       "checked_at": "2026-10-26"
     },
     {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001762668.pdf",
+      "label": "【参考資料３】令和６年度介護報酬改定の効果検証及び調査研究にかかる調査（令和８年度調査）の進め方について（案）［115KB］",
+      "meeting_date": "2026-10-26",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76754.html",
+      "status": "本文取得・解説未審査",
+      "pages": 1,
+      "chars": 1106,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 3,
+      "notes_and_exceptions_candidates": 0,
+      "sha256": "96c0afbf2ce232b744822d14f6b8be5b49ae17151adf0cae22c5d58c1973cfd9",
+      "checked_at": "2026-10-27"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001762667.pdf",
+      "label": "【参考資料２】設置要綱・調査概要［492KB］",
+      "meeting_date": "2026-10-26",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76754.html",
+      "status": "本文取得・解説未審査",
+      "pages": 6,
+      "chars": 6113,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 9,
+      "notes_and_exceptions_candidates": 9,
+      "sha256": "6f9ba509628e5437162599565121ea8c5519cac1c5c0421d3587b961dd92aa2d",
+      "checked_at": "2026-10-27"
+    },
+    {
       "pdf_url": "https://www.mhlw.go.jp/content/12300000/001762666.pdf",
       "label": "【参考資料１】令和６年度介護報酬改定の効果検証及び調査研究に係る調査（令和８年度調査）の調査票の回収率等について［99KB］",
       "meeting_date": "2026-10-26",
@@ -57,6 +85,34 @@
       "notes_and_exceptions_candidates": 1,
       "sha256": "de34bdd64fae309d76de939e2ca5b95745fc617ed6c25f1b05173260d5d8f34e",
       "checked_at": "2026-10-26"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001762519.pdf",
+      "label": "資料２ 要介護認定について［PDF形式：2.1MB］",
+      "meeting_date": "2026-10-26",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76887.html",
+      "status": "本文取得・解説未審査",
+      "pages": 53,
+      "chars": 57557,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 58,
+      "notes_and_exceptions_candidates": 45,
+      "sha256": "ebd14cb69aadc28805817ca7d09a4327567a5cb5bcf3759224b0197182ee7adc",
+      "checked_at": "2026-10-27"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001762518.pdf",
+      "label": "資料１ 持続可能性の確保（給付と負担）について［PDF形式：4.6MB］",
+      "meeting_date": "2026-10-26",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76887.html",
+      "status": "本文取得・解説未審査",
+      "pages": 82,
+      "chars": 157702,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 96,
+      "notes_and_exceptions_candidates": 151,
+      "sha256": "e20d58e439578a1ebdb616ac83b9ab6b6adec92fc8d9e7c89481fcea681e9603",
+      "checked_at": "2026-10-27"
     },
     {
       "pdf_url": "https://www.mhlw.go.jp/content/12300000/001760888.pdf",
