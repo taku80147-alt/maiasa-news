@@ -10,7 +10,7 @@ permissions:
   contents: read
 jobs:
   smoke:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
@@ -27,6 +27,7 @@ jobs:
         run: |
           python -m pip install pymupdf==1.26.5 beautifulsoup4==4.13.4
           python -m unittest discover -s scripts -p 'test_kaigo_*.py' -v
+          node --test scripts/test_livnavi_daily_tip.cjs
       - name: 採用済み画面の比較元を準備
         run: |
           mkdir -p .qa-baseline/data .qa-baseline/assets
@@ -57,4 +58,5 @@ jobs:
           path: kaigo-qa-screenshots/
           if-no-files-found: ignore
           retention-days: 7
+
 

@@ -1,7 +1,7 @@
 name: LivNavi 修正検証
 on:
   push:
-    branches: [fix/livnavi-release-validation]
+    branches: [fix/livnavi-release-validation, fix/livnavi-reform-coverage]
   pull_request:
     paths:
       - '.github/workflows/**'
@@ -43,6 +43,35 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: livnavi-source-validation
+          path: |
+            /tmp/kaigo-evidence/
+            kaigo-navi2027-preview/data/
+          retention-days: 7
+
+
+  coverage:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pymupdf==1.26.5 beautifulsoup4==4.13.4
+      - name: 通知・Q&A一覧の実取得と掲載漏れ照合（公開しない）
+        run: |
+          python scripts/update_kaigo_reform.py
+          python -c "import json; from pathlib import Path; print('NOTICE_INVENTORY_JSON '+Path('kaigo-navi2027-preview/data/source-inventory.json').read_text().replace('\n',''))"
+      - name: 新通知の原本・根拠・ハッシュを検査
+        if: always()
+        run: python scripts/review_kaigo_notice.py --inspect
+      - name: 旧資料の現行リンクとハッシュを照合
+        if: always()
+        run: python scripts/check_kaigo_source_links.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: livnavi-notice-inspection
           path: |
             /tmp/kaigo-evidence/
             kaigo-navi2027-preview/data/

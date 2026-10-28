@@ -86,3 +86,17 @@ Use small commits and/or pull requests, separate pipeline code from UI. No unexp
 - アプリ名は LivNavi 2027（リブナビ2027）、副題は「介護制度改正ガイド」。Livingoodに由来。
 - 最初の i の点は金色の紙飛行機。先端は左下向き、浅い角度の平たい2面形状。採用画像 assets/livnavi-2027.png を変更せず使用。
 - ホーム上部のブランドだけ変更。既存バナー・特集・記事・下部ナビは保持。
+
+
+
+## 2026-10-28 user-approved direction
+
+The audience works in welfare equipment but needs to discuss ALL care-reform topics with facilities, care managers and others. Do not narrow coverage to equipment, and do not turn this into a general news app. Track reform proposals, decisions, notices and Q&A across all relevant services. Keep the approved home look, logo, banner, imagery, topics and navigation.
+
+The accepted article format is a vertical reader: short key points, what changes/current versus next, who is affected, practical implications clearly labelled as editorial explanation, dates/status, and official sources/page evidence. Existing reviewed prose is retained; do not require sales tabs to read the explanation. Unreviewed sources must say 解説準備中 and link to the original, without invented requirements or timing.
+
+Source collection includes the two council indexes plus the MHLW 介護保険最新情報 index. Keep the full discovery inventory, including reasons for exclusion and pending reviews; never equate a successful scraper with comprehensive editorial coverage. The inventory's 2026-04-01 start and pending items are real coverage limits. No paid AI summarisation service is configured.
+
+
+## 2026-10-28 accepted simple home (supersedes earlier home sections)
+The user explicitly approved simplifying the home after reviewing the private demo. Preserve the logo, sky-blue illustrated banner and friendly palette. Below the banner, show ONE compact 今日の小ネタ card, then FIVE text-only reform news headlines (date, topic, status), and a link to the full news list. Remove home feature cards, daily discovery/sales cards, recommendations and category grids. Bottom navigation is ニュース / 検索 / 保存. The compact daily card uses the Japanese date; verified fixed-date observances link to their organising body, other dates use editorial conversation prompts, never invented commemorative days. No paid API, new cloud automation or autonomous generated interpretations. The full news list, search, saved articles and source-backed vertical reader remain. Visual QA preserves the banner and logo while testing this user-authorised simpler layout at 320/360/390/430px.

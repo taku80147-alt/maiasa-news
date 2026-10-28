@@ -31,6 +31,8 @@ def fetch(url,limit):
     return official_fetch(url,limit)
 
 def source_docs(meeting):
+    if urllib.parse.urlparse(meeting['source_url']).path.lower().endswith('.pdf'):
+        return [{'pdf_url':meeting['source_url'],'label':meeting['title'],'meeting_date':meeting['date'],'meeting_url':meeting['source_url']}]
     html=fetch(meeting['source_url'],2*1024*1024).decode('utf-8','replace')
     soup=BeautifulSoup(html,'html.parser')
     found=[]
@@ -74,6 +76,8 @@ def run():
     older=[x for x in feed if x['id']=='n-pay-259']
     for x in older:
         if all(q['id']!=x['id'] for q in meetings):meetings.append(x)
+    for item in feed:
+        if item.get('source_kind')=='notice' and all(q['id']!=item['id'] for q in meetings):meetings.append(item)
     existing=json.loads(QUEUE.read_text(encoding='utf-8')) if QUEUE.exists() else {'documents':[]}
     docs={x['pdf_url']:x for x in existing.get('documents',[])}
     candidates=[];errors=[]
@@ -102,11 +106,12 @@ def run():
     if errors:
         raise RuntimeError('Official document collection incomplete; preserve prior queue: '+json.dumps(errors,ensure_ascii=False))
     output={'schema_version':1,'disclaimer':'本文取得は解説の正確さを意味しません。原文の読込・確認待ちリストです。',
-            'documents':sorted(docs.values(),key=lambda x:(x['meeting_date'],x['pdf_url']),reverse=True)[:MAX_QUEUED]}
+            'documents':sorted(docs.values(),key=lambda x:(x['meeting_date'],x['pdf_url']),reverse=True)}
     if output['documents']!=existing.get('documents',[]):
         QUEUE.write_text(json.dumps(output,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print('Processed',processed,'docs. Queue',len(output['documents']),'Errors',errors[:8])
     if processed==0 and not docs:raise RuntimeError('Nothing retrieved; no queue produced')
 
 if __name__=='__main__':run()
+
 

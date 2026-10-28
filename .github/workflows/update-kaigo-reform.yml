@@ -1,4 +1,4 @@
-name: 介護制度改正・公式会議資料チェック
+name: 介護制度改正・公式資料・通知チェック
 on:
   schedule:
     - cron: '10 22 * * *' # 日本時間 毎朝07:10（GitHub側の遅延あり）
@@ -8,6 +8,7 @@ on:
     paths:
       - '.github/workflows/update-kaigo-reform.yml'
       - 'scripts/update_kaigo_reform.py'
+      - 'scripts/discover_kaigo_notices.py'
       - 'scripts/build_kaigo_sales_guides.cjs'
       - 'scripts/test_kaigo_sales_guides.cjs'
 permissions:
@@ -32,7 +33,7 @@ jobs:
           python-version: '3.12'
       - name: HTML解析ライブラリ
         run: pip install beautifulsoup4==4.13.4 pymupdf==1.26.5
-      - name: 厚生労働省の介護関連審議会を確認
+      - name: 厚生労働省の会議資料・通知・Q&Aを照合
         run: python scripts/update_kaigo_reform.py
       - name: 公開済みの会議議題から営業向け会話ガイドを作成
         run: |
@@ -42,11 +43,11 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add kaigo-navi2027-preview/data/latest.json kaigo-navi2027-preview/data/sales-guides.json
+          git add kaigo-navi2027-preview/data/source-inventory.json kaigo-navi2027-preview/data/latest.json kaigo-navi2027-preview/data/sales-guides.json
           if git diff --cached --quiet; then
             echo 'No new official meeting information'
           else
-            git commit -m '介護制度改正の公式会議資料を更新'
+            git commit -m '介護制度改正の会議資料・通知・Q&Aを更新'
             git pull --rebase origin main
             git push origin main
           fi
@@ -62,3 +63,4 @@ jobs:
     uses: ./.github/workflows/pages.yml
     with:
       ref: ${{ needs.update.outputs.revision }}
+

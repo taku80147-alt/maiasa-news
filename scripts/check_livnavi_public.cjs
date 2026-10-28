@@ -13,6 +13,18 @@ assert.ok(Array.isArray(source.articles)&&source.articles.length>0,"Repository f
 const first=[...source.articles].filter(a=>/^n-[a-z0-9-]+$/.test(a.id))
  .sort((a,b)=>b.date.localeCompare(a.date)||a.id.localeCompare(b.id))[0];
 assert.ok(first,"No eligible official source articles");
+function assertNoticeCoverage(inventory,feed){
+ assert.equal(inventory.schema_version,1,"Unknown source inventory schema");
+ assert.ok(Array.isArray(inventory.documents)&&inventory.documents.length>0,"Missing notice discovery inventory");
+ const ids=new Set();
+ for(const row of inventory.documents){
+  assert.ok(!ids.has(row.id),"Duplicate discovered notice");ids.add(row.id);
+  assert.ok(["include","excluded","review_pending"].includes(row.selection)&&row.reason,"Notice missing triage decision");
+  assert.notEqual(row.selection,"review_pending","Notice needs editorial triage: "+row.id);
+  if(row.selection==="include")assert.ok(feed.articles.some(a=>a.id===row.id&&a.source_url===row.source_url),"Discovered reform notice missing from feed: "+row.id);
+ }
+ console.log("NOTICE_COVERAGE_OK",inventory.documents.length,"pending review",inventory.documents.filter(r=>r.selection==="review_pending").length);
+}
 async function officialCheck(workflow="update-kaigo-reform.yml",jobName="update",hours=48){
  const token=process.env.GITHUB_TOKEN,repo=process.env.GITHUB_REPOSITORY;
  if(!token||!repo)throw Error("GitHub monitoring credentials missing");
@@ -71,6 +83,16 @@ async function liveCheck(browser){
   assert.deepEqual(publishedReviewed.source_audits,reviewedRelease.source_audits,
     "Published source audits differ from the verified original PDF checks");
 
+  const inventory=JSON.parse(fs.readFileSync("kaigo-navi2027-preview/data/source-inventory.json","utf8"));
+  assertNoticeCoverage(inventory,source);
+  const publishedInventory=await page.evaluate(async()=>{
+   const response=await fetch(new URL("data/source-inventory.json?monitor="+Date.now(),location.href),{cache:"no-store"});
+   if(!response.ok)throw Error("Notice inventory HTTP "+response.status);
+   return response.json();
+  });
+  assert.deepEqual(publishedInventory,inventory,"Published notice inventory differs from GitHub main");
+  assertNoticeCoverage(publishedInventory,publicFeed);
+
   const localEvidence="kaigo-navi2027-preview/data/pdf-evidence.json";
   if(fs.existsSync(localEvidence)){
    const expected=JSON.parse(fs.readFileSync(localEvidence,"utf8"));
@@ -86,17 +108,6 @@ async function liveCheck(browser){
    console.log("PDF_EVIDENCE_PUBLICATION_OK",expected.articles.length);
   }
 
-  const guide=sales.guides.find(g=>g.id===first.id);
-  if(guide&&!reviewedIds.has(first.id)){
-   await page.locator("#homeNews .news").first().click();
-   await page.locator(".sales-auto").waitFor({state:"visible",timeout:15000});
-   const guideText=await page.locator(".sales-auto").innerText();
-   assert.ok(guideText.includes(guide.topics[0].question),"Live sales guide missing latest conversation questions");
-   assert.ok(guideText.includes("精読した解説ではありません"),"Auto-created advice must disclose its verification limits");
-   assert.ok((await page.locator(".sales-auto a[href='"+guide.source_url+"']").count())===1,
-     "Sales card must link to its official MHLW source");
-  }
-
   await page.waitForFunction(id=>document.querySelector("#homeNews .news[data-id]")?.dataset.id===id,first.id,{timeout:15000});
   const card=page.locator("#homeNews .news").first();
   assert.equal(await card.getAttribute("data-id"),first.id,"Displayed first article is old");
@@ -104,18 +115,17 @@ async function liveCheck(browser){
   const reviewedItem=reviewedRelease.articles.find(r=>r.id===first.id);
   if(reviewedItem){
     await page.locator("#homeNews .news").first().click();
-    await page.locator(".exp-card .exp-tabs").waitFor({state:"visible",timeout:16000});
-    for(const tab of ["quick","deep","sales"]){
-      await page.locator('[data-exp-tab="'+tab+'"]').click();
-      const panel=page.locator('[data-exp-panel="'+tab+'"]');
-      assert.ok(await panel.isVisible(),"Reviewed reader tab not visible: "+tab);
-      assert.ok((await panel.innerText()).length>70,"Reviewed reader panel unexpectedly blank: "+tab);
+    await page.locator(".reform-reader").waitFor({state:"visible",timeout:16000});
+    for(const section of ["summary","changes","audience","impact","timing","sources"]){
+      const panel=page.locator('[data-reader-section="'+section+'"]');
+      assert.ok(await panel.isVisible(),"Reader section not visible: "+section);
+      assert.ok((await panel.innerText()).length>8,"Reader section unexpectedly blank: "+section);
     }
     const text=await page.locator(".exp-card").innerText();
     assert.ok(text.includes(reviewedItem.one_liner),"Reviewed explanation is not rendered for latest article");
     console.log("LIVNAVI_REVIEWED_READER_OK",reviewedItem.id,reviewedRelease.articles.length);
   }
-  assert.equal(await page.locator("#homeNews .news").count(),3,"Expected 3 visible homepage news cards");
+  assert.equal(await page.locator("#homeNews .news").count(),5,"Expected 5 visible homepage news cards");
   assert.deepEqual(errors,[],"Homepage JavaScript errors");
   console.log("LIVNAVI_OK",JSON.stringify({latest_date:first.date,first_id:first.id,articles:publicFeed.articles.length,verified_on:publicFeed.verified_on}));
  }finally{await page.close()}
@@ -140,3 +150,4 @@ async function liveCheck(browser){
  if(errors.length)throw Error(errors.join("\\n\\n"));
  console.log("LIVNAVI_ALL_CHECKS_PASSED");
 })().catch(e=>{console.error("LIVNAVI_MONITOR_FAILED",e.stack||e);process.exitCode=1});
+
