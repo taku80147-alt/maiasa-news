@@ -150,4 +150,3 @@ async function liveCheck(browser){
  console.log("LIVNAVI_ALL_CHECKS_PASSED");
 })().catch(e=>{console.error("LIVNAVI_MONITOR_FAILED",e.stack||e);process.exitCode=1});
 
-
