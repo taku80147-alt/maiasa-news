@@ -47,3 +47,9 @@ test("missing or mismatched discovered notice cannot pass publication monitoring
  assert.throws(()=>coverage()(inventory,{articles:[{id:"n-notice-vol-1549",source_url:"old"}]}),/missing from feed/);
  coverage()(inventory,{articles:[{id:"n-notice-vol-1549",source_url:inventory.documents[0].source_url}]});
 });
+
+// A successful scraper must not hide a newly discovered, unclassified reform notice.
+test("unclassified notice requires a review instead of silently passing",()=>{
+ const inventory={schema_version:1,documents:[{id:"n-notice-new",selection:"review_pending",reason:"Needs original review"}]};
+ assert.throws(()=>coverage()(inventory,{articles:[]}),/needs editorial triage/);
+});

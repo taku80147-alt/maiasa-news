@@ -70,6 +70,19 @@
       "curated": false
     },
     {
+      "id": "n-notice-vol-1548",
+      "date": "2026-10-21",
+      "title": "介護保険最新情報Vol.1548(介護現場において事故が発生した際の報告について)",
+      "summary": "改正・制度運用に関する公式資料が公開されました。本文の解説は準備中です。",
+      "detail": "この項目は公式一覧の見出しと発出日を確認した速報です。変更内容・対象・適用日は本文確認後に追記します。",
+      "category": "介護保険制度",
+      "status": "公式資料公開・解説準備中",
+      "source_url": "https://www.mhlw.go.jp/content/001761586.pdf",
+      "source_name": "厚生労働省・介護保険最新情報",
+      "source_kind": "notice",
+      "curated": false
+    },
+    {
       "id": "n-notice-vol-1547",
       "date": "2026-10-21",
       "title": "介護保険最新情報Vol.1547(特定福祉用具販売・住宅改修の給付分析に向けた介護保険システム標準仕様書の改定に関する検討について(ご連絡))",
@@ -93,6 +106,19 @@
       "status": "会議資料",
       "source_url": "https://www.mhlw.go.jp/stf/newpage_76626.html",
       "source_name": "厚生労働省 第271回介護給付費分科会資料",
+      "curated": false
+    },
+    {
+      "id": "n-notice-vol-1546",
+      "date": "2026-10-15",
+      "title": "介護保険最新情報Vol.1546(介護サービス事業者経営情報データベースシステムの運用再開について 等)",
+      "summary": "改正・制度運用に関する公式資料が公開されました。本文の解説は準備中です。",
+      "detail": "この項目は公式一覧の見出しと発出日を確認した速報です。変更内容・対象・適用日は本文確認後に追記します。",
+      "category": "介護保険制度",
+      "status": "公式資料公開・解説準備中",
+      "source_url": "https://www.mhlw.go.jp/content/001760203.pdf",
+      "source_name": "厚生労働省・介護保険最新情報",
+      "source_kind": "notice",
       "curated": false
     },
     {
@@ -278,6 +304,32 @@
       "curated": false
     },
     {
+      "id": "n-notice-vol-1542",
+      "date": "2026-09-10",
+      "title": "介護保険最新情報vol.1542(障害者の日常生活及び社会生活を総合的に支援するための法律に基づく補装具支給制度と介護保険制度の適用関係等について)",
+      "summary": "改正・制度運用に関する公式資料が公開されました。本文の解説は準備中です。",
+      "detail": "この項目は公式一覧の見出しと発出日を確認した速報です。変更内容・対象・適用日は本文確認後に追記します。",
+      "category": "介護保険制度",
+      "status": "公式資料公開・解説準備中",
+      "source_url": "https://www.mhlw.go.jp/content/001748303.pdf",
+      "source_name": "厚生労働省・介護保険最新情報",
+      "source_kind": "notice",
+      "curated": false
+    },
+    {
+      "id": "n-notice-vol-1541",
+      "date": "2026-09-08",
+      "title": "介護保険最新情報vol.1541(行方不明者の被保険者資格の喪失手続及び介護保険料の減免・返還に係る取扱いについて)",
+      "summary": "改正・制度運用に関する公式資料が公開されました。本文の解説は準備中です。",
+      "detail": "この項目は公式一覧の見出しと発出日を確認した速報です。変更内容・対象・適用日は本文確認後に追記します。",
+      "category": "介護保険制度",
+      "status": "公式資料公開・解説準備中",
+      "source_url": "https://www.mhlw.go.jp/content/001747516.pdf",
+      "source_name": "厚生労働省・介護保険最新情報",
+      "source_kind": "notice",
+      "curated": false
+    },
+    {
       "id": "n-pay-264",
       "date": "2026-09-03",
       "title": "第264回介護給付費分科会の資料が公開",
@@ -288,6 +340,19 @@
       "status": "会議資料",
       "source_url": "https://www.mhlw.go.jp/stf/newpage_75593.html",
       "source_name": "厚生労働省 第264回介護給付費分科会資料",
+      "curated": false
+    },
+    {
+      "id": "n-notice-vol-1539",
+      "date": "2026-08-31",
+      "title": "介護保険最新情報vol.1539(「介護保険資格確認等WEB サービスとの連携におけるAPI 標準仕様書(第1.0 版)」の公開について)",
+      "summary": "改正・制度運用に関する公式資料が公開されました。本文の解説は準備中です。",
+      "detail": "この項目は公式一覧の見出しと発出日を確認した速報です。変更内容・対象・適用日は本文確認後に追記します。",
+      "category": "介護保険制度",
+      "status": "公式資料公開・解説準備中",
+      "source_url": "https://www.mhlw.go.jp/content/001744369.pdf",
+      "source_name": "厚生労働省・介護保険最新情報",
+      "source_kind": "notice",
       "curated": false
     },
     {
@@ -382,6 +447,19 @@
       "curated": false
     },
     {
+      "id": "n-notice-vol-1529",
+      "date": "2026-07-29",
+      "title": "介護保険最新情報vol.1529(ケアプランデータ連携システムの介護保険資格確認等WEB サービスへの移行について)",
+      "summary": "改正・制度運用に関する公式資料が公開されました。本文の解説は準備中です。",
+      "detail": "この項目は公式一覧の見出しと発出日を確認した速報です。変更内容・対象・適用日は本文確認後に追記します。",
+      "category": "介護保険制度",
+      "status": "公式資料公開・解説準備中",
+      "source_url": "https://www.mhlw.go.jp/content/001730882.pdf",
+      "source_name": "厚生労働省・介護保険最新情報",
+      "source_kind": "notice",
+      "curated": false
+    },
+    {
       "id": "n-pay-261",
       "date": "2026-07-23",
       "title": "第261回介護給付費分科会の資料が公開",
@@ -392,6 +470,19 @@
       "status": "会議資料",
       "source_url": "https://www.mhlw.go.jp/stf/newpage_74599.html",
       "source_name": "厚生労働省 第261回介護給付費分科会資料",
+      "curated": false
+    },
+    {
+      "id": "n-notice-vol-1528",
+      "date": "2026-07-23",
+      "title": "介護保険最新情報vol.1528(保険薬局及び保険薬剤師療養担当規則第2条の3の2第2項に規定する経済上の利益の提供による誘引の禁止について)",
+      "summary": "改正・制度運用に関する公式資料が公開されました。本文の解説は準備中です。",
+      "detail": "この項目は公式一覧の見出しと発出日を確認した速報です。変更内容・対象・適用日は本文確認後に追記します。",
+      "category": "介護保険制度",
+      "status": "公式資料公開・解説準備中",
+      "source_url": "https://www.mhlw.go.jp/content/001727399.pdf",
+      "source_name": "厚生労働省・介護保険最新情報",
+      "source_kind": "notice",
       "curated": false
     },
     {
@@ -457,6 +548,45 @@
       "status": "会議資料",
       "source_url": "https://www.mhlw.go.jp/stf/newpage_74170.html",
       "source_name": "厚生労働省 第260回介護給付費分科会資料",
+      "curated": false
+    },
+    {
+      "id": "n-notice-vol-1522",
+      "date": "2026-07-08",
+      "title": "介護保険最新情報Vol.1522(介護職員等処遇改善加算に関する様式例の一部差替について)",
+      "summary": "改正・制度運用に関する公式資料が公開されました。本文の解説は準備中です。",
+      "detail": "この項目は公式一覧の見出しと発出日を確認した速報です。変更内容・対象・適用日は本文確認後に追記します。",
+      "category": "人員配置",
+      "status": "公式資料公開・解説準備中",
+      "source_url": "https://www.mhlw.go.jp/content/001720493.pdf",
+      "source_name": "厚生労働省・介護保険最新情報",
+      "source_kind": "notice",
+      "curated": false
+    },
+    {
+      "id": "n-notice-vol-1521",
+      "date": "2026-07-08",
+      "title": "介護保険最新情報Vol.1521(介護給付適正化における住宅改修等の点検および福祉用具購入・貸与調査の取組促進について 等)",
+      "summary": "改正・制度運用に関する公式資料が公開されました。本文の解説は準備中です。",
+      "detail": "この項目は公式一覧の見出しと発出日を確認した速報です。変更内容・対象・適用日は本文確認後に追記します。",
+      "category": "福祉用具",
+      "status": "公式資料公開・解説準備中",
+      "source_url": "https://www.mhlw.go.jp/content/001719971.pdf",
+      "source_name": "厚生労働省・介護保険最新情報",
+      "source_kind": "notice",
+      "curated": false
+    },
+    {
+      "id": "n-notice-vol-1520",
+      "date": "2026-07-02",
+      "title": "介護保険最新情報Vol.1520(公益社団法人国民健康保険中央会運用LIFE への移行に係る再周知について)",
+      "summary": "改正・制度運用に関する公式資料が公開されました。本文の解説は準備中です。",
+      "detail": "この項目は公式一覧の見出しと発出日を確認した速報です。変更内容・対象・適用日は本文確認後に追記します。",
+      "category": "介護DX",
+      "status": "公式資料公開・解説準備中",
+      "source_url": "https://www.mhlw.go.jp/content/001718022.pdf",
+      "source_name": "厚生労働省・介護保険最新情報",
+      "source_kind": "notice",
       "curated": false
     },
     {
@@ -590,6 +720,45 @@
       "curated": false
     },
     {
+      "id": "n-notice-vol-1508",
+      "date": "2026-06-03",
+      "title": "介護保険最新情報vol.1508(「介護支援専門員等の在宅介護従事者の安全確保の徹底について」)",
+      "summary": "改正・制度運用に関する公式資料が公開されました。本文の解説は準備中です。",
+      "detail": "この項目は公式一覧の見出しと発出日を確認した速報です。変更内容・対象・適用日は本文確認後に追記します。",
+      "category": "介護保険制度",
+      "status": "公式資料公開・解説準備中",
+      "source_url": "https://www.mhlw.go.jp/content/001707964.pdf",
+      "source_name": "厚生労働省・介護保険最新情報",
+      "source_kind": "notice",
+      "curated": false
+    },
+    {
+      "id": "n-notice-vol-1506",
+      "date": "2026-05-29",
+      "title": "介護保険最新情報vol.1506(【事務連絡】令和8年8月からの特定入所者介護(予防)サービス費の見直し等に係る周知への協力依頼について)",
+      "summary": "改正・制度運用に関する公式資料が公開されました。本文の解説は準備中です。",
+      "detail": "この項目は公式一覧の見出しと発出日を確認した速報です。変更内容・対象・適用日は本文確認後に追記します。",
+      "category": "介護保険制度",
+      "status": "公式資料公開・解説準備中",
+      "source_url": "https://www.mhlw.go.jp/content/001706483.pdf",
+      "source_name": "厚生労働省・介護保険最新情報",
+      "source_kind": "notice",
+      "curated": false
+    },
+    {
+      "id": "n-notice-vol-1505",
+      "date": "2026-05-27",
+      "title": "介護保険最新情報vol.1505(【事務連絡】「介護保険資格確認等WEB サービスとの連携におけるAPI 仕様書(暫定版)」の公開及び「ケアプランデータ連携標準仕様」の今後の取扱いについて)",
+      "summary": "改正・制度運用に関する公式資料が公開されました。本文の解説は準備中です。",
+      "detail": "この項目は公式一覧の見出しと発出日を確認した速報です。変更内容・対象・適用日は本文確認後に追記します。",
+      "category": "介護保険制度",
+      "status": "公式資料公開・解説準備中",
+      "source_url": "https://www.mhlw.go.jp/content/001705072.pdf",
+      "source_name": "厚生労働省・介護保険最新情報",
+      "source_kind": "notice",
+      "curated": false
+    },
+    {
       "id": "n-pay-257",
       "date": "2026-05-25",
       "title": "第257回介護給付費分科会の資料が公開",
@@ -642,6 +811,32 @@
       "curated": false
     },
     {
+      "id": "n-notice-vol-1499",
+      "date": "2026-04-30",
+      "title": "介護保険最新情報vol.1499(介護分野の業務効率化に資する汎用機器の導入に向けた省力化補助金の活用について(介護業における対象汎用製品の補助申請受付開始および主な問い合わせについて))",
+      "summary": "改正・制度運用に関する公式資料が公開されました。本文の解説は準備中です。",
+      "detail": "この項目は公式一覧の見出しと発出日を確認した速報です。変更内容・対象・適用日は本文確認後に追記します。",
+      "category": "介護保険制度",
+      "status": "公式資料公開・解説準備中",
+      "source_url": "https://www.mhlw.go.jp/content/001698727.pdf",
+      "source_name": "厚生労働省・介護保険最新情報",
+      "source_kind": "notice",
+      "curated": false
+    },
+    {
+      "id": "n-notice-vol-1497",
+      "date": "2026-04-28",
+      "title": "介護保険最新情報vol.1497(令和8年度における介護情報基盤の活用のための介護事業所等への支援について)",
+      "summary": "改正・制度運用に関する公式資料が公開されました。本文の解説は準備中です。",
+      "detail": "この項目は公式一覧の見出しと発出日を確認した速報です。変更内容・対象・適用日は本文確認後に追記します。",
+      "category": "介護DX",
+      "status": "公式資料公開・解説準備中",
+      "source_url": "https://www.mhlw.go.jp/content/001696517.pdf",
+      "source_name": "厚生労働省・介護保険最新情報",
+      "source_kind": "notice",
+      "curated": false
+    },
+    {
       "id": "n-pay-256",
       "date": "2026-04-27",
       "title": "第256回介護給付費分科会の資料が公開",
@@ -663,6 +858,32 @@
       "category": "介護保険制度",
       "status": "公式資料公開・解説準備中",
       "source_url": "https://www.mhlw.go.jp/content/001696286.pdf",
+      "source_name": "厚生労働省・介護保険最新情報",
+      "source_kind": "notice",
+      "curated": false
+    },
+    {
+      "id": "n-notice-vol-1495",
+      "date": "2026-04-21",
+      "title": "介護保険最新情報vol.1495(「LIFE の厚生労働省から公益社団法人国民健康保険中央会への移管に伴い事業所・施設で必要な対応について」)",
+      "summary": "改正・制度運用に関する公式資料が公開されました。本文の解説は準備中です。",
+      "detail": "この項目は公式一覧の見出しと発出日を確認した速報です。変更内容・対象・適用日は本文確認後に追記します。",
+      "category": "介護DX",
+      "status": "公式資料公開・解説準備中",
+      "source_url": "https://www.mhlw.go.jp/content/001696866.pdf",
+      "source_name": "厚生労働省・介護保険最新情報",
+      "source_kind": "notice",
+      "curated": false
+    },
+    {
+      "id": "n-notice-vol-1494",
+      "date": "2026-04-13",
+      "title": "介護保険最新情報vol.1494(「介護施設・事業所等における災害時情報共有システムに係る平時における物資の備蓄状況等報告機能の追加について」) 参考資料",
+      "summary": "改正・制度運用に関する公式資料が公開されました。本文の解説は準備中です。",
+      "detail": "この項目は公式一覧の見出しと発出日を確認した速報です。変更内容・対象・適用日は本文確認後に追記します。",
+      "category": "介護保険制度",
+      "status": "公式資料公開・解説準備中",
+      "source_url": "https://www.mhlw.go.jp/content/001690439.pdf",
       "source_name": "厚生労働省・介護保険最新情報",
       "source_kind": "notice",
       "curated": false

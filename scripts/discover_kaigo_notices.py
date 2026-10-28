@@ -106,12 +106,10 @@ def scan_notices(html):
 
 def triage(row):
     title = unicodedata.normalize('NFKC', row['title'])
-    if re.search(r'セミナー|研修会|参加案内|出展|老人の日|老人週間|への協力依頼', title):
+    if re.search(r'セミナー|研修会|参加案内|出展|老人の日|老人週間', title) or re.search(r'調査.{0,30}への(?:ご)?協力依頼', title):
         return 'excluded', '行事・研修・調査協力の案内。改正内容の新情報ではない。'
     if re.search(r'改正|改定|見直し|公布|施行|Q\s*&\s*A|給付対象|給付と負担|中間とりまとめ|貸与価格|価格の上限', title, re.I):
         return 'include', '改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。'
-    if re.search(r'セミナー|研修会|参加案内|出展|老人の日|老人週間', title):
-        return 'excluded', '行事・研修の案内。改正内容の新情報ではない。'
     return 'review_pending', '見出しだけでは改正との関係を判断できないため、本文確認待ち。'
 
 

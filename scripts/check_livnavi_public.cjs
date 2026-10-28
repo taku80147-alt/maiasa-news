@@ -20,6 +20,7 @@ function assertNoticeCoverage(inventory,feed){
  for(const row of inventory.documents){
   assert.ok(!ids.has(row.id),"Duplicate discovered notice");ids.add(row.id);
   assert.ok(["include","excluded","review_pending"].includes(row.selection)&&row.reason,"Notice missing triage decision");
+  assert.notEqual(row.selection,"review_pending","Notice needs editorial triage: "+row.id);
   if(row.selection==="include")assert.ok(feed.articles.some(a=>a.id===row.id&&a.source_url===row.source_url),"Discovered reform notice missing from feed: "+row.id);
  }
  console.log("NOTICE_COVERAGE_OK",inventory.documents.length,"pending review",inventory.documents.filter(r=>r.selection==="review_pending").length);

@@ -5,6 +5,8 @@ on:
     paths:
       - '.github/workflows/publish-livnavi-recovery.yml'
       - 'kaigo-navi2027-preview/index.html'
+      - 'kaigo-navi2027-preview/daily-tip.js'
+      - 'kaigo-navi2027-preview/data/source-inventory.json'
       - 'kaigo-navi2027-preview/data/latest.json'
       - 'kaigo-navi2027-preview/data/sales-guides.json'
       - 'kaigo-navi2027-preview/data/pdf-evidence.json'
@@ -64,3 +66,4 @@ jobs:
     uses: ./.github/workflows/pages.yml
     with:
       ref: ${{ needs.preflight.outputs.revision }}
+

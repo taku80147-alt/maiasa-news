@@ -20,6 +20,10 @@ class NoticeTests(unittest.TestCase):
         for title in ['介護報酬改定に関するＱ＆Ａ（Vol.18）', '介護老人福祉施設の人員基準の見直し', '利用者負担の一部改正']:
             self.assertEqual(triage({'title': title})[0], 'include')
 
+    def test_reform_publicity_request_is_not_a_survey_request(self):
+        self.assertEqual(triage({'title': '令和8年8月からの特定入所者介護サービス費の見直し等に係る周知への協力依頼について'})[0], 'include')
+        self.assertEqual(triage({'title': '介護報酬改定の効果検証調査へのご協力依頼について'})[0], 'excluded')
+
     def test_unknown_not_silently_excluded_and_event_has_reason(self):
         self.assertEqual(triage({'title': '新しい運用のお知らせ'})[0], 'review_pending')
         state, reason = triage({'title': 'ケアプラン活用セミナーの開催'})

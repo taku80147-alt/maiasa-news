@@ -40,9 +40,10 @@
         "https://www.mhlw.go.jp/content/001761586.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "include",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2ページ：事故報告の全国システムと報告様式見直し案。単なる事故報告の再周知ではない。",
+      "publication": "listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1547",
@@ -66,9 +67,10 @@
         "https://www.mhlw.go.jp/content/001760203.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "include",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2ページ：経営情報報告の受付再開と具体的な取扱い。制度上の報告手続に影響。",
+      "publication": "listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1545",
@@ -79,9 +81,10 @@
         "https://www.mhlw.go.jp/content/001755179.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "excluded",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2ページは事務調査の集計結果の情報提供。新たな改正内容・手続変更の通知ではない。",
+      "publication": "not_listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1544",
@@ -118,9 +121,10 @@
         "https://www.mhlw.go.jp/content/001748303.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "include",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2～4ページ：補装具と介護保険の適用関係・相談対応の留意事項を整理。",
+      "publication": "listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1541",
@@ -131,9 +135,10 @@
         "https://www.mhlw.go.jp/content/001747516.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "include",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2～3ページ：行方不明者の資格喪失・保険料減免返還の取扱いを新たに周知。",
+      "publication": "listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1540",
@@ -157,9 +162,10 @@
         "https://www.mhlw.go.jp/content/001744369.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "include",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2～3ページ：介護情報基盤連携APIの確定版と対応仕様を公表。",
+      "publication": "listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1538",
@@ -262,9 +268,10 @@
         "https://www.mhlw.go.jp/content/001731699.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "excluded",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2ページは養成研修の受講案内。新しい人員要件等を決める通知ではない。",
+      "publication": "not_listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1530",
@@ -275,9 +282,10 @@
         "https://www.mhlw.go.jp/content/001730818.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "excluded",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2ページは車椅子送迎事故の調査経過報告の紹介。改正・手続変更の通知ではない。",
+      "publication": "not_listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1529",
@@ -288,9 +296,10 @@
         "https://www.mhlw.go.jp/content/001730882.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "include",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2ページ以降：ケアプランデータ連携の移行準備と移行後の取扱い。",
+      "publication": "listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1528",
@@ -301,9 +310,10 @@
         "https://www.mhlw.go.jp/content/001727399.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "include",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2～4ページ：高齢者施設と薬局間の利益提供禁止について解釈を整理。",
+      "publication": "listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1527",
@@ -314,9 +324,10 @@
         "https://www.mhlw.go.jp/content/001726865.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "excluded",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2ページは既報のLIFE移行の再々周知。変更内容はVol.1495、具体的な提出・加算の扱いはVol.1520として掲載。",
+      "publication": "not_listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1526",
@@ -379,9 +390,10 @@
         "https://www.mhlw.go.jp/content/001720493.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "include",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2～4ページ：処遇改善加算の実績報告様式の計算式等を修正し差し替え。",
+      "publication": "listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1521",
@@ -392,9 +404,10 @@
         "https://www.mhlw.go.jp/content/001719971.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "include",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2～3ページ：住宅改修・用具点検手引きを第二版へ改訂。給付判断の実務に関係。",
+      "publication": "listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1520",
@@ -405,9 +418,10 @@
         "https://www.mhlw.go.jp/content/001718022.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "include",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2ページ：LIFE移行未了時のデータ提出と加算算定への影響を明示。",
+      "publication": "listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1519",
@@ -418,9 +432,10 @@
         "https://www.mhlw.go.jp/content/001717178.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "excluded",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2ページ以降は既存の総合事業評価に用いる分析ワークシート等の活用案内。新たな報酬・給付・義務を定める通知ではない。",
+      "publication": "not_listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1518",
@@ -509,9 +524,10 @@
         "https://www.mhlw.go.jp/content/001713143.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "excluded",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2～3ページは既報LIFE移行作業と問い合わせ先の再周知。変更内容はVol.1495とVol.1520として掲載。",
+      "publication": "not_listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1511",
@@ -522,9 +538,10 @@
         "https://www.mhlw.go.jp/content/001711784.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "excluded",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2ページ以降は地域づくり・災害・家族支援の参考ハンドブック等の周知。新たな制度改正そのものの公表ではない。",
+      "publication": "not_listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1510",
@@ -561,9 +578,10 @@
         "https://www.mhlw.go.jp/content/001707964.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "include",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2～3ページ：在宅介護従事者の安全確保対策と成立したハラスメント対策法に関する周知。",
+      "publication": "listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1507",
@@ -574,9 +592,10 @@
         "https://www.mhlw.go.jp/content/001706555.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "excluded",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2ページは事業実態調査への協力依頼。改定の基礎調査であり、改正内容ではない。",
+      "publication": "not_listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1506",
@@ -587,9 +606,10 @@
         "https://www.mhlw.go.jp/content/001706483.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "excluded",
-      "reason": "行事・研修・調査協力の案内。改正内容の新情報ではない。",
-      "publication": "not_listed"
+      "selection": "include",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2ページ：補足給付の食費・居住費等の見直しに関する周知。協力依頼の語で除外しない。",
+      "publication": "listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1505",
@@ -600,9 +620,10 @@
         "https://www.mhlw.go.jp/content/001705072.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "include",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2～3ページ：介護情報基盤連携API暫定版と標準仕様の今後の取扱い。",
+      "publication": "listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1504",
@@ -613,9 +634,10 @@
         "https://www.mhlw.go.jp/content/001703567.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "excluded",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2ページは既報のLIFE移行の説明動画・操作マニュアルの公開。変更本体はVol.1495、実務上の取扱いはVol.1520として掲載。",
+      "publication": "not_listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1503",
@@ -626,9 +648,10 @@
         "https://www.mhlw.go.jp/content/001699553.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "excluded",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2～3ページは調査研究報告書と参考ガイドの紹介。新たな制度要件の公表ではない。",
+      "publication": "not_listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1502",
@@ -678,9 +701,10 @@
         "https://www.mhlw.go.jp/content/001698727.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "include",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2～3ページ：介護業向け対象機器の補助申請が可能となったことと問い合わせ整理。",
+      "publication": "listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1498",
@@ -691,9 +715,10 @@
         "https://www.mhlw.go.jp/content/001696520.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "excluded",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2ページは開催済みLIFE説明会の録画・資料公開。新たな変更通知ではない。",
+      "publication": "not_listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1497",
@@ -704,9 +729,10 @@
         "https://www.mhlw.go.jp/content/001696517.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "include",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2～4ページ：介護情報基盤導入助成の当年度の受付・対象を公表。",
+      "publication": "listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1496",
@@ -730,9 +756,10 @@
         "https://www.mhlw.go.jp/content/001696866.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "include",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2ページ以降：LIFE移管で必要な作業と関連加算の取扱いQ&A。",
+      "publication": "listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1494",
@@ -744,9 +771,10 @@
         "https://www.mhlw.go.jp/content/001690474.pdf"
       ],
       "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
-      "selection": "review_pending",
-      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
-      "publication": "not_listed"
+      "selection": "include",
+      "reason": "2026-10-28に一次PDFの発出趣旨・本文を確認。PDF2ページ以降：災害時情報共有システムの備蓄報告機能の追加。",
+      "publication": "listed",
+      "editorial_reviewed_on": "2026-10-28"
     },
     {
       "id": "n-notice-vol-1493",
