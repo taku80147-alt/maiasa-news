@@ -66,18 +66,6 @@ async function main() {
         await hideFooter.evaluate(el=>el.remove());
         await baseline.close();
       }
-      // A newly added official meeting must have a visible, explicitly provisional sales guide.
-      const homeFirstId=await page.locator("#homeNews .news").first().getAttribute("data-id");
-      const autoGuide=autoSales.guides.find(g=>g.id===homeFirstId);
-      if(autoGuide && !release.articles.some(a=>a.id===homeFirstId)){
-        await page.locator("#homeNews .news").first().click();
-        await page.locator(".sales-auto").waitFor({state:"visible",timeout:14000});
-        const guideText=await page.locator(".sales-auto").innerText();
-        assert.ok(guideText.includes(autoGuide.topics[0].question),
-          "Latest article must show its concrete sales question");
-        assert.ok(guideText.includes("精読した解説ではありません"),"Automatic guide must disclose its limitations");
-        await page.locator(".bottom [data-go='home']").click();
-      }
       // Parent Oct 9 overview: all four newly reviewed services must be navigable.
       await page.locator('.bottom [data-go="news"]').first().click();
       await page.locator('#viewbody [data-id="n-pay-269"]').first().click();
@@ -89,12 +77,11 @@ async function main() {
       // Verify 3-level reading controls and back navigation, on two representative topics.
       for(const id of [four[0],four[3]]) {
         await page.locator('#viewbody [data-id="'+id+'"]').click();
-        await page.locator('.exp-tabs').waitFor({state:"visible",timeout:12000});
-        for (const tab of ["quick","deep","sales"]) {
-          await page.locator('[data-exp-tab="'+tab+'"]').click();
-          const panel=page.locator('[data-exp-panel="'+tab+'"]');
-          assert.equal(await panel.isVisible(),true,`${id} tab ${tab} not visible`);
-          assert.ok((await panel.innerText()).trim().length>=40,`empty panel: ${id}/${tab}`);
+        await page.locator('.reform-reader').waitFor({state:"visible",timeout:12000});
+        for(const section of ["summary","changes","audience","impact","timing","sources"]){
+          const panel=page.locator('[data-reader-section="'+section+'"]');
+          assert.ok(await panel.isVisible(),`${id}: missing ${section}`);
+          assert.ok((await panel.innerText()).trim().length>8);
         }
         await noHorizontalOverflow(page,`${id} detail`,width);
         await page.locator("#back").click();
@@ -103,13 +90,17 @@ async function main() {
       // Every reviewed article, including current-system lessons, must load from a share link.
       for(const article of release.articles) {
         await page.goto(BASE+"#article="+article.id,{waitUntil:"networkidle"});
-        await page.locator(".exp-tabs").waitFor();
+        await page.locator(".reform-reader").waitFor();
         assert.ok((await page.locator(".exp-safe").innerText()).includes(article.status));
-        for(const tab of ["quick","deep","sales"]) {
-          await page.locator('[data-exp-tab="'+tab+'"]').click();
-          assert.ok((await page.locator('[data-exp-panel="'+tab+'"]').innerText()).length>40);
-          if(["n-ins-136-burden","l-equipment-choice","n-law51-overview"].includes(article.id) && ["deep","sales"].includes(tab))
-            await page.screenshot({path:path.join("kaigo-qa-screenshots",`${article.id}_${tab}_${width}.png`),fullPage:true});
+        for(const section of ["summary","changes","audience","impact","timing","sources"]){
+          const panel=page.locator('[data-reader-section="'+section+'"]');
+          assert.ok(await panel.isVisible());
+          assert.ok((await panel.innerText()).length>8);
+        }
+        if(article.id==="n-notice-vol-1549"){
+          assert.ok((await page.locator('[data-reader-section="timing"]').innerText()).includes("2027-02-01"));
+          assert.ok((await page.locator('[data-reader-section="changes"]').innerText()).includes("給付対象外"));
+          await page.screenshot({path:path.join("kaigo-qa-screenshots",`notice1549_${width}.png`),fullPage:true});
         }
         await noHorizontalOverflow(page,article.id,width);
       }
@@ -135,7 +126,7 @@ async function main() {
       await page.locator('.bottom [data-go="home"]').click();
       for(const id of ["n-pay-268","n-ins-136-burden","n-pay-259"]) {
         await page.locator('#featureGrid [data-id="'+id+'"]').click();
-        await page.locator(".exp-tabs").waitFor();
+        await page.locator(".reform-reader").waitFor();
         await page.locator('.bottom [data-go="home"]').click();
       }
       assert.deepEqual(errors,[],`${width}px browser JavaScript errors: ${errors.join("; ")}`);
@@ -150,7 +141,7 @@ async function main() {
       return route.fulfill({json:data});
     });
     await tampered.goto(BASE+"#article=n-pay-268",{waitUntil:"networkidle"});
-    assert.equal(await tampered.locator(".exp-tabs").count(),0,"tampered article must be withheld");
+    assert.equal(await tampered.locator(".reform-reader").count(),0,"tampered article must be withheld");
     await tampered.close();
     const offline=await browser.newPage();
     await offline.route("**/data/*",route=>route.abort());
@@ -160,4 +151,5 @@ async function main() {
   } finally {await browser.close()}
 }
 main().catch(e=>{console.error(e.stack||e);process.exit(1)});
+
 

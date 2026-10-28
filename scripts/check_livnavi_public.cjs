@@ -86,17 +86,6 @@ async function liveCheck(browser){
    console.log("PDF_EVIDENCE_PUBLICATION_OK",expected.articles.length);
   }
 
-  const guide=sales.guides.find(g=>g.id===first.id);
-  if(guide&&!reviewedIds.has(first.id)){
-   await page.locator("#homeNews .news").first().click();
-   await page.locator(".sales-auto").waitFor({state:"visible",timeout:15000});
-   const guideText=await page.locator(".sales-auto").innerText();
-   assert.ok(guideText.includes(guide.topics[0].question),"Live sales guide missing latest conversation questions");
-   assert.ok(guideText.includes("精読した解説ではありません"),"Auto-created advice must disclose its verification limits");
-   assert.ok((await page.locator(".sales-auto a[href='"+guide.source_url+"']").count())===1,
-     "Sales card must link to its official MHLW source");
-  }
-
   await page.waitForFunction(id=>document.querySelector("#homeNews .news[data-id]")?.dataset.id===id,first.id,{timeout:15000});
   const card=page.locator("#homeNews .news").first();
   assert.equal(await card.getAttribute("data-id"),first.id,"Displayed first article is old");
@@ -104,12 +93,11 @@ async function liveCheck(browser){
   const reviewedItem=reviewedRelease.articles.find(r=>r.id===first.id);
   if(reviewedItem){
     await page.locator("#homeNews .news").first().click();
-    await page.locator(".exp-card .exp-tabs").waitFor({state:"visible",timeout:16000});
-    for(const tab of ["quick","deep","sales"]){
-      await page.locator('[data-exp-tab="'+tab+'"]').click();
-      const panel=page.locator('[data-exp-panel="'+tab+'"]');
-      assert.ok(await panel.isVisible(),"Reviewed reader tab not visible: "+tab);
-      assert.ok((await panel.innerText()).length>70,"Reviewed reader panel unexpectedly blank: "+tab);
+    await page.locator(".reform-reader").waitFor({state:"visible",timeout:16000});
+    for(const section of ["summary","changes","audience","impact","timing","sources"]){
+      const panel=page.locator('[data-reader-section="'+section+'"]');
+      assert.ok(await panel.isVisible(),"Reader section not visible: "+section);
+      assert.ok((await panel.innerText()).length>8,"Reader section unexpectedly blank: "+section);
     }
     const text=await page.locator(".exp-card").innerText();
     assert.ok(text.includes(reviewedItem.one_liner),"Reviewed explanation is not rendered for latest article");
@@ -140,3 +128,4 @@ async function liveCheck(browser){
  if(errors.length)throw Error(errors.join("\\n\\n"));
  console.log("LIVNAVI_ALL_CHECKS_PASSED");
 })().catch(e=>{console.error("LIVNAVI_MONITOR_FAILED",e.stack||e);process.exitCode=1});
+

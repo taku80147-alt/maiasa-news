@@ -169,33 +169,39 @@ async function loadAutoSalesGuides(){
 function safePDF(a){return a&&typeof a.source_pdf==='string'&&a.source_pdf.startsWith('https://www.mhlw.go.jp/content/')?a.source_pdf:null}
 function explainArticle(a){
  const ex=reviewedExplainers.get(a.id);if(!ex)return '';
- const title=ex.article_kind==='learning'?'現行制度を学ぶ':'原文に基づく・やさしい解説';
  const src=safePDF(ex);
- const citation=src?('<a class="exp-cite" target="_blank" rel="noopener noreferrer" href="'+esc(src)+'#page=1">厚労省の資料を開く ↗</a>'):'';
- const quick=ex.quick.map(v=>'<li>'+esc(v)+'</li>').join('');
+ const effective=ex.reader?.effective_on;
+ const cits=ex.verified_claims.map(v=>'<li>'+esc(v.claim)+'<br><a class="exp-cite" target="_blank" rel="noopener noreferrer" href="'+esc(src)+'#page='+Number(v.pdf_page)+'">'+esc(v.source)+'（PDF '+Number(v.pdf_page)+'ページ）↗</a></li>').join('');
  const deep=ex.explain.map(v=>'<section><h4>'+esc(v.heading)+'</h4><p>'+esc(v.body)+'</p><span class="exp-score">'+esc(v.source)+'</span></section>').join('');
- const cits=ex.verified_claims.map(v=>'<li>'+esc(v.claim)+'<br><a class="exp-cite" target="_blank" rel="noopener noreferrer" href="'+esc(src)+'#page='+Number(v.pdf_page)+'">'+esc(v.source)+' （PDF '+Number(v.pdf_page)+'ページ）↗</a></li>').join('');
- const sales=ex.sales;
- return '<section class="exp-card"><div class="exp-hero"><b>📘 '+title+'</b><span class="exp-safe">'+esc(ex.status)+'</span></div>'+
- '<p class="exp-meta">対象：'+esc(ex.category)+' ／ 資料の日付：'+esc(ex.meeting_date)+'<br>'+esc(ex.source_scope)+'</p>'+
- '<p class="exp-meta">記事確認：'+esc(ex.editorial_reviewed_on||'未記録')+'</p><p class="exp-lead">'+esc(ex.one_liner)+'</p>'+
- '<div class="exp-tabs" role="tablist" aria-label="記事の読み方"><button type="button" role="tab" aria-selected="true" data-exp-tab="quick">⚡ 30秒で理解</button><button type="button" role="tab" aria-selected="false" data-exp-tab="deep">📖 詳しく</button><button type="button" role="tab" aria-selected="false" data-exp-tab="sales">💼 営業で使う</button></div>'+
- '<div class="exp-panel" data-exp-panel="quick"><ol class="exp-list">'+quick+'</ol><h4>今とこれからの違い</h4><p><b>現行：</b>'+esc(ex.now_vs_next.now)+'</p><p><b>2027年度に向けて：</b>'+esc(ex.now_vs_next.next)+'</p><div class="exp-alert">⚠️ '+esc(ex.numerical_caution)+'</div></div>'+
- '<div class="exp-panel" data-exp-panel="deep" hidden><h4>対象になる方・関係する事業所</h4><p>'+esc(ex.who)+'</p>'+deep+'<h4>原文に当たって確認できるポイント</h4><ol class="exp-list">'+cits+'</ol><div class="exp-alert">資料に書かれた現行制度と、検討中の変更を区別してご確認ください。個別の適用は最新の正式資料を確認します。</div></div>'+
- '<div class="exp-panel" data-exp-panel="sales" hidden><h4>こんな聞き方から</h4><div class="exp-quote">'+esc(sales.approach)+'</div><h4>施設に説明する</h4><p>'+esc(sales.facility)+'</p><h4>ケアマネジャーに説明する</h4><p>'+esc(sales.caremanager)+'</p><h4>利用者・ご家族に説明する</h4><p>'+esc(sales.family)+'</p><div class="exp-alert">誤解を避けるために：'+esc(sales.caution)+'</div></div>'+
- '<p class="exp-scope"><b>検証した範囲：</b>'+esc(ex.review_scope)+'<br>'+citation+'</p></section>';
+ const impact=ex.reader?.impact;
+ const legacy=ex.sales;
+ return '<section class="exp-card reform-reader" aria-label="改正情報の解説"><div class="exp-hero"><b>📘 分かりやすく解説</b><span class="exp-safe">'+esc(ex.status)+'</span></div>'+
+ '<h2>'+esc(ex.title)+'</h2><p class="exp-meta">'+esc(ex.category)+' ／ 資料の日付：'+esc(ex.meeting_date)+(effective?' ／ 適用：'+esc(effective):'')+'</p><p class="exp-lead">'+esc(ex.one_liner)+'</p>'+
+ '<section data-reader-section="summary"><h3>まず要点</h3><ul class="exp-list">'+ex.quick.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul></section>'+
+ '<section data-reader-section="changes"><h3>何が変わる？</h3><h4>これまで・現行制度</h4><p>'+esc(ex.now_vs_next.now)+'</p><h4>変更・検討の内容</h4><p>'+esc(ex.now_vs_next.next)+'</p>'+deep+'<div class="exp-alert">'+esc(ex.numerical_caution)+'</div></section>'+
+ '<section data-reader-section="audience"><h3>誰に関係する？</h3><p>'+esc(ex.who)+'</p></section>'+
+ '<section data-reader-section="impact"><h3>現場では何を確認する？</h3><p class="exp-meta">ここからは、資料を踏まえた編集上の解説です。</p>'+(impact?'<p>'+esc(impact)+'</p>':'<h4>施設・事業所</h4><p>'+esc(legacy.facility)+'</p><h4>ケアマネジャー</h4><p>'+esc(legacy.caremanager)+'</p><h4>利用者・家族</h4><p>'+esc(legacy.family)+'</p><p>'+esc(legacy.caution)+'</p>')+'</section>'+
+ '<section data-reader-section="timing"><h3>いつから？</h3><p>'+esc(ex.status)+(effective?' ／ 適用日：'+esc(effective):'。適用時期が確定していない内容は、決定済みと区別してください。')+'</p></section>'+
+ '<section data-reader-section="sources"><h3>公式資料</h3><p>'+esc(ex.source_scope)+'</p><p><a class="exp-cite" target="_blank" rel="noopener noreferrer" href="'+esc(src)+'">通知・資料の原文を読む ↗</a></p><details><summary>根拠のページを確認する</summary><ol class="exp-list">'+cits+'</ol><p class="exp-scope">'+esc(ex.review_scope)+'</p></details><p class="exp-meta">記事確認：'+esc(ex.editorial_reviewed_on||'未記録')+'</p></section></section>';
 }
 
 function go(to){if(to==='home'){mode='home';$('home').classList.add('current');$('view').classList.remove('current')}else{mode=to;$('home').classList.remove('current');$('view').classList.add('current');render()}document.querySelectorAll('.bottom button').forEach(b=>b.classList.toggle('active',b.dataset.go===to));$('back').textContent=mode==='detail'?'← 一覧に戻る':'← ホームに戻る';if(to!=='detail')history.replaceState(null,'',location.pathname+location.search);window.scrollTo(0,0)}
 function row(a){return '<article class="card"><span class="tag">'+esc(a.category)+'</span><span class="tag">'+esc(a.status||'会議資料')+'</span><h3>'+esc(a.title)+'</h3><p>'+esc(a.summary)+'</p>'+(a.date?'<p class="vsub">資料の日付：'+esc(a.date)+'</p>':'')+'<div class="card-actions"><button class="primary" data-id="'+a.id+'">詳細を見る →</button><button class="secondary" data-save="'+a.id+'">'+(saved.has(a.id)?'♥ 保存済み':'♡ 保存')+'</button></div></article>'}
 function render(){const heading={news:'最新情報',topics:'いま注目の法改正',today:'今日の発見',talk:'今日の営業ネタ',categories:'分野から探す',ai:'制度を調べる',favorites:'お気に入り',search:'記事を検索',detail:'記事詳細',category:'分野別の記事'}[mode];let content='<h1 class="vtitle">'+heading+'</h1>';
-if(mode==='news'||mode==='topics'){let choices=items.filter(x=>x.id.startsWith('n')&&(mode==='news'||reviewedExplainers.has(x.id)));content+='<p class="vsub">厚労省の公式会議資料と確認できた議題です。資料の公開と制度の正式決定は異なります。</p><div class="filters">'+['すべて',...new Set(choices.map(x=>x.category))].map(f=>'<button class="filter '+(filter===f?'selected':'')+'" data-filter="'+f+'">'+f+'</button>').join('')+'</div><div class="cards">'+choices.filter(x=>filter==='すべて'||x.category===filter).map(row).join('')+'</div>'}
-if(mode==='detail'){const a=items.find(x=>x.id===selected);if(a){const source=typeof a.source_url==='string'&&a.source_url.startsWith('https://www.mhlw.go.jp/')?a.source_url:null;content+='<div class="card"><span class="tag">'+(source?'厚労省・公式資料':'制度解説')+'</span><h3>'+esc(a.title)+'</h3><p>'+esc(a.detail||a.summary)+'</p>'+(a.date?'<p><b>資料の日付：</b>'+esc(a.date)+'</p>':'')+'<h3>現在の扱い</h3><p>'+esc(a.status||'会議資料')+'。資料公表と改正の正式決定・施行は区別します。</p>'+(a.sales_tip?'<h3>営業での確認ポイント</h3><p>'+esc(a.sales_tip)+'</p>':'')+(source?'<p><b>出典：</b>'+esc(a.source_name||'厚生労働省')+'</p><p><a class="primary" href="'+esc(source)+'" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:11px 15px;border-radius:11px;color:#fff;text-decoration:none">厚労省の元資料を確認 ↗</a></p>':'')+'<div class="card-actions"><button class="secondary" data-save="'+a.id+'">'+(saved.has(a.id)?'♥ 保存済み':'♡ お気に入り')+'</button></div></div>'}}
-if(mode==='detail'){const a=items.find(x=>x.id===selected);if(a){content+=explainArticle(a);content+=pdfEvidenceArticle(a);content+=autoSalesArticle(a);content+='<div class="card-actions" style="margin-top:13px"><button class="secondary" data-share="'+esc(a.id)+'">🔗 記事リンクをコピー</button></div>';}}
-if(mode==='detail' && !reviewedExplainers.has(selected) && !autoSalesGuides.has(selected) && selected!=='n-pay-269' && String(selected||'').startsWith('n-'))content+='<p class="exp-alert">この情報は現在概要版です。営業向けガイドも未取得のため、会議資料の原文をご確認ください。</p>'; 
+if(mode==='news'||mode==='topics'){let choices=items.filter(x=>x.id.startsWith('n')&&(mode==='news'||reviewedExplainers.has(x.id)));content+='<p class="vsub">介護制度・報酬改正に関する会議資料・通知・Q&Aを掲載。検討中と決定済みを区別して解説します。</p><div class="filters">'+['すべて',...new Set(choices.map(x=>x.category))].map(f=>'<button class="filter '+(filter===f?'selected':'')+'" data-filter="'+f+'">'+f+'</button>').join('')+'</div><div class="cards">'+choices.filter(x=>filter==='すべて'||x.category===filter).map(row).join('')+'</div>'}
+if(mode==='detail'){const a=items.find(x=>x.id===selected);if(a){
+ const ex=reviewedExplainers.get(a.id);
+ if(ex)content+=explainArticle(a);
+ else{
+  const source=typeof a.source_url==='string'&&a.source_url.startsWith('https://www.mhlw.go.jp/')?a.source_url:null;
+  content+='<div class="card"><span class="tag">'+esc(a.status||'公式資料公開')+'</span><h2>'+esc(a.title)+'</h2><p>'+esc(a.detail||a.summary)+'</p><p>資料の日付：'+esc(a.date||'未確認')+'</p><p class="exp-alert">解説準備中。変更内容・対象・適用日は、原文を確認して追記します。</p>'+(source?'<a class="exp-cite" target="_blank" rel="noopener noreferrer" href="'+esc(source)+'">公式資料を読む ↗</a>':'')+'</div>';
+  content+=pdfEvidenceArticle(a);
+ }
+ content+='<div class="card-actions" style="margin-top:13px"><button class="secondary" data-save="'+esc(a.id)+'">'+(saved.has(a.id)?'♥ 保存済み':'♡ お気に入り')+'</button><button class="secondary" data-share="'+esc(a.id)+'">🔗 記事リンクをコピー</button></div>';
+}}
 if(mode==='detail' && selected==='n-pay-269') {
   const links=[['n-pay-269-gh','認知症グループホームの解説'],['n-pay-269-sm','小規模多機能の解説'],['n-pay-269-nm','看護小規模多機能の解説'],['n-pay-269-dn','定期巡回・夜間対応型訪問介護の解説']];
-  content+='<section class="card"><h3>📘 分科会の個別解説を読む</h3><p>本日の会議には複数のテーマがあります。詳しい本文と営業向けの説明は、次の記事で確認できます。</p>'+links.map(x=>'<p><button class="primary" type="button" data-id="'+x[0]+'" style="width:100%;text-align:left;padding:13px;margin:2px 0;border-radius:12px;">'+x[1]+' →</button></p>').join('')+'</section>';
+  content+='<section class="card"><h3>📘 分科会の個別解説を読む</h3><p>本日の会議には複数のテーマがあります。詳しい解説は、次の記事で確認できます。</p>'+links.map(x=>'<p><button class="primary" type="button" data-id="'+x[0]+'" style="width:100%;text-align:left;padding:13px;margin:2px 0;border-radius:12px;">'+x[1]+' →</button></p>').join('')+'</section>';
 }
 if(mode==='today')content+='<div class="card"><h3>5分で学ぶ、制度の読み方</h3><p>「検討中」は変更案、「決定」は公布・通知などで内容が定まった段階、「施行」は効力が生じる段階です。成立しても、すべてがその日から変わるとは限りません。記事では現行の扱いと変更案を分けて確認します。</p></div><h2>現行制度を学ぶ</h2><div class="cards">'+items.filter(x=>x.article_kind==='learning').map(row).join('')+'</div>';
 if(mode==='talk'){const recent=items.find(a=>autoSalesGuides.has(a.id)&&!reviewedExplainers.has(a.id));const guide=recent?autoSalesGuides.get(recent.id):null;const entries=[...reviewedExplainers.values()];const day=Math.floor(Date.now()/86400000);const ex=entries.length?entries[day%entries.length]:null;content+='<div class="card"><span class="tag">'+(guide?'直近の公式会議から':'今日の聞き方')+'</span><h3>'+esc(guide?recent.title:ex?ex.title:'お客様の課題を聞く')+'</h3><p>'+esc(guide?guide.first_phrase:ex?ex.sales.approach:'最近、事業所の運営で困っていることはありますか？')+'</p>'+(guide?'<p class="vsub">※会議の議題に基づく会話例。制度変更の決定ではありません。</p>':'')+(guide||ex?'<button class="primary" data-id="'+esc(guide?guide.id:ex.id)+'">元資料と説明例を見る →</button>':'')+'</div>'}
@@ -226,7 +232,7 @@ async function loadOfficialFeed(){
   if(!resp.ok)throw Error('HTTP '+resp.status);
   const json=await resp.json();
   if(!Array.isArray(json.articles))throw Error('No articles');
-  const candidates=json.articles.filter(a=>a&&typeof a.id==='string'&&/^n-[a-z0-9-]+$/.test(a.id)&&/^20\d\d-\d\d-\d\d$/.test(a.date)&&typeof a.title==='string'&&typeof a.summary==='string'&&typeof a.source_url==='string'&&a.source_url.startsWith('https://www.mhlw.go.jp/')).sort((a,b)=>b.date.localeCompare(a.date)||a.id.localeCompare(b.id)).slice(0,40);
+  const candidates=json.articles.filter(a=>a&&typeof a.id==='string'&&/^n-[a-z0-9-]+$/.test(a.id)&&/^20\d\d-\d\d-\d\d$/.test(a.date)&&typeof a.title==='string'&&typeof a.summary==='string'&&typeof a.source_url==='string'&&a.source_url.startsWith('https://www.mhlw.go.jp/')).sort((a,b)=>b.date.localeCompare(a.date)||a.id.localeCompare(b.id));
   if(!candidates.length)throw Error('No verified entries');
   const images=items.filter(x=>x.id.startsWith('n')).slice(0,3).map(x=>x.image);
   const recent=new Date(Date.now()-7*86400000).toLocaleDateString('sv-SE',{timeZone:'Asia/Tokyo'});
@@ -237,9 +243,9 @@ async function loadOfficialFeed(){
    const key='kaigo_official_meetings_seen_v1',prev=JSON.parse(localStorage.getItem(key)||'null');
    const ids=arr.map(a=>a.id),fresh=Array.isArray(prev)?ids.filter(id=>!prev.includes(id)).length:0;
    const label=document.querySelector('.updatetag');
-   if(label)label.textContent=fresh?'● 前回から'+fresh+'件追加':'● 公式会議資料 '+arr.length+'件';
+   if(label)label.textContent=fresh?'● 前回から'+fresh+'件追加':'● 改正関連資料 '+arr.length+'件';
    localStorage.setItem(key,JSON.stringify(ids));
-  }catch(e){const label=document.querySelector('.updatetag');if(label)label.textContent='● 公式会議資料 '+arr.length+'件'}
+  }catch(e){const label=document.querySelector('.updatetag');if(label)label.textContent='● 改正関連資料 '+arr.length+'件'}
   if(['news','topics','detail','category','search','ai','favorites','today','talk'].includes(mode))render();
  }catch(e){const label=document.querySelector('.updatetag');if(label)label.textContent='● 最新情報の取得に失敗';const box=document.querySelector('.demobox');if(box)box.textContent='最新情報を取得できませんでした。組み込み記事を表示しています。通信が戻ったら開き直してください。';console.warn('公式資料データの取得失敗',e)}
 }
@@ -276,3 +282,4 @@ function mergeLearningArticles(){for(const ex of reviewedExplainers.values()){co
 function openDeepLink(){const m=location.hash.match(/^#article=([^&]+)$/);if(!m)return;let id;try{id=decodeURIComponent(m[1])}catch(e){return}if(items.some(a=>a.id===id)&&!(mode==='detail'&&selected===id))openArticle(id)}
 window.addEventListener('hashchange',openDeepLink);
 </script></body></html>
+

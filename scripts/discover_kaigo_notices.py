@@ -65,7 +65,7 @@ def scan_notices(html):
         date = dt.date(2018 + (1 if year == '元' else int(year)), int(month), int(day)).isoformat()
         if date < START_DATE:
             continue
-        first_date = re.search(r'[（(]\s*令和\s*(?:元|\d+)\s*年', block)
+        first_date = list(re.finditer(r'[（(]\s*令和\s*(?:元|\d+)\s*年', block))[-1]
         title = re.sub(r'LINK\d+', '', block[:first_date.start()]).strip()
         title = re.sub(r'\s+', ' ', title)
         title = re.sub(r'[\[［][^\]］]*(?:KB|MB)[\]］]', '', title, flags=re.I).strip()
