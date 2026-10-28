@@ -205,10 +205,10 @@
       "status": "検討中（対応案）",
       "category": "施設運営",
       "source_scope": "第269回介護給付費分科会・資料４『認知症対応型共同生活介護（改定の方向性）』全36ページ",
-      "review_scope": "資料全36ページを取得・文字解析。主な対応案はPDF14・27ページ、従来の配置基準・事業所概要はPDF16・26・29ページ、現状・課題はPDF35・36ページ。表の数値は調査時点・対象区分を分けて扱い、施行日・報酬単位数は決定事項としていません。 ※厚労省が差し替えた更新版PDFについてアンカーを再検証中。",
+      "review_scope": "資料全36ページを取得・文字解析。主な対応案はPDF14・27ページ、従来の配置基準・事業所概要はPDF16・26・29ページ、現状・課題はPDF35・36ページ。表の数値は調査時点・対象区分を分けて扱い、施行日・報酬単位数は決定事項としていません。 更新版PDFの本文と主な根拠ページの表示・条件を2026年10月28日に再確認。",
       "source_page": "https://www.mhlw.go.jp/stf/newpage_76456.html",
-      "source_pdf": "https://www.mhlw.go.jp/content/12300000/001758851.pdf",
-      "pinned_pdf_sha256": "435c1c62522d4fa6549df4516c3cc57c7dc9085af3ad81ae7c44b5bb46a8a083",
+      "source_pdf": "https://www.mhlw.go.jp/content/12300000/001763678.pdf",
+      "pinned_pdf_sha256": "c4c694bfc8dd4687fccc1d1e581f3fa9294d3386d5fe78f7a98a8e62db3f61a5",
       "one_liner": "認知症グループホームについて、地域の認知症ケア拠点としての活動、人員配置、夜勤体制の見直し案が示されました。今すぐ夜勤2人にしてよい、という決定ではありません。",
       "quick": [
         "地域の人と交流するだけでなく、入居者の社会参加や本人発信を支える活動を評価する案が出ています。",
@@ -233,7 +233,7 @@
         },
         {
           "heading": "④ 夜勤2人体制の議論は条件付き",
-          "body": "資料では3ユニットの夜勤は原則3人以上、一定の要件を満たす場合には例外的に2人以上と整理しています。対応案では、階の配置が異なる一部の3ユニット事業所についても、見守り機器等を使った継続的な把握と迅速な対応ができる体制を前提に2人体制を認めることを検討しています。『機器を置けば必ず2人でよい』という意味ではありません。",
+          "body": "資料では3ユニットの夜勤は原則3人以上、一定の要件を満たす場合には例外的に2人以上と整理しています。対応案は、①同一階で隣接する2ユニットと、別の階の1ユニットを一体運営する場合、②同一階で隣接しない3ユニットの場合にも、2人体制を認めるというものです。いずれも夜間の安全確保、見守り機器等による継続的な状態把握、迅速な対応が可能な体制が要件の案です。機器の設置だけで緩和される、という決定ではありません。",
           "source": "資料４・PDF26・27ページ"
         },
         {
@@ -306,9 +306,17 @@
       ],
       "status_kind": "proposal",
       "article_kind": "reform",
-      "editorial_reviewed_on": "2026-10-11",
+      "editorial_reviewed_on": "2026-10-28",
       "related_categories": [
         "人員配置"
+      ],
+      "source_history": [
+        {
+          "source_pdf": "https://www.mhlw.go.jp/content/12300000/001758851.pdf",
+          "sha256": "435c1c62522d4fa6549df4516c3cc57c7dc9085af3ad81ae7c44b5bb46a8a083",
+          "status": "公式掲載URLが変更され、原本が404となったため差し替え。新PDFは別ハッシュで本文・該当表・ページ根拠を再確認。",
+          "replaced_on": "2026-10-28"
+        }
       ]
     },
     {
@@ -318,10 +326,10 @@
       "status": "検討中（対応案・論点）",
       "category": "在宅サービス",
       "source_scope": "第269回介護給付費分科会・資料２『小規模多機能型居宅介護（改定の方向性）』全31ページ",
-      "review_scope": "資料全31ページを取得・文字解析。主な対応案はPDF14・15ページ、人員配置等の論点はPDF17・18・20ページ、現行制度の概要はPDF22・31ページ。提示された事業所アンケートの数値は今回の論点と分けて扱いました。 ※厚労省が差し替えた更新版PDFについてアンカーを再検証中。",
+      "review_scope": "資料全31ページを取得・文字解析。主な対応案はPDF14・15ページ、人員配置等の論点はPDF17・18・20ページ、現行制度の概要はPDF22・31ページ。提示された事業所アンケートの数値は今回の論点と分けて扱いました。 更新版PDFの本文と主な根拠ページの表示・条件を2026年10月28日に再確認。",
       "source_page": "https://www.mhlw.go.jp/stf/newpage_76456.html",
-      "source_pdf": "https://www.mhlw.go.jp/content/12300000/001758850.pdf",
-      "pinned_pdf_sha256": "1df55ebb2710901f8d8697d50227b31fc260fb23c063b18a43c38796ad6352d5",
+      "source_pdf": "https://www.mhlw.go.jp/content/12300000/001763677.pdf",
+      "pinned_pdf_sha256": "d5757ac9de05948e27af83f9ba1bb1ff8d230f5a3d86fdd0aa1e141385d5ba8c",
       "one_liner": "小規模多機能型居宅介護で、独居や認知症の人を支える機能、要介護1・2の利用者への評価、人員配置の柔軟化などが検討されています。報酬や配置基準の変更はまだ決定していません。",
       "quick": [
         "『通い・訪問・泊まり』を組み合わせる小規模多機能が、独居や認知症の人を地域で支える役割をどう評価するかが論点です。",
@@ -420,9 +428,17 @@
       ],
       "status_kind": "proposal",
       "article_kind": "reform",
-      "editorial_reviewed_on": "2026-10-11",
+      "editorial_reviewed_on": "2026-10-28",
       "related_categories": [
         "人員配置"
+      ],
+      "source_history": [
+        {
+          "source_pdf": "https://www.mhlw.go.jp/content/12300000/001758850.pdf",
+          "sha256": "1df55ebb2710901f8d8697d50227b31fc260fb23c063b18a43c38796ad6352d5",
+          "status": "公式掲載URLが変更され、原本が404となったため差し替え。新PDFは別ハッシュで本文・該当表・ページ根拠を再確認。",
+          "replaced_on": "2026-10-28"
+        }
       ]
     },
     {
@@ -543,11 +559,11 @@
       "meeting_date": "2026-10-09",
       "status": "検討中（報酬案）／法改正の統合方針は成立済み",
       "category": "在宅サービス",
-      "source_scope": "第269回介護給付費分科会・資料１『定期巡回・随時対応型訪問介護看護及び夜間対応型訪問介護（改定の方向性）』全34ページ。法律関係は令和8年法律第51号の確認を別途要する。",
-      "review_scope": "全34ページを取得・解析。統合と対応案はPDF15ページ、配置要件はPDF18ページ、居住形態はPDF20ページ、現行制度の説明はPDF22・25ページ、改革の経緯はPDF34ページ。経過措置の期限は資料の記載に差があるため断定せず、施行法令で要再確認として扱う。 ※厚労省が差し替えた更新版PDFについてアンカーを再検証中。",
+      "source_scope": "第269回介護給付費分科会・資料１『定期巡回・随時対応型訪問介護看護及び夜間対応型訪問介護（改定の方向性）』全34ページ。統合方針については会議資料の説明を紹介。個別の適用・期限は施行法令の確認を別途要する。",
+      "review_scope": "全34ページを取得・解析。統合と対応案はPDF15ページ、配置要件はPDF18ページ、居住形態はPDF20ページ、現行制度の説明はPDF22・25ページ、改革の経緯はPDF34ページ。経過措置の期限は資料の記載に差があるため断定せず、施行法令で要再確認として扱う。 更新版PDFの本文と主な根拠ページの表示・条件を2026年10月28日に再確認。",
       "source_page": "https://www.mhlw.go.jp/stf/newpage_76456.html",
-      "source_pdf": "https://www.mhlw.go.jp/content/12300000/001758849.pdf",
-      "pinned_pdf_sha256": "f664d3f6309688dba0af75a5c31519597dceb4a9c967859227c1bf2043075371",
+      "source_pdf": "https://www.mhlw.go.jp/content/12300000/001763676.pdf",
+      "pinned_pdf_sha256": "bbbabd9f8d7a14de7d8b953dc434faea6b6d2b580484eeedf68cf049bdcf9673",
       "one_liner": "夜間対応型訪問介護の定期巡回サービスへの統合は、2026年成立の法律に基づく話です。一方、事業所が移行しやすいようにする新しい報酬上の評価や人員配置の緩和は、10月9日の資料では検討案です。",
       "quick": [
         "『夜間対応型を定期巡回・随時対応型訪問介護看護に統合する』のは、成立済みの法改正に関係する話です。ただし現行事業者には経過措置があります。",
@@ -563,7 +579,7 @@
         {
           "heading": "② 統合は報酬案と同じ『検討中』ではない",
           "body": "資料では、2026年に成立した社会福祉法等の改正により夜間対応型訪問介護を定期巡回へ統合し、既存事業所に経過措置を設けると説明されています。一方、どんな報酬・加算で移行を支えるかは、2027年度の介護報酬改定に向けた案です。法律上の統合方針と、未決定の報酬案を区別してください。",
-          "source": "資料１・PDF15・34ページ／令和8年法律第51号の公布情報"
+          "source": "資料１・PDF15・34ページ（成立法に関する会議資料の説明）"
         },
         {
           "heading": "③ 日中対応への移行をどう支える？",
@@ -634,20 +650,28 @@
         {
           "pdf_page": 15,
           "literal": "令和11年３月",
-          "scope": "資料１のこのページの経過措置期間表現。33ページと表記差があり、施行期限は法令で再確認"
+          "scope": "資料１のこのページの経過措置期間表現。PDF34ページと表記差があり、施行期限は法令で再確認"
         },
         {
           "pdf_page": 34,
           "literal": "令和11年度末",
-          "scope": "資料１の別ページの経過措置期間表現。14ページと表記差があり、施行期限は法令で再確認"
+          "scope": "資料１の別ページの経過措置期間表現。PDF15ページと表記差があり、施行期限は法令で再確認"
         }
       ],
       "numerical_caution": "『令和11年3月』と『令和11年度末』の表記が資料1の異なるページにあります。日付の取り違えを避け、法律の附則・省令等と指定権者の最新案内を優先して確認するまで終了日を断定しません。",
       "status_kind": "mixed",
       "article_kind": "reform",
-      "editorial_reviewed_on": "2026-10-11",
+      "editorial_reviewed_on": "2026-10-28",
       "related_categories": [
         "人員配置"
+      ],
+      "source_history": [
+        {
+          "source_pdf": "https://www.mhlw.go.jp/content/12300000/001758849.pdf",
+          "sha256": "f664d3f6309688dba0af75a5c31519597dceb4a9c967859227c1bf2043075371",
+          "status": "公式掲載URLが変更され、原本が404となったため差し替え。新PDFは別ハッシュで本文・該当表・ページ根拠を再確認。",
+          "replaced_on": "2026-10-28"
+        }
       ]
     },
     {
@@ -1526,7 +1550,7 @@
       ]
     }
   ],
-  "source_verified_at": "2026-10-16",
+  "source_verified_at": "2026-10-28",
   "verification_scope": "All PDF pages, table candidates and exception-note candidates extracted; originals archived in CI. Pinned PDF hashes, page anchors, numeric literals and article hashes checked. Text coverage >=75% for multi-page files. Scope and legal meaning are editorial, not automatically certified.",
   "source_audits": [
     {
@@ -1630,8 +1654,8 @@
     },
     {
       "id": "n-pay-269-gh",
-      "source_pdf": "https://www.mhlw.go.jp/content/12300000/001758851.pdf",
-      "sha256": "435c1c62522d4fa6549df4516c3cc57c7dc9085af3ad81ae7c44b5bb46a8a083",
+      "source_pdf": "https://www.mhlw.go.jp/content/12300000/001763678.pdf",
+      "sha256": "c4c694bfc8dd4687fccc1d1e581f3fa9294d3386d5fe78f7a98a8e62db3f61a5",
       "pdf_pages_read": 36,
       "characters_read": 51911,
       "evidence_checks": [
@@ -1687,7 +1711,7 @@
         }
       ],
       "readable_page_rate": 0.889,
-      "article_sha256": "fc7ef43fbb7f1a200eaf1fb4c799a702c0eb588dc22c1f52f0f43f8f7cea8f05",
+      "article_sha256": "b2e20e1efc07c1a8eaa17bae73e168b70f0d318f0611f9ffb8594fe955a8a368",
       "tables_extracted": 51,
       "notes_and_exceptions_candidates": 58,
       "pages_requiring_visual_review": [
@@ -1700,10 +1724,10 @@
     },
     {
       "id": "n-pay-269-sm",
-      "source_pdf": "https://www.mhlw.go.jp/content/12300000/001758850.pdf",
-      "sha256": "1df55ebb2710901f8d8697d50227b31fc260fb23c063b18a43c38796ad6352d5",
+      "source_pdf": "https://www.mhlw.go.jp/content/12300000/001763677.pdf",
+      "sha256": "d5757ac9de05948e27af83f9ba1bb1ff8d230f5a3d86fdd0aa1e141385d5ba8c",
       "pdf_pages_read": 31,
-      "characters_read": 40949,
+      "characters_read": 40945,
       "evidence_checks": [
         {
           "claim": "第269回分科会資料2は小規模多機能型居宅介護",
@@ -1757,7 +1781,7 @@
         }
       ],
       "readable_page_rate": 0.871,
-      "article_sha256": "d5e7bf98a07d3f269bd8bd32ac9dc1eceebeb72339a78f4a23c3d2063880943a",
+      "article_sha256": "aadf72c17f99f1aaae21a6dddb2786e0ac47f096284ce5a1eb731f5330fdcdce",
       "tables_extracted": 19,
       "notes_and_exceptions_candidates": 31,
       "pages_requiring_visual_review": [
@@ -1840,8 +1864,8 @@
     },
     {
       "id": "n-pay-269-dn",
-      "source_pdf": "https://www.mhlw.go.jp/content/12300000/001758849.pdf",
-      "sha256": "f664d3f6309688dba0af75a5c31519597dceb4a9c967859227c1bf2043075371",
+      "source_pdf": "https://www.mhlw.go.jp/content/12300000/001763676.pdf",
+      "sha256": "bbbabd9f8d7a14de7d8b953dc434faea6b6d2b580484eeedf68cf049bdcf9673",
       "pdf_pages_read": 34,
       "characters_read": 45165,
       "evidence_checks": [
@@ -1886,18 +1910,18 @@
         {
           "pdf_page": 15,
           "literal": "令和11年３月",
-          "scope": "資料１のこのページの経過措置期間表現。33ページと表記差があり、施行期限は法令で再確認",
+          "scope": "資料１のこのページの経過措置期間表現。PDF34ページと表記差があり、施行期限は法令で再確認",
           "status": "located"
         },
         {
           "pdf_page": 34,
           "literal": "令和11年度末",
-          "scope": "資料１の別ページの経過措置期間表現。14ページと表記差があり、施行期限は法令で再確認",
+          "scope": "資料１の別ページの経過措置期間表現。PDF15ページと表記差があり、施行期限は法令で再確認",
           "status": "located"
         }
       ],
       "readable_page_rate": 0.882,
-      "article_sha256": "8c38f338e6f33efa039a3ab7e8dfc6ef6378247f6e6aecf00a3ebe43e59d5aa2",
+      "article_sha256": "f352a7e1763febf1523cac65394a0bcf259dcc57d1214786eae65d00856dac5a",
       "tables_extracted": 38,
       "notes_and_exceptions_candidates": 75,
       "pages_requiring_visual_review": [

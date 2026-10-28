@@ -60,8 +60,11 @@ async function main() {
         await baseline.evaluate(()=>document.fonts.ready);
         console.log("Visual document geometry", width, JSON.stringify(await page.evaluate(()=>({height:document.body.scrollHeight}))), JSON.stringify(await baseline.evaluate(()=>({height:document.body.scrollHeight}))));
         // A fixed footer must not cover the region being compared.
-        const hideFooter=await page.addStyleTag({content:".bottom{visibility:hidden!important}"});
-        await baseline.addStyleTag({content:".bottom{visibility:hidden!important}"});
+        // Rounded corners include the page gradient, which depends on the intended shorter home height.
+        // Compare the unchanged component on the same backdrop; full-home shots remain unmodified.
+        const comparisonStyle=".bottom{visibility:hidden!important}body{background:#fff!important}";
+        const hideFooter=await page.addStyleTag({content:comparisonStyle});
+        await baseline.addStyleTag({content:comparisonStyle});
         for(const selector of [".hero",".livnavi-wordmark"]) {
           const label=selector.replace(/[^a-zA-Z0-9]/g, "");
           const before=await baseline.locator(selector).screenshot({path:path.join("kaigo-qa-screenshots",`${width}_${label}_before.png`)});
