@@ -12,7 +12,7 @@
   "status_kind": "enacted",
   "source_page": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
   "source_pdf": "https://www.mhlw.go.jp/content/001762862.pdf",
-  "pinned_pdf_sha256": "",
+  "pinned_pdf_sha256": "9161f9a1a2200a1d0833d49c144d8c068267a867b20e2d23c49ad252b798c0da",
   "source_scope": "介護保険最新情報 Vol.1549／通知・新旧対照表（PDF2～4ページ）",
   "one_liner": "通信機能を備えた一部の福祉用具が、条件付きで介護保険の給付対象になります。通信費などは対象外です。",
   "quick": [
@@ -83,7 +83,7 @@
     {
       "claim": "位置情報の通知は携行型の専用受信端末で受信するものに限定",
       "pdf_page": 4,
-      "anchor": "携行型の専用受信端末",
+      "anchor": "携行型の専用受",
       "source": "新旧対照表"
     },
     {

@@ -26,6 +26,12 @@ class NoticeTests(unittest.TestCase):
         self.assertEqual(state, 'excluded')
         self.assertTrue(reason)
 
+    def test_bullet_inside_anchor_keeps_correct_primary_pdf(self):
+        html = notice(volume='1494', href='/content/first.pdf') + notice(volume='1493', href='/content/second.pdf').replace('○<a', '<a').replace('>介護保険', '>○介護保険')
+        rows = {r['id']:r for r in scan_notices(html)}
+        self.assertEqual(rows['n-notice-vol-1493']['source_urls'], ['https://www.mhlw.go.jp/content/second.pdf'])
+        self.assertEqual(rows['n-notice-vol-1494']['source_urls'], ['https://www.mhlw.go.jp/content/first.pdf'])
+
     def test_multiple_pdf_attachments_and_unnumbered_notice(self):
         html = notice(volume='') .replace('Vol.', '').replace('</a><br>', '</a><a href="/content/appendix.pdf">別紙</a><br>')
         row = scan_notices(html)[0]

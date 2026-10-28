@@ -26,6 +26,7 @@ class IndexText(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.parts, self.links, self.skip = [], [], 0
+        self.pending_link = None
 
     def handle_starttag(self, tag, attrs):
         if tag in ('script', 'style'):
@@ -36,16 +37,27 @@ class IndexText(HTMLParser):
             self.parts.append('\n')
         if tag == 'a':
             href = dict(attrs).get('href', '')
-            self.parts.append(' LINK%d ' % len(self.links))
+            self.pending_link = ' LINK%d ' % len(self.links)
             self.links.append(urljoin(NOTICE_INDEX, href))
 
     def handle_endtag(self, tag):
+        if tag == 'a' and self.pending_link:
+            self.parts.append(self.pending_link)
+            self.pending_link = None
         if tag in ('script', 'style') and self.skip:
             self.skip -= 1
 
     def handle_data(self, data):
         if not self.skip:
-            self.parts.append(data)
+            if self.pending_link:
+                bullet = re.match(r'^(\s*[○〇◯])', data)
+                if bullet:
+                    self.parts.extend([bullet[0], self.pending_link, data[len(bullet[0]):]])
+                else:
+                    self.parts.extend([self.pending_link, data])
+                self.pending_link = None
+            else:
+                self.parts.append(data)
 
 
 def scan_notices(html):
