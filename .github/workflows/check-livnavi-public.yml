@@ -15,7 +15,7 @@ permissions:
   contents: read
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 18
     permissions:
       contents: read
@@ -38,7 +38,7 @@ jobs:
   alert:
     needs: verify
     if: ${{ always() }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       issues: write
@@ -73,3 +73,4 @@ jobs:
             ].join(String.fromCharCode(10,10));
             if(issue)await github.rest.issues.update({owner,repo,issue_number:issue.number,body});
             else await github.rest.issues.create({owner,repo,title,body});
+

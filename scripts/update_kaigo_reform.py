@@ -12,9 +12,11 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 from bs4 import BeautifulSoup
+from discover_kaigo_notices import NOTICE_INDEX, scan_notices, triage, notice_article, reconcile_inventory, coverage_errors
 
 ROOT=Path(__file__).resolve().parent.parent
 DEST=ROOT/'kaigo-navi2027-preview'/'data'/'latest.json'
+INVENTORY=DEST.with_name('source-inventory.json')
 INDEXES=[
  ('pay','介護給付費分科会','https://www.mhlw.go.jp/stf/shingi/shingi-hosho_126698_00022.html'),
  ('ins','介護保険部会','https://www.mhlw.go.jp/stf/shingi/shingi-hosho_126734.html')
@@ -82,28 +84,41 @@ def main():
  before=json.loads(DEST.read_text(encoding='utf-8'))
  previous={x['id']:x for x in before['articles']}
  merged={}
- successes=0
+ # Every configured source must be parsed. Partial success is not a full check.
  for code,label,url in INDEXES:
-  try:
-   found=scan(code,label,url,get(url))
-   print(label,'found',len(found))
-   successes+=1
-   for item in found:merged[item['id']]=previous.get(item['id'],item)
-  except Exception as exc:print('WARNING',label,exc,flush=True)
- if successes==0:raise RuntimeError('Both source pages failed; original JSON remains unchanged')
+  found=scan(code,label,url,get(url))
+  print(label,'found',len(found))
+  for item in found:
+   prior=previous.get(item['id'])
+   if prior and prior['source_url'] != item['source_url']:
+    raise RuntimeError('Meeting source changed; editorial recheck required: '+item['id'])
+   merged[item['id']]=prior or item
+ notices=scan_notices(get(NOTICE_INDEX))
+ for row in notices:
+  if triage(row)[0]=='include':
+   prior=previous.get(row['id'])
+   if prior and prior['source_url'] != row['source_url']:
+    raise RuntimeError('Notice source changed; editorial recheck required: '+row['id'])
+   merged[row['id']]=prior or notice_article(row,classify)
  for item in before['articles']:merged.setdefault(item['id'],item)
- articles=sorted(merged.values(),key=lambda x:(x['date'],x['id']),reverse=True)[:40]
+ articles=sorted(merged.values(),key=lambda x:(x['date'],x['id']),reverse=True)
+ prior_inventory=json.loads(INVENTORY.read_text(encoding='utf-8')) if INVENTORY.exists() else {}
+ inventory=reconcile_inventory(notices,prior_inventory,articles)
+ missing=coverage_errors(inventory,articles)
+ if missing:raise RuntimeError('Discovered reform notices not listed: '+', '.join(missing))
  if len(articles)<3:raise RuntimeError('Too few source-linked articles')
- if articles==before['articles']:
-  print('No new entries, nothing to publish');return
- output={'schema_version':1,
-         'verified_on':dt.datetime.now(dt.timezone(dt.timedelta(hours=9))).date().isoformat(),
-         'source_type':'厚生労働省・会議資料',
-         'disclaimer':'会議の議題・資料公開の情報です。改正の正式決定・施行を意味しません。',
+ output={**before,'source_type':'厚生労働省・会議資料・通知・Q&A',
+         'disclaimer':'検討案・通知・Q&Aを区別します。資料公開だけで改正の決定・施行とは判断しません。',
          'articles':articles}
- tmp=DEST.with_suffix('.tmp')
- tmp.write_text(json.dumps(output,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
- os.replace(tmp,DEST)
+ if articles!=before['articles']:
+  output['verified_on']=dt.datetime.now(dt.timezone(dt.timedelta(hours=9))).date().isoformat()
+ for path,data in [(DEST,output),(INVENTORY,inventory)]:
+  content=json.dumps(data,ensure_ascii=False,indent=2)+'\n'
+  if path.exists() and path.read_text(encoding='utf-8')==content:continue
+  tmp=path.with_suffix('.tmp');tmp.write_text(content,encoding='utf-8');os.replace(tmp,path)
+ print('NOTICE_COVERAGE',json.dumps({'discovered':len(notices),'included':sum(r['selection']=='include' for r in inventory['documents']),
+       'review_pending':[r['id'] for r in inventory['documents'] if r['selection']=='review_pending'],'missing':missing},ensure_ascii=False))
  print('Updated',len(articles),'articles')
 
 if __name__=='__main__':main()
+

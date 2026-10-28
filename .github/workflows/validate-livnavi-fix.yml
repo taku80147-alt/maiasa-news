@@ -1,7 +1,7 @@
 name: LivNavi 修正検証
 on:
   push:
-    branches: [fix/livnavi-release-validation]
+    branches: [fix/livnavi-release-validation, fix/livnavi-reform-coverage]
   pull_request:
     paths:
       - '.github/workflows/**'
@@ -33,6 +33,8 @@ jobs:
         run: python scripts/build_kaigo_explainers.py
       - name: PDF根拠データの作成
         run: python scripts/build_kaigo_pdf_evidence.py
+      - name: 新通知の原本・根拠・ハッシュを検査（公開用データは変更しない）
+        run: python scripts/review_kaigo_notice.py --inspect
       - name: 全オフライン検査
         run: |
           python -m unittest discover -s scripts -p 'test_kaigo_*.py' -v
@@ -47,3 +49,4 @@ jobs:
             /tmp/kaigo-evidence/
             kaigo-navi2027-preview/data/
           retention-days: 7
+
