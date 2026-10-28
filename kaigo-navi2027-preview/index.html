@@ -121,10 +121,10 @@ function pdfEvidenceArticle(a){
  const content=documents.map((d,j)=>{
   const subjects=d.topics.map(t=>{
    const href=d.pdf_url+'#page='+Number(t.pdf_page);
-   return '<li><b>'+esc(t.heading)+'</b> <a href="'+esc(href)+'" target="_blank" rel="noopener noreferrer">PDF '+Number(t.pdf_page)+'ページ ↗</a>'+
+   return '<li><b>'+esc(t.heading)+'</b> <a href="'+esc(href)+'" target="_self" rel="noopener noreferrer">PDF '+Number(t.pdf_page)+'ページ ↗</a>'+
     (t.evidence?'<br><span>原文の抜粋：'+esc(t.evidence)+'</span>':'')+'</li>';
   }).join('');
-  return '<details '+(j===0?'open':'')+'><summary>'+esc(d.label)+'（'+d.topics.length+'項目）</summary>'+(subjects?'<ul>'+subjects+'</ul>':'<p>この資料からは「対応案」の項目を自動抽出できませんでした。<a href="'+esc(d.pdf_url)+'#page=1" target="_blank" rel="noopener noreferrer">資料の原文を読む ↗</a></p>')+'</details>';
+  return '<details '+(j===0?'open':'')+'><summary>'+esc(d.label)+'（'+d.topics.length+'項目）</summary>'+(subjects?'<ul>'+subjects+'</ul>':'<p>この資料からは「対応案」の項目を自動抽出できませんでした。<a href="'+esc(d.pdf_url)+'#page=1" target="_self" rel="noopener noreferrer">資料の原文を読む ↗</a></p>')+'</details>';
  }).join('');
  return '<section class="pdf-evidence"><span class="pdf-t">📚 厚労省PDF・原文確認の手がかり（自動抽出／未審査）</span>'+
  '<h3>具体的に何が検討されている？</h3>'+
@@ -165,7 +165,7 @@ function autoSalesArticle(a){
  '<div class="auto-caution"><b>⚠️ 判断の範囲：</b>'+esc(guide.check_first)+
  '<br>このガイドは会議の議題と開催日から自動作成。PDF本文・個別の算定要件まで精読した解説ではありません。</div>'+
  '<p><small>資料の日付：'+esc(guide.date)+'　／　'+esc(guide.source_name||'厚労省公式資料')+'</small><br>'+
- '<a href="'+esc(guide.source_url)+'" target="_blank" rel="noopener noreferrer">厚労省の原文・会議資料を確認 ↗</a></p></section>';
+ '<a href="'+esc(guide.source_url)+'" target="_self" rel="noopener noreferrer">厚労省の原文・会議資料を確認 ↗</a></p></section>';
 }
 async function loadAutoSalesGuides(){
  try{
@@ -189,8 +189,12 @@ function explainArticle(a){
  const ex=reviewedExplainers.get(a.id);if(!ex)return '';
  const src=safePDF(ex);
  const effective=ex.reader?.effective_on;
- const cits=ex.verified_claims.map(v=>'<li>'+esc(v.claim)+'<br><a class="exp-cite" target="_blank" rel="noopener noreferrer" href="'+esc(src)+'#page='+Number(v.pdf_page)+'">'+esc(v.source)+'（PDF '+Number(v.pdf_page)+'ページ）↗</a></li>').join('');
- const deep=ex.explain.map(v=>'<section><h4>'+esc(v.heading)+'</h4><p>'+esc(v.body)+'</p><span class="exp-score">'+esc(v.source)+'</span></section>').join('');
+ const cits=ex.verified_claims.map(v=>'<li>'+esc(v.claim)+'<br><a class="exp-cite" target="_self" rel="noopener noreferrer" href="'+esc(src)+'#page='+Number(v.pdf_page)+'">'+esc(v.source)+'（PDF '+Number(v.pdf_page)+'ページ）↗</a></li>').join('');
+ const deep=ex.explain.map(v=>{
+  const page=String(v.source).normalize('NFKC').match(/PDF\s*([1-9]\d*)/i);
+  const href=src+(page?'#page='+Number(page[1]):'');
+  return '<section><h4>'+esc(v.heading)+'</h4><p>'+esc(v.body)+'</p><a class="exp-score exp-cite" target="_self" rel="noopener noreferrer" href="'+esc(href)+'">'+esc(v.source)+' ↗</a></section>';
+ }).join('');
  const impact=ex.reader?.impact;
  const legacy=ex.sales;
  return '<section class="exp-card reform-reader" aria-label="改正情報の解説"><div class="exp-hero"><b>📘 分かりやすく解説</b><span class="exp-safe">'+esc(ex.status)+'</span></div>'+
@@ -200,7 +204,7 @@ function explainArticle(a){
  '<section data-reader-section="audience"><h3>誰に関係する？</h3><p>'+esc(ex.who)+'</p></section>'+
  '<section data-reader-section="impact"><h3>現場では何を確認する？</h3><p class="exp-meta">ここからは、資料を踏まえた編集上の解説です。</p>'+(impact?'<p>'+esc(impact)+'</p>':'<h4>施設・事業所</h4><p>'+esc(legacy.facility)+'</p><h4>ケアマネジャー</h4><p>'+esc(legacy.caremanager)+'</p><h4>利用者・家族</h4><p>'+esc(legacy.family)+'</p><p>'+esc(legacy.caution)+'</p>')+'</section>'+
  '<section data-reader-section="timing"><h3>いつから？</h3><p>'+esc(ex.status)+(effective?' ／ 適用日：'+esc(effective):'。適用時期が確定していない内容は、決定済みと区別してください。')+'</p></section>'+
- '<section data-reader-section="sources"><h3>公式資料</h3><p>'+esc(ex.source_scope)+'</p><p><a class="exp-cite" target="_blank" rel="noopener noreferrer" href="'+esc(src)+'">通知・資料の原文を読む ↗</a></p><details><summary>根拠のページを確認する</summary><ol class="exp-list">'+cits+'</ol><p class="exp-scope">'+esc(ex.review_scope)+'</p></details><p class="exp-meta">記事確認：'+esc(ex.editorial_reviewed_on||'未記録')+'</p></section></section>';
+ '<section data-reader-section="sources"><h3>公式資料</h3><p>'+esc(ex.source_scope)+'</p><p><a class="exp-cite" target="_self" rel="noopener noreferrer" href="'+esc(src)+'">通知・資料の原文を読む ↗</a></p><details><summary>根拠のページを確認する</summary><ol class="exp-list">'+cits+'</ol><p class="exp-scope">'+esc(ex.review_scope)+'</p></details><p class="exp-meta">記事確認：'+esc(ex.editorial_reviewed_on||'未記録')+'</p></section></section>';
 }
 
 function go(to){if(to==='home'){mode='home';$('home').classList.add('current');$('view').classList.remove('current')}else{mode=to;$('home').classList.remove('current');$('view').classList.add('current');render()}document.querySelectorAll('.bottom button').forEach(b=>b.classList.toggle('active',b.dataset.go===to));$('back').textContent=mode==='detail'?'← 一覧に戻る':'← ホームに戻る';if(to!=='detail')history.replaceState(null,'',location.pathname+location.search);window.scrollTo(0,0)}
@@ -212,7 +216,7 @@ if(mode==='detail'){const a=items.find(x=>x.id===selected);if(a){
  if(ex)content+=explainArticle(a);
  else{
   const source=typeof a.source_url==='string'&&a.source_url.startsWith('https://www.mhlw.go.jp/')?a.source_url:null;
-  content+='<div class="card"><span class="tag">'+esc(a.status||'公式資料公開')+'</span><h2>'+esc(a.title)+'</h2><p>'+esc(a.detail||a.summary)+'</p><p>資料の日付：'+esc(a.date||'未確認')+'</p><p class="exp-alert">解説準備中。変更内容・対象・適用日は、原文を確認して追記します。</p>'+(source?'<a class="exp-cite" target="_blank" rel="noopener noreferrer" href="'+esc(source)+'">公式資料を読む ↗</a>':'')+'</div>';
+  content+='<div class="card"><span class="tag">'+esc(a.status||'公式資料公開')+'</span><h2>'+esc(a.title)+'</h2><p>'+esc(a.detail||a.summary)+'</p><p>資料の日付：'+esc(a.date||'未確認')+'</p><p class="exp-alert">解説準備中。変更内容・対象・適用日は、原文を確認して追記します。</p>'+(source?'<a class="exp-cite" target="_self" rel="noopener noreferrer" href="'+esc(source)+'">公式資料を読む ↗</a>':'')+'</div>';
   content+=pdfEvidenceArticle(a);
  }
  content+='<div class="card-actions" style="margin-top:13px"><button class="secondary" data-save="'+esc(a.id)+'">'+(saved.has(a.id)?'♥ 保存済み':'♡ お気に入り')+'</button><button class="secondary" data-share="'+esc(a.id)+'">🔗 記事リンクをコピー</button></div>';

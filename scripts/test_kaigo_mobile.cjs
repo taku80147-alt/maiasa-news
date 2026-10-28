@@ -109,7 +109,25 @@ async function main() {
         if(article.id==="n-notice-vol-1549"){
           assert.ok((await page.locator('[data-reader-section="timing"]').innerText()).includes("2027-02-01"));
           assert.ok((await page.locator('[data-reader-section="changes"]').innerText()).includes("給付対象外"));
+          // Inline blue PDF page references must be real, tappable links, including in an in-app browser.
+          const sourceLinks=page.locator('[data-reader-section="changes"] a.exp-cite');
+          assert.equal(await sourceLinks.count(),article.explain.length,"every explanation has an actionable source");
+          for(let i=0;i<article.explain.length;i++){
+            const expectedPage=article.explain[i].source.normalize("NFKC").match(/PDF\s*([1-9]\d*)/i);
+            assert.equal(await sourceLinks.nth(i).getAttribute("href"),article.source_pdf+(expectedPage?"#page="+Number(expectedPage[1]):""));
+            assert.equal(await sourceLinks.nth(i).getAttribute("target"),"_self");
+          }
           await page.screenshot({path:path.join("kaigo-qa-screenshots",`notice1549_${width}.png`),fullPage:true});
+          // Stub only the external PDF response; prove the tap navigates this tab rather than opening a popup.
+          const pdfPattern="https://www.mhlw.go.jp/content/001762862.pdf*";
+          await page.route(pdfPattern,route=>route.fulfill({contentType:"text/html",body:"<!doctype html><title>Official PDF navigation fixture</title><p>PDF navigation reached</p>"}));
+          const tabsBefore=page.context().pages().length;
+          await sourceLinks.first().click();
+          await page.waitForURL(article.source_pdf+"#page=3");
+          assert.equal(page.context().pages().length,tabsBefore,"PDF tap must not require a new window");
+          await page.goBack({waitUntil:"networkidle"});
+          await page.locator(".reform-reader").waitFor();
+          await page.unroute(pdfPattern);
         }
         await noHorizontalOverflow(page,article.id,width);
       }
