@@ -62,6 +62,7 @@ class NoticeTests(unittest.TestCase):
         inv = reconcile_inventory(rows, {}, [])
         inv['documents'][0]['selection'] = 'excluded'
         inv['documents'][0]['reason'] = 'editorial'
+        inv['documents'][0]['editorial_reviewed_on'] = '2026-10-28'
         self.assertEqual(reconcile_inventory(rows, inv, [])['documents'][0]['selection'], 'excluded')
         changed = copy.deepcopy(rows); changed[0]['source_urls'].append('https://www.mhlw.go.jp/content/new.pdf')
         self.assertEqual(reconcile_inventory(changed, inv, [])['documents'][0]['selection'], 'include')

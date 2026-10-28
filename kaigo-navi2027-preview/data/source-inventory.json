@@ -1,0 +1,791 @@
+{
+  "schema_version": 1,
+  "coverage_start": "2026-04-01",
+  "sources": [
+    "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html"
+  ],
+  "documents": [
+    {
+      "id": "n-notice-vol-1549",
+      "date": "2026-10-26",
+      "title": "介護保険最新情報Vol.1549(「介護保険の給付対象となる福祉用具及び住宅改修の取扱いについて」の一部改正について)",
+      "source_url": "https://www.mhlw.go.jp/content/001762862.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001762862.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-d82d3228808baab5",
+      "date": "2026-10-26",
+      "title": "介護保険制度における預貯金等の把握等に係る検討の場中間とりまとめについて",
+      "source_url": "https://www.mhlw.go.jp/content/001763099.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001763099.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1548",
+      "date": "2026-10-21",
+      "title": "介護保険最新情報Vol.1548(介護現場において事故が発生した際の報告について)",
+      "source_url": "https://www.mhlw.go.jp/content/001761586.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001761586.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1547",
+      "date": "2026-10-21",
+      "title": "介護保険最新情報Vol.1547(特定福祉用具販売・住宅改修の給付分析に向けた介護保険システム標準仕様書の改定に関する検討について(ご連絡))",
+      "source_url": "https://www.mhlw.go.jp/content/001761469.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001761469.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1546",
+      "date": "2026-10-15",
+      "title": "介護保険最新情報Vol.1546(介護サービス事業者経営情報データベースシステムの運用再開について 等)",
+      "source_url": "https://www.mhlw.go.jp/content/001760203.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001760203.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1545",
+      "date": "2026-10-02",
+      "title": "介護保険最新情報Vol.1545(令和7年度介護保険事務調査の集計結果について)",
+      "source_url": "https://www.mhlw.go.jp/content/001755179.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001755179.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1544",
+      "date": "2026-09-18",
+      "title": "介護保険最新情報Vol.1544(介護保険資格確認等WEB サービス及び介護情報基盤に関する国際福祉機器展(H.C.R.)2026 出展のお知らせ)",
+      "source_url": "https://www.mhlw.go.jp/content/001751848.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001751848.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "excluded",
+      "reason": "行事・研修・調査協力の案内。改正内容の新情報ではない。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1543",
+      "date": "2026-09-11",
+      "title": "介護保険最新情報vol.1543(ケアプランデータ連携システム活用セミナーの開催について)",
+      "source_url": "https://www.mhlw.go.jp/content/001749005.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001749005.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "excluded",
+      "reason": "行事・研修・調査協力の案内。改正内容の新情報ではない。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1542",
+      "date": "2026-09-10",
+      "title": "介護保険最新情報vol.1542(障害者の日常生活及び社会生活を総合的に支援するための法律に基づく補装具支給制度と介護保険制度の適用関係等について)",
+      "source_url": "https://www.mhlw.go.jp/content/001748303.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001748303.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1541",
+      "date": "2026-09-08",
+      "title": "介護保険最新情報vol.1541(行方不明者の被保険者資格の喪失手続及び介護保険料の減免・返還に係る取扱いについて)",
+      "source_url": "https://www.mhlw.go.jp/content/001747516.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001747516.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1540",
+      "date": "2026-09-02",
+      "title": "介護保険最新情報vol.1540(令和8年度「老人の日・老人週間」の実施について)",
+      "source_url": "https://www.mhlw.go.jp/content/001744801.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001744801.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "excluded",
+      "reason": "行事・研修・調査協力の案内。改正内容の新情報ではない。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1539",
+      "date": "2026-08-31",
+      "title": "介護保険最新情報vol.1539(「介護保険資格確認等WEB サービスとの連携におけるAPI 標準仕様書(第1.0 版)」の公開について)",
+      "source_url": "https://www.mhlw.go.jp/content/001744369.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001744369.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1538",
+      "date": "2026-08-26",
+      "title": "介護保険最新情報vol.1538(令和6年度介護報酬改定の効果検証及び調査研究に係る調査 (令和8年度調査)への協力依頼(3回目)について)",
+      "source_url": "https://www.mhlw.go.jp/content/001742978.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001742978.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "excluded",
+      "reason": "行事・研修・調査協力の案内。改正内容の新情報ではない。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1537",
+      "date": "2026-08-21",
+      "title": "介護保険最新情報vol.1537(令和8年度地域支援事業実施要綱等の改正点について)",
+      "source_url": "https://www.mhlw.go.jp/content/001741393.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001741393.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1536",
+      "date": "2026-08-17",
+      "title": "介護保険最新情報vol.1536(令和八年熊本地震による災害に対処するための要介護認定 有効期間及び要支援認定有効期間の特例に関する省令等の 施行等について(通知))",
+      "source_url": "https://www.mhlw.go.jp/content/001739327.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001739327.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1535",
+      "date": "2026-08-14",
+      "title": "介護保険最新情報vol.1535(「「介護サービス情報の公表」制度の施行について」一部改正について) ・ 令和8年度 別添1~7 ・ (参考)【事務連絡】介護サービス情報公表システム(生活関連情報)への有料老人ホームの情報公表・検索機能追加等について",
+      "source_url": "https://www.mhlw.go.jp/content/001738725.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001738725.pdf",
+        "https://www.mhlw.go.jp/content/001738727.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1534",
+      "date": "2026-08-10",
+      "title": "介護保険最新情報vol.1534(令和6年度介護報酬改定の効果検証及び調査研究に係る調査 (令和8年度調査)への協力依頼(2回目)について)",
+      "source_url": "https://www.mhlw.go.jp/content/001715558.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001715558.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "excluded",
+      "reason": "行事・研修・調査協力の案内。改正内容の新情報ではない。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1533",
+      "date": "2026-08-07",
+      "title": "介護保険最新情報Vol.1533(地方公共団体情報システムの標準化に関する法律第二条第一項に規定する標準化対象事務を定める政令に規定するデジタル庁令・総務省令で定める事務を定める命令第十三条各号に規定する事務の処理に係るシステムに必要とされる機能等に関する標準化基準を定める省令等の公布について)",
+      "source_url": "https://www.mhlw.go.jp/content/001735289.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001735289.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1532",
+      "date": "2026-07-31",
+      "title": "介護保険最新情報Vol.1532(「介護保険制度における利用者負担等の事務処理の取扱いについて」の一部改正について)",
+      "source_url": "https://www.mhlw.go.jp/content/001737209.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001737209.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1531",
+      "date": "2026-07-31",
+      "title": "介護保険最新情報Vol.1531(令和8年度 介護デジタル中核人材養成に向けた調査研究事業一式「デジタル中核人材養成研修」の周知及び受講勧奨のお願いについて)",
+      "source_url": "https://www.mhlw.go.jp/content/001731699.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001731699.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1530",
+      "date": "2026-07-30",
+      "title": "介護保険最新情報Vol.1530(消費者庁消費安全調査委員会「車椅子使用者を自動車で送迎中の事故に係る事故等原因調査について(経過報告)」等の共有について)",
+      "source_url": "https://www.mhlw.go.jp/content/001730818.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001730818.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1529",
+      "date": "2026-07-29",
+      "title": "介護保険最新情報vol.1529(ケアプランデータ連携システムの介護保険資格確認等WEB サービスへの移行について)",
+      "source_url": "https://www.mhlw.go.jp/content/001730882.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001730882.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1528",
+      "date": "2026-07-23",
+      "title": "介護保険最新情報vol.1528(保険薬局及び保険薬剤師療養担当規則第2条の3の2第2項に規定する経済上の利益の提供による誘引の禁止について)",
+      "source_url": "https://www.mhlw.go.jp/content/001727399.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001727399.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1527",
+      "date": "2026-07-23",
+      "title": "介護保険最新情報Vol.1527(公益社団法人国民健康保険中央会運用LIFE への移行に係る再々周知について)",
+      "source_url": "https://www.mhlw.go.jp/content/001726865.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001726865.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1526",
+      "date": "2026-07-22",
+      "title": "介護保険最新情報vol.1526(「令和9年1月貸与分から適用される福祉用具の全国平均貸与価格及び貸与価格の上限の公表について(新商品に係る分)」)",
+      "source_url": "https://www.mhlw.go.jp/content/001726655.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001726655.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1525",
+      "date": "2026-07-14",
+      "title": "介護保険最新情報vol.1525 「「医療計画及び介護保険事業(支援)計画における整備目標及びサービスの量の見込みに係る整合性の確保について」の一部改正について」 の送付について",
+      "source_url": "https://www.mhlw.go.jp/content/001722971.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001722971.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1524",
+      "date": "2026-07-14",
+      "title": "介護保険最新情報vol.1524 「令和6年度介護報酬改定に関するQ&A(Vol.18)(令和8年7月 14 日)」 の送付について",
+      "source_url": "https://www.mhlw.go.jp/content/001722883.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001722883.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1523",
+      "date": "2026-07-13",
+      "title": "介護保険最新情報vol.1523「「指定居宅サービスに要する費用の額の算定に関する基準 (訪問通所サービス、居宅療養管理指導及び福祉用具貸与 に係る部分)及び指定居宅介護支援に要する費用の額の算 定に関する基準の制定に伴う実施上の留意事項について」 等の一部改正について」の発出等に伴うQ&A(Vol.2) (令和8年7月 13 日)の送付について",
+      "source_url": "https://www.mhlw.go.jp/content/001722713.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001722713.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1522",
+      "date": "2026-07-08",
+      "title": "介護保険最新情報Vol.1522(介護職員等処遇改善加算に関する様式例の一部差替について)",
+      "source_url": "https://www.mhlw.go.jp/content/001720493.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001720493.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1521",
+      "date": "2026-07-08",
+      "title": "介護保険最新情報Vol.1521(介護給付適正化における住宅改修等の点検および福祉用具購入・貸与調査の取組促進について 等)",
+      "source_url": "https://www.mhlw.go.jp/content/001719971.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001719971.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1520",
+      "date": "2026-07-02",
+      "title": "介護保険最新情報Vol.1520(公益社団法人国民健康保険中央会運用LIFE への移行に係る再周知について)",
+      "source_url": "https://www.mhlw.go.jp/content/001718022.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001718022.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1519",
+      "date": "2026-06-30",
+      "title": "介護保険最新情報vol.1519(「(改修版)総合事業の充実に向けたワークシート」について(周知)、「都道府県プラットフォーム構築の手引きVol.2」について(周知)、「食の支援を通じて人や地域がつながるプラットフォームガイドブック」について(周知))",
+      "source_url": "https://www.mhlw.go.jp/content/001717178.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001717178.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1518",
+      "date": "2026-06-25",
+      "title": "介護保険最新情報vol.1518(社会福祉法等の一部を改正する法律の公布について(通知))",
+      "source_url": "https://www.mhlw.go.jp/content/001715668.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001715668.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1517",
+      "date": "2026-06-25",
+      "title": "介護保険最新情報vol.1517(令和6年度介護報酬改定の効果検証及び調査研究に係る調査 (令和8年度調査)への協力依頼について)",
+      "source_url": "https://www.mhlw.go.jp/content/001715558.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001715558.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "excluded",
+      "reason": "行事・研修・調査協力の案内。改正内容の新情報ではない。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1516",
+      "date": "2026-06-25",
+      "title": "介護保険最新情報vol.1516(健康保険法施行令等の一部を改正する政令の公布について)",
+      "source_url": "https://www.mhlw.go.jp/content/001715374.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001715374.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1515",
+      "date": "2026-06-23",
+      "title": "介護保険最新情報Vol.1515(「介護老人福祉施設等における診療行為に係る報酬の給付調整」に関するリーフレットの一部見直しについて)",
+      "source_url": "https://www.mhlw.go.jp/content/001714541.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001714541.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1514",
+      "date": "2026-06-23",
+      "title": "介護保険最新情報Vol.1514(科学的介護情報システム(LIFE)研修会の周知について)",
+      "source_url": "https://www.mhlw.go.jp/content/001714506.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001714506.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "excluded",
+      "reason": "行事・研修・調査協力の案内。改正内容の新情報ではない。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1513",
+      "date": "2026-06-22",
+      "title": "介護保険最新情報vol.1513(介護保険法施行規則の一部を改正する省令等の公布について)",
+      "source_url": "https://www.mhlw.go.jp/content/001714217.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001714217.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1512",
+      "date": "2026-06-18",
+      "title": "介護保険最新情報vol.1512(公益社団法人国民健康保険中央会運用LIFE への移行に係る再度の周知について)",
+      "source_url": "https://www.mhlw.go.jp/content/001713143.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001713143.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1511",
+      "date": "2026-06-15",
+      "title": "介護保険最新情報vol.1511(支援パッケージ(地域づくり支援ハンドブックVol.3)について(周知)、市町村・地域包括センターにおける災害等に備えた平時からの体制整備に向けたハンドブックについて(周知)、市町村及び地域包括支援センター等における家族介護者支援にかかる取組事例集について(周知))",
+      "source_url": "https://www.mhlw.go.jp/content/001711784.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001711784.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1510",
+      "date": "2026-06-03",
+      "title": "介護保険最新情報vol.1510(令和8年度 介護現場の生産性向上に関する普及加速化事業一式生産性向上ビギナーセミナー・フォローアップセミナー(講義形式・ワーク形式)参加案内・周知のお願い)",
+      "source_url": "https://www.mhlw.go.jp/content/001708992.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001708992.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "excluded",
+      "reason": "行事・研修・調査協力の案内。改正内容の新情報ではない。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1509",
+      "date": "2026-06-03",
+      "title": "介護保険最新情報vol.1509(地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律の公布及び施行について(通知))",
+      "source_url": "https://www.mhlw.go.jp/content/001707972.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001707972.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1508",
+      "date": "2026-06-03",
+      "title": "介護保険最新情報vol.1508(「介護支援専門員等の在宅介護従事者の安全確保の徹底について」)",
+      "source_url": "https://www.mhlw.go.jp/content/001707964.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001707964.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1507",
+      "date": "2026-06-01",
+      "title": "介護保険最新情報vol.1507(「令和8年度介護事業実態調査(介護従事者処遇状況等調査)へのご協力依頼について」)",
+      "source_url": "https://www.mhlw.go.jp/content/001706555.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001706555.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1506",
+      "date": "2026-05-29",
+      "title": "介護保険最新情報vol.1506(【事務連絡】令和8年8月からの特定入所者介護(予防)サービス費の見直し等に係る周知への協力依頼について)",
+      "source_url": "https://www.mhlw.go.jp/content/001706483.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001706483.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "excluded",
+      "reason": "行事・研修・調査協力の案内。改正内容の新情報ではない。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1505",
+      "date": "2026-05-27",
+      "title": "介護保険最新情報vol.1505(【事務連絡】「介護保険資格確認等WEB サービスとの連携におけるAPI 仕様書(暫定版)」の公開及び「ケアプランデータ連携標準仕様」の今後の取扱いについて)",
+      "source_url": "https://www.mhlw.go.jp/content/001705072.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001705072.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1504",
+      "date": "2026-05-22",
+      "title": "介護保険最新情報vol.1504(公益社団法人国民健康保険中央会による LIFE に係る説明会動画の公開について(情報提供))",
+      "source_url": "https://www.mhlw.go.jp/content/001703567.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001703567.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1503",
+      "date": "2026-05-11",
+      "title": "介護保険最新情報vol.1503(【事務連絡】令和7年度老人保健健康増進等事業「身寄りのない在宅高齢者への支援に関する調査事業」及び「保険外サービス活用推進等に関する調査研究事業」の報告書について(情報提供))",
+      "source_url": "https://www.mhlw.go.jp/content/001699553.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001699553.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1502",
+      "date": "2026-05-08",
+      "title": "介護保険最新情報vol.1502(「「指定居宅サービスに要する費用の額の算定に関する基準(訪問通所サービス、居宅療養管理指導及び福祉用具貸与に係る部分)及び指定居宅介護支援に要する費用の額の算定に関する基準の制定に伴う実施上の留意事項について」等の一部改正について」及び当該通知の発出に伴うQ&Aの発出について)",
+      "source_url": "https://www.mhlw.go.jp/content/001698614.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001698614.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1501",
+      "date": "2026-05-08",
+      "title": "介護保険最新情報vol.1501(「訪問看護事業所の看護師等がD to P with N によるオンライン診療の補助を行った場合の令和8年度診療報酬改定を踏まえた評価に関するQ&A」の送付について)",
+      "source_url": "https://www.mhlw.go.jp/content/001698479.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001698479.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1500",
+      "date": "2026-04-30",
+      "title": "介護保険最新情報vol.1500(介護保険制度の被保険者となる外国人住民の取扱いに関するQ&Aについて(その2))",
+      "source_url": "https://www.mhlw.go.jp/content/001697217.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001697217.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1499",
+      "date": "2026-04-30",
+      "title": "介護保険最新情報vol.1499(介護分野の業務効率化に資する汎用機器の導入に向けた省力化補助金の活用について(介護業における対象汎用製品の補助申請受付開始および主な問い合わせについて))",
+      "source_url": "https://www.mhlw.go.jp/content/001698727.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001698727.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1498",
+      "date": "2026-04-28",
+      "title": "介護保険最新情報vol.1498(科学的介護情報システム(LIFE)第2回説明会の動画及び説明資料の公開について)",
+      "source_url": "https://www.mhlw.go.jp/content/001696520.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001696520.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1497",
+      "date": "2026-04-28",
+      "title": "介護保険最新情報vol.1497(令和8年度における介護情報基盤の活用のための介護事業所等への支援について)",
+      "source_url": "https://www.mhlw.go.jp/content/001696517.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001696517.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1496",
+      "date": "2026-04-27",
+      "title": "介護保険最新情報vol.1496(「医療介護提供体制改革推進交付金、地域医療対策支援臨時特例交付金及び地域介護対策支援臨時特例交付金の運営について」の一部改正について)",
+      "source_url": "https://www.mhlw.go.jp/content/001696286.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001696286.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1495",
+      "date": "2026-04-21",
+      "title": "介護保険最新情報vol.1495(「LIFE の厚生労働省から公益社団法人国民健康保険中央会への移管に伴い事業所・施設で必要な対応について」)",
+      "source_url": "https://www.mhlw.go.jp/content/001696866.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001696866.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1494",
+      "date": "2026-04-13",
+      "title": "介護保険最新情報vol.1494(「介護施設・事業所等における災害時情報共有システムに係る平時における物資の備蓄状況等報告機能の追加について」) 参考資料",
+      "source_url": "https://www.mhlw.go.jp/content/001690439.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001690439.pdf",
+        "https://www.mhlw.go.jp/content/001690474.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
+      "id": "n-notice-vol-1493",
+      "date": "2026-04-10",
+      "title": "介護保険最新情報vol.1493(「令和8年10月貸与分から適用される福祉用具の全国平均貸与価格及び貸与価格の上限の公表について(新商品に係る分)」)",
+      "source_url": "https://www.mhlw.go.jp/content/001689718.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001689718.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1492",
+      "date": "2026-04-10",
+      "title": "介護保険最新情報vol.1492(「介護保険法施行令第37条の13第5項の規定に基づき厚生労働大臣が定める事由第5号の規定に基づき厚生労働省老健局長が定める事由について」及び「令和6年度以降における地域支援事業交付金に係る介護保険法施行令第37条の13第5項の厚生労働大臣が認める額の取扱いについて」の一部改正について)",
+      "source_url": "https://www.mhlw.go.jp/content/001689598.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001689598.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    },
+    {
+      "id": "n-notice-vol-1491",
+      "date": "2026-04-03",
+      "title": "介護保険最新情報vol.1491(介護保険法施行規則の一部を改正する省令の公布について(通知))",
+      "source_url": "https://www.mhlw.go.jp/content/001686032.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001686032.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "include",
+      "reason": "改正・制度運用・Q&Aに関する一次資料。本文の解釈は別途確認。",
+      "publication": "listed"
+    }
+  ]
+}
