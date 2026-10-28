@@ -32,6 +32,10 @@ class NoticeTests(unittest.TestCase):
         self.assertEqual(len(row['source_urls']), 2)
         self.assertTrue(row['id'].startswith('n-notice-'))
 
+    def test_effective_date_in_following_note_is_not_issue_date(self):
+        html = notice(date='令和８年１月23日') + ' (施行日：令和８年４月１日)' + notice(volume='1550')
+        self.assertEqual([r['id'] for r in scan_notices(html)], ['n-notice-vol-1550'])
+
     def test_unparseable_or_external_source_fails_closed(self):
         for html in ['<html>maintenance</html>', notice(href='https://www.mhlw.go.jp.evil.example/x.pdf'), notice(href='https://user@www.mhlw.go.jp/x.pdf')]:
             with self.assertRaises(ValueError):

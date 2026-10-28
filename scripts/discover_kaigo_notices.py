@@ -58,14 +58,15 @@ def scan_notices(html):
         if not re.search(r'LINK\d+', block):
             continue
         # Dates in the notice title (e.g. applicability) are not the issue date.
-        dates = re.findall(r'[（(]\s*令和\s*(元|\d+)\s*年\s*(\d+)\s*月\s*(\d+)\s*日[^）)]*[）)]', block)
+        date_matches = list(re.finditer(r'[（(]\s*令和\s*(元|\d+)\s*年\s*(\d+)\s*月\s*(\d+)\s*日[^）)]*(?:厚生労働|事務連絡|課長|局長)[^）)]*[）)]', block))
+        dates = [m.groups() for m in date_matches]
         if not dates:
             continue
-        year, month, day = dates[-1]
+        year, month, day = dates[0]
         date = dt.date(2018 + (1 if year == '元' else int(year)), int(month), int(day)).isoformat()
         if date < START_DATE:
             continue
-        first_date = list(re.finditer(r'[（(]\s*令和\s*(?:元|\d+)\s*年', block))[-1]
+        first_date = date_matches[0]
         title = re.sub(r'LINK\d+', '', block[:first_date.start()]).strip()
         title = re.sub(r'\s+', ' ', title)
         title = re.sub(r'[\[［][^\]］]*(?:KB|MB)[\]］]', '', title, flags=re.I).strip()

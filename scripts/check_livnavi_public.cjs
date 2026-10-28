@@ -13,6 +13,17 @@ assert.ok(Array.isArray(source.articles)&&source.articles.length>0,"Repository f
 const first=[...source.articles].filter(a=>/^n-[a-z0-9-]+$/.test(a.id))
  .sort((a,b)=>b.date.localeCompare(a.date)||a.id.localeCompare(b.id))[0];
 assert.ok(first,"No eligible official source articles");
+function assertNoticeCoverage(inventory,feed){
+ assert.equal(inventory.schema_version,1,"Unknown source inventory schema");
+ assert.ok(Array.isArray(inventory.documents)&&inventory.documents.length>0,"Missing notice discovery inventory");
+ const ids=new Set();
+ for(const row of inventory.documents){
+  assert.ok(!ids.has(row.id),"Duplicate discovered notice");ids.add(row.id);
+  assert.ok(["include","excluded","review_pending"].includes(row.selection)&&row.reason,"Notice missing triage decision");
+  if(row.selection==="include")assert.ok(feed.articles.some(a=>a.id===row.id&&a.source_url===row.source_url),"Discovered reform notice missing from feed: "+row.id);
+ }
+ console.log("NOTICE_COVERAGE_OK",inventory.documents.length,"pending review",inventory.documents.filter(r=>r.selection==="review_pending").length);
+}
 async function officialCheck(workflow="update-kaigo-reform.yml",jobName="update",hours=48){
  const token=process.env.GITHUB_TOKEN,repo=process.env.GITHUB_REPOSITORY;
  if(!token||!repo)throw Error("GitHub monitoring credentials missing");
@@ -70,6 +81,16 @@ async function liveCheck(browser){
     "Published full explanations differ from verified articles on GitHub main");
   assert.deepEqual(publishedReviewed.source_audits,reviewedRelease.source_audits,
     "Published source audits differ from the verified original PDF checks");
+
+  const inventory=JSON.parse(fs.readFileSync("kaigo-navi2027-preview/data/source-inventory.json","utf8"));
+  assertNoticeCoverage(inventory,source);
+  const publishedInventory=await page.evaluate(async()=>{
+   const response=await fetch(new URL("data/source-inventory.json?monitor="+Date.now(),location.href),{cache:"no-store"});
+   if(!response.ok)throw Error("Notice inventory HTTP "+response.status);
+   return response.json();
+  });
+  assert.deepEqual(publishedInventory,inventory,"Published notice inventory differs from GitHub main");
+  assertNoticeCoverage(publishedInventory,publicFeed);
 
   const localEvidence="kaigo-navi2027-preview/data/pdf-evidence.json";
   if(fs.existsSync(localEvidence)){

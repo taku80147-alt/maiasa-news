@@ -94,15 +94,16 @@ def main():
     raise RuntimeError('Meeting source changed; editorial recheck required: '+item['id'])
    merged[item['id']]=prior or item
  notices=scan_notices(get(NOTICE_INDEX))
- for row in notices:
-  if triage(row)[0]=='include':
+ prior_inventory=json.loads(INVENTORY.read_text(encoding='utf-8')) if INVENTORY.exists() else {}
+ selected_rows=reconcile_inventory(notices,prior_inventory,[])['documents']
+ for row in selected_rows:
+  if row['selection']=='include':
    prior=previous.get(row['id'])
    if prior and prior['source_url'] != row['source_url']:
     raise RuntimeError('Notice source changed; editorial recheck required: '+row['id'])
    merged[row['id']]=prior or notice_article(row,classify)
  for item in before['articles']:merged.setdefault(item['id'],item)
  articles=sorted(merged.values(),key=lambda x:(x['date'],x['id']),reverse=True)
- prior_inventory=json.loads(INVENTORY.read_text(encoding='utf-8')) if INVENTORY.exists() else {}
  inventory=reconcile_inventory(notices,prior_inventory,articles)
  missing=coverage_errors(inventory,articles)
  if missing:raise RuntimeError('Discovered reform notices not listed: '+', '.join(missing))

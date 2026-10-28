@@ -38,3 +38,12 @@ test("failed source extraction is an anomaly",async()=>{
  const {fn}=checker([run()],[{name:"read-and-publish",conclusion:"failure"}]);
  await assert.rejects(fn("build-kaigo-pdf-evidence.yml","read-and-publish",48),/did not succeed/);
 });
+
+
+function coverage(){return vm.runInNewContext(source.slice(source.indexOf("function assertNoticeCoverage("),source.indexOf("async function officialCheck("))+";assertNoticeCoverage",{assert,console:{log(){}}});}
+test("missing or mismatched discovered notice cannot pass publication monitoring",()=>{
+ const inventory={schema_version:1,documents:[{id:"n-notice-vol-1549",selection:"include",reason:"fixture",source_url:"https://www.mhlw.go.jp/content/notice.pdf"}]};
+ assert.throws(()=>coverage()(inventory,{articles:[]}),/missing from feed/);
+ assert.throws(()=>coverage()(inventory,{articles:[{id:"n-notice-vol-1549",source_url:"old"}]}),/missing from feed/);
+ coverage()(inventory,{articles:[{id:"n-notice-vol-1549",source_url:inventory.documents[0].source_url}]});
+});

@@ -69,8 +69,10 @@ class EvidenceContractTests(unittest.TestCase):
                 self.assertIn(article['status_kind'], ('proposal','current','mixed','enacted'))
                 if article['status_kind'] in ('proposal','mixed'): self.assertIn('検討中', article['status'])
                 self.assertNotIn("施行済み", article["status"])
-                self.assertNotIn("決定済み", article["status"])
+                if article["status_kind"] != "enacted":
+                    self.assertNotIn("決定済み", article["status"])
 
 if __name__ == "__main__":
     unittest.main()
+
 

@@ -22,6 +22,9 @@ def main():
     extracted = extract_pdf(raw)
     archive_source('/tmp/kaigo-evidence', article['source_pdf'], raw, extracted)
     if inspect:
+        print('NOTICE_PDF_SHA256 ' + hashlib.sha256(raw).hexdigest())
+        for page in extracted['pages'][1:4]:
+            print('NOTICE_PAGE_TEXT '+json.dumps({'page':page['pdf_page'],'text':page['text']},ensure_ascii=False))
         # A discovery checksum is an inspection result, never an editorial pin.
         article['pinned_pdf_sha256'] = hashlib.sha256(raw).hexdigest()
     audit = examine(article, raw, extracted)
