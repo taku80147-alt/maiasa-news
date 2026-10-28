@@ -4,6 +4,141 @@
   "disclaimer": "PDFの対応案見出しを機械抽出。資料全文の理解・法的な適用判断は人による確認が必要です。",
   "articles": [
     {
+      "id": "n-pay-272",
+      "meeting_date": "2026-10-28",
+      "source_url": "https://www.mhlw.go.jp/stf/newpage_76726.html",
+      "status": "公式資料の「対応案」見出しを機械抽出（未審査）",
+      "scope": "資料にある検討項目を探しやすくしたものです。新制度の決定・適用条件・数値を保証する解説ではありません。",
+      "documents": [
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001763389.pdf",
+          "pdf_sha256": "1c4a445d9907a7f45a128053ec9b54e4a9c781b6f8cf38402c75a97a63aacdcf",
+          "label": "【参考資料１】令和６年度介護報酬改定の効果検証及び調査研究に係る調査（令和８年度調査）の調査票の回収率等について［113KB］",
+          "extractor_version": 3,
+          "pdf_pages": 1,
+          "checked_at": "2026-10-28",
+          "topics": []
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001763608.pdf",
+          "pdf_sha256": "080282389ceed7226ca35f94df80814d9014aaa0260f53a08602ee03e9483688",
+          "label": "【資料１】特定施設入居者生活介護［3.9MB］",
+          "extractor_version": 3,
+          "pdf_pages": 40,
+          "checked_at": "2026-10-28",
+          "topics": [
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 2,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 3,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 6,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 12,
+              "evidence": "◼ 特定施設入居者生活介護において、より自立支援に資するケアを推進するため、入居者ごとの排泄支援計画の作成・見直しや、排泄の状態の改善を評価することとしてはどうか。"
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 21,
+              "evidence": "◼ 住宅型有料老人ホームから特定施設に移行した事例や移行を検討している事業者の関心事項等について詳細に調査した上で、好事例の横展開も含め、事業者及び自治体に周知することとしてはどうか。"
+            }
+          ]
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001763390.pdf",
+          "pdf_sha256": "8edcf9f0342a3a403b730ddd5415abcb4ffc054e27361ff2d6fbd5bcb2efa380",
+          "label": "【参考資料２】設置要綱・調査概要［492KB］",
+          "extractor_version": 3,
+          "pdf_pages": 6,
+          "checked_at": "2026-10-28",
+          "topics": []
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001763609.pdf",
+          "pdf_sha256": "ced2a66207a337d6bbfe9d7441c9420a9365cea37f336f3b4f6476dbaaf47dd3",
+          "label": "【資料２】登録施設介護支援［3.4MB］",
+          "extractor_version": 3,
+          "pdf_pages": 47,
+          "checked_at": "2026-10-28",
+          "topics": [
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 2,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 3,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 10,
+              "evidence": ""
+            },
+            {
+              "heading": "登録施設介護支援の人員基準について",
+              "pdf_page": 31,
+              "evidence": "◼ 登録施設介護支援の人員基準については、居宅介護支援と同様に介護支援専門員を配置することに加え、地域生活相談を行うための人員（地域生活相談員）を配置することとしつつ、介護支援専門員との兼務を認めることとしてはどうか。"
+            },
+            {
+              "heading": "登録施設介護予防支援の人員基準について",
+              "pdf_page": 31,
+              "evidence": ""
+            }
+          ]
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001763384.pdf",
+          "pdf_sha256": "4f3d0bdec9df9e74b5c89b5dd73fd3b9096bb367658fb55b94364a5e19423d61",
+          "label": "【資料３】地域区分［1.9MB］",
+          "extractor_version": 3,
+          "pdf_pages": 25,
+          "checked_at": "2026-10-28",
+          "topics": [
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 2,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 3,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 6,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 11,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 17,
+              "evidence": ""
+            }
+          ]
+        }
+      ],
+      "warnings": [
+        "資料の本文解析は次回に繰り越し"
+      ]
+    },
+    {
       "id": "n-pay-33",
       "meeting_date": "2026-10-26",
       "source_url": "https://www.mhlw.go.jp/stf/newpage_76754.html",
