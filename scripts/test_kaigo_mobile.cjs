@@ -44,8 +44,14 @@ async function main() {
       await page.evaluate(()=>document.fonts.ready);
       await noHorizontalOverflow(page,"homepage",width);
       // Home retains required visual concepts and navigation.
-      assert.ok(await page.locator("#homeNews .news").count()>=3,"home must show 3 news cards");
-      assert.ok(await page.locator(".bottom button").count()>=3,"bottom navigation missing");
+      assert.equal(await page.locator("#homeNews .news").count(),5,"home shows five compact headlines");
+      assert.equal(await page.locator("#homeNews img").count(),0,"headlines have no thumbnails");
+      assert.equal(await page.locator("#featureGrid,.daily-grid,.recs").count(),0,"removed home sections must stay removed");
+      assert.equal(await page.locator("#dailyTip").count(),1);
+      assert.match(await page.locator("#dailyTip").getAttribute("data-date"),/^20\d{2}-\d{2}-\d{2}$/);
+      assert.ok((await page.locator("#dailyTip .today-title").innerText()).length>2);
+      assert.ok((await page.locator("#dailyTip .today-quote").innerText()).length>10);
+      assert.deepEqual(await page.locator(".bottom button").allTextContents(),["⌂ニュース","⌕検索","♡保存"]);
       await page.screenshot({path:path.join("kaigo-qa-screenshots",`home_${width}.png`),fullPage:true});
       // Compare adopted static visual regions to the unchanged previous source.
       if(process.env.KAIGO_BASELINE_URL) {
@@ -56,7 +62,7 @@ async function main() {
         // A fixed footer must not cover the region being compared.
         const hideFooter=await page.addStyleTag({content:".bottom{visibility:hidden!important}"});
         await baseline.addStyleTag({content:".bottom{visibility:hidden!important}"});
-        for(const selector of [".hero","#featureGrid",".daily-grid"]) {
+        for(const selector of [".hero",".livnavi-wordmark"]) {
           const label=selector.replace(/[^a-zA-Z0-9]/g, "");
           const before=await baseline.locator(selector).screenshot({path:path.join("kaigo-qa-screenshots",`${width}_${label}_before.png`)});
           const after=await page.locator(selector).screenshot({path:path.join("kaigo-qa-screenshots",`${width}_${label}_after.png`)});
@@ -67,7 +73,7 @@ async function main() {
         await baseline.close();
       }
       // Parent Oct 9 overview: all four newly reviewed services must be navigable.
-      await page.locator('.bottom [data-go="news"]').first().click();
+      await page.locator('.more-news').click();
       await page.locator('#viewbody [data-id="n-pay-269"]').first().click();
       for(const id of four) {
         const el=page.locator('#viewbody [data-id="'+id+'"]');
@@ -111,7 +117,7 @@ async function main() {
       assert.ok((await page.locator('#viewbody [data-save="l-equipment-choice"]').innerText()).includes("保存済み"));
       await page.locator('.bottom [data-go="favorites"]').click();
       assert.equal(await page.locator('#viewbody [data-id="l-equipment-choice"]').count(),1);
-      await page.locator('.bottom [data-go="ai"]').click();
+      await page.locator('.bottom [data-go="search"]').click();
       await page.locator("#q").fill("歩行車");
       assert.ok(await page.locator('#results [data-id="l-equipment-choice"]').count());
       await page.locator("#q").fill("２割 負担");
@@ -120,17 +126,8 @@ async function main() {
       await page.locator("#back").click();
       assert.equal(await page.locator("#q").inputValue(),"２割 負担");
       await page.locator('.bottom [data-go="home"]').click();
-      await page.locator('[data-go="today"]').click();
-      assert.ok(await page.locator('#viewbody [data-id="l-equipment-choice"]').count());
-      // The colored feature cards lead to real 3-level explanations.
-      await page.locator('.bottom [data-go="home"]').click();
-      for(const id of ["n-pay-268","n-ins-136-burden","n-pay-259"]) {
-        await page.locator('#featureGrid [data-id="'+id+'"]').click();
-        await page.locator(".reform-reader").waitFor();
-        await page.locator('.bottom [data-go="home"]').click();
-      }
       assert.deepEqual(errors,[],`${width}px browser JavaScript errors: ${errors.join("; ")}`);
-      console.log(`PASS ${width}px: home, no horizontal overflow, four linked articles, 3 reading tabs, back navigation`);
+      console.log(`PASS ${width}px: home, no horizontal overflow, four linked articles, vertical reader, back navigation`);
       await page.close();
     }
     // Fail closed if release prose is changed without the matching content audit.
@@ -146,7 +143,8 @@ async function main() {
     const offline=await browser.newPage();
     await offline.route("**/data/*",route=>route.abort());
     await offline.goto(BASE,{waitUntil:"networkidle"});
-    assert.ok((await offline.locator(".updatetag").innerText()).includes("取得に失敗"));
+    assert.ok(await offline.locator("#feedWarning").isVisible());
+    assert.ok((await offline.locator("#feedWarning").innerText()).includes("最新情報を取得できません"));
     await offline.close();
   } finally {await browser.close()}
 }

@@ -124,7 +124,7 @@ async function liveCheck(browser){
     assert.ok(text.includes(reviewedItem.one_liner),"Reviewed explanation is not rendered for latest article");
     console.log("LIVNAVI_REVIEWED_READER_OK",reviewedItem.id,reviewedRelease.articles.length);
   }
-  assert.equal(await page.locator("#homeNews .news").count(),3,"Expected 3 visible homepage news cards");
+  assert.equal(await page.locator("#homeNews .news").count(),5,"Expected 5 visible homepage news cards");
   assert.deepEqual(errors,[],"Homepage JavaScript errors");
   console.log("LIVNAVI_OK",JSON.stringify({latest_date:first.date,first_id:first.id,articles:publicFeed.articles.length,verified_on:publicFeed.verified_on}));
  }finally{await page.close()}
