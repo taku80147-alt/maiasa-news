@@ -102,7 +102,10 @@ def main():
    if prior and prior['source_url'] != row['source_url']:
     raise RuntimeError('Notice source changed; editorial recheck required: '+row['id'])
    merged[row['id']]=prior or notice_article(row,classify)
- for item in before['articles']:merged.setdefault(item['id'],item)
+ excluded={row['id'] for row in selected_rows if row['selection']=='excluded'}
+ for item in before['articles']:
+  if item.get('source_kind')=='notice' and item['id'] in excluded:continue
+  merged.setdefault(item['id'],item)
  articles=sorted(merged.values(),key=lambda x:(x['date'],x['id']),reverse=True)
  inventory=reconcile_inventory(notices,prior_inventory,articles)
  missing=coverage_errors(inventory,articles)

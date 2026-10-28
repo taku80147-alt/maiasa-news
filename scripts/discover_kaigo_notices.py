@@ -125,6 +125,7 @@ def reconcile_inventory(rows, previous, articles):
         # Editorial decisions survive only for unchanged discovery metadata.
         if prior and prior.get('editorial_reviewed_on') and prior.get('title') == row['title'] and prior.get('source_urls') == row['source_urls'] and prior.get('date') == row['date']:
             state, reason = prior.get('selection', state), prior.get('reason', reason)
+            row['editorial_reviewed_on'] = prior['editorial_reviewed_on']
         row.update(selection=state, reason=reason)
         article = published.get(row['id'])
         row['publication'] = 'listed' if article and article['source_url'] == row['source_url'] else 'not_listed'
