@@ -24,3 +24,13 @@ class CollectionTests(unittest.TestCase):
         docs={'old':row,'other':{**row,'meeting_url':'meeting-b'}}
         candidates=[{'meeting_url':'meeting-a','pdf_url':'old'}]
         self.assertEqual(reconcile_sources(docs,candidates),docs)
+
+
+
+class CommitteeLabelTests(unittest.TestCase):
+    def test_research_committee_is_not_reported_as_the_parent_subcommittee(self):
+        from update_kaigo_reform import scan
+        html='<table><tr><td>第33回</td><td>2026年10月26日</td><td>介護報酬改定検証・研究委員会 令和6年度改定の効果検証調査の結果</td><td><a href="/stf/newpage_76754.html">資料</a></td></tr></table>'
+        rows=scan('pay','介護給付費分科会','https://www.mhlw.go.jp/stf/index.html',html)
+        self.assertEqual(rows[0]['title'],'第33回介護報酬改定検証・研究委員会の資料が公開')
+        self.assertIn('介護報酬改定検証・研究委員会',rows[0]['source_name'])

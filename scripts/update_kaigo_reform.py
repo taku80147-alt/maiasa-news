@@ -63,9 +63,9 @@ def scan(code,label,url,html):
    if link: break
   if not link: continue
   number=n[1]
-  actual_label='介護事業経営調査委員会' if (code=='pay' and '介護事業経営調査委員会' in agenda) else label
+  actual_label=next((name for name in ('介護事業経営調査委員会','介護報酬改定検証・研究委員会') if code=='pay' and name in agenda),label)
   actual_code='econ' if actual_label=='介護事業経営調査委員会' else code
-  if actual_code=='econ': agenda=agenda.replace('介護事業経営調査委員会','',1).strip()
+  if actual_label!=label: agenda=agenda.replace(actual_label,'',1).strip()
   summary=f'第{number}回{actual_label}の議題：{agenda}'
   if len(summary)>110: summary=summary[:107].rstrip(' ・、')+'…'
   meetings.append({
@@ -82,6 +82,11 @@ def scan(code,label,url,html):
 
 def main():
  before=json.loads(DEST.read_text(encoding='utf-8'))
+ # Correct the prior committee label without breaking already shared article IDs.
+ for article in before['articles']:
+  if article['id'].startswith('n-pay-') and '介護報酬改定検証・研究委員会' in article.get('summary',''):
+   for key in ('title','summary','detail','source_name'):
+    if key in article:article[key]=article[key].replace('介護給付費分科会','介護報酬改定検証・研究委員会')
  previous={x['id']:x for x in before['articles']}
  merged={}
  # Every configured source must be parsed. Partial success is not a full check.
