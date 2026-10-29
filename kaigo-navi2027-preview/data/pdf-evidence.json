@@ -132,11 +132,18 @@
               "evidence": ""
             }
           ]
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001763657.pdf",
+          "pdf_sha256": "af9da609b24a8cffc5f9cfe72ee9f22646a3316c9d3c847002dc5ab25d303691",
+          "label": "【参考資料３】令和６年度介護報酬改定の効果検証及び調査研究に係る調査（令和８年度調査）の進め方について（案）［97KB］",
+          "extractor_version": 3,
+          "pdf_pages": 1,
+          "checked_at": "2026-10-29",
+          "topics": []
         }
       ],
-      "warnings": [
-        "資料の本文解析は次回に繰り越し"
-      ]
+      "warnings": []
     },
     {
       "id": "n-pay-33",
@@ -226,6 +233,15 @@
           "pdf_pages": 53,
           "checked_at": "2026-10-27",
           "topics": []
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001762527.pdf",
+          "pdf_sha256": "d703ce3465fa5cd1dc6f4c18b498cb1227e5c1cd2491ea1e3a04ae80870cf2c1",
+          "label": "資料３ 介護支援専門員法定研修の見直しの検討状況について（報告）［PDF形式：2.9MB］",
+          "extractor_version": 3,
+          "pdf_pages": 37,
+          "checked_at": "2026-10-29",
+          "topics": []
         }
       ],
       "warnings": []
@@ -238,12 +254,12 @@
       "scope": "資料にある検討項目を探しやすくしたものです。新制度の決定・適用条件・数値を保証する解説ではありません。",
       "documents": [
         {
-          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001760459.pdf",
-          "pdf_sha256": "571a63b7b3b7c0bfb356f38477a1e4cb7077df512345bf8bea8faa527ee4ee3e",
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001764375.pdf",
+          "pdf_sha256": "6dac14ac2b236e40a611150e622f08fd9eedfaea23e6ad309b74bc8057fffe53",
           "label": "・【資料１】訪問介護［2.2MB］",
           "extractor_version": 3,
           "pdf_pages": 55,
-          "checked_at": "2026-10-19",
+          "checked_at": "2026-10-29",
           "topics": [
             {
               "heading": "このページの対応案（本文の確認が必要）",
@@ -269,41 +285,6 @@
               "heading": "定期巡回・随時対応型訪問介護看護との連携促進",
               "pdf_page": 24,
               "evidence": "◼その地域の限られた事業所間で連携しながら24時間対応体制の維持・確保を促進することが重要であり、例えば、訪問介護事業所が同一法人外の定期巡回・随時対応型訪問介護看護事業所（定期巡回・随時対応型訪問介護看護Ⅲ）と連携しながら日中の随時訪問サービスを行う場合の評価について検討してはどうか。"
-            }
-          ]
-        },
-        {
-          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001760888.pdf",
-          "pdf_sha256": "ad441f404464d2b4b4440f1bddc87d2a01eb1bcb986d963ea2af4d150df7ef6c",
-          "label": "・【資料２】訪問入浴介護［1.8MB］",
-          "extractor_version": 3,
-          "pdf_pages": 21,
-          "checked_at": "2026-10-19",
-          "topics": [
-            {
-              "heading": "このページの対応案（本文の確認が必要）",
-              "pdf_page": 2,
-              "evidence": ""
-            },
-            {
-              "heading": "このページの対応案（本文の確認が必要）",
-              "pdf_page": 3,
-              "evidence": ""
-            },
-            {
-              "heading": "このページの対応案（本文の確認が必要）",
-              "pdf_page": 5,
-              "evidence": ""
-            },
-            {
-              "heading": "医療ニーズへの対応",
-              "pdf_page": 12,
-              "evidence": "◼訪問診療や訪問看護、家族等による日常的な医療的ケアの提供を受けている方へのサービス提供について、利用者の状態に応じた看護職員によるサービス提供を評価することを検討してはどうか。"
-            },
-            {
-              "heading": "このページの対応案（本文の確認が必要）",
-              "pdf_page": 15,
-              "evidence": ""
             }
           ]
         },
