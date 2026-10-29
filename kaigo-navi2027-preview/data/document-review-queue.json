@@ -17,6 +17,20 @@
       "checked_at": "2026-10-28"
     },
     {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001763657.pdf",
+      "label": "【参考資料３】令和６年度介護報酬改定の効果検証及び調査研究に係る調査（令和８年度調査）の進め方について（案）［97KB］",
+      "meeting_date": "2026-10-28",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76726.html",
+      "status": "本文取得・解説未審査",
+      "pages": 1,
+      "chars": 1268,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 3,
+      "notes_and_exceptions_candidates": 0,
+      "sha256": "af9da609b24a8cffc5f9cfe72ee9f22646a3316c9d3c847002dc5ab25d303691",
+      "checked_at": "2026-10-29"
+    },
+    {
       "pdf_url": "https://www.mhlw.go.jp/content/12300000/001763609.pdf",
       "label": "【資料２】登録施設介護支援［3.4MB］",
       "meeting_date": "2026-10-28",
@@ -199,6 +213,20 @@
       "checked_at": "2026-10-26"
     },
     {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001762527.pdf",
+      "label": "資料３ 介護支援専門員法定研修の見直しの検討状況について（報告）［PDF形式：2.9MB］",
+      "meeting_date": "2026-10-26",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76887.html",
+      "status": "本文取得・解説未審査",
+      "pages": 37,
+      "chars": 61822,
+      "readable_page_rate": 0.97,
+      "tables_extracted": 41,
+      "notes_and_exceptions_candidates": 92,
+      "sha256": "d703ce3465fa5cd1dc6f4c18b498cb1227e5c1cd2491ea1e3a04ae80870cf2c1",
+      "checked_at": "2026-10-29"
+    },
+    {
       "pdf_url": "https://www.mhlw.go.jp/content/12300000/001762519.pdf",
       "label": "資料２ 要介護認定について［PDF形式：2.1MB］",
       "meeting_date": "2026-10-26",
@@ -227,11 +255,39 @@
       "checked_at": "2026-10-27"
     },
     {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001761861.pdf",
+      "label": "伊藤委員提出資料［PDF形式：2.2MB］",
+      "meeting_date": "2026-10-26",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76887.html",
+      "status": "本文取得・解説未審査",
+      "pages": 11,
+      "chars": 19061,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 35,
+      "notes_and_exceptions_candidates": 1,
+      "sha256": "ea4e86c61731c940150426ba71fa78fe7effbd044c1448fd77788a747c2e7c8e",
+      "checked_at": "2026-10-29"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001764375.pdf",
+      "label": "・【資料１】訪問介護［2.2MB］",
+      "meeting_date": "2026-10-19",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76626.html",
+      "status": "本文取得・解説未審査",
+      "pages": 55,
+      "chars": 81269,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 69,
+      "notes_and_exceptions_candidates": 110,
+      "sha256": "6dac14ac2b236e40a611150e622f08fd9eedfaea23e6ad309b74bc8057fffe53",
+      "checked_at": "2026-10-29"
+    },
+    {
       "pdf_url": "https://www.mhlw.go.jp/content/12300000/001760888.pdf",
       "label": "・【資料２】訪問入浴介護［1.8MB］",
       "meeting_date": "2026-10-19",
       "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76626.html",
-      "status": "本文取得・解説未審査",
+      "status": "公式掲載URL変更・要再確認",
       "pages": 21,
       "chars": 29346,
       "readable_page_rate": 1.0,
@@ -259,7 +315,7 @@
       "label": "・【資料１】訪問介護［2.2MB］",
       "meeting_date": "2026-10-19",
       "meeting_url": "https://www.mhlw.go.jp/stf/newpage_76626.html",
-      "status": "本文取得・解説未審査",
+      "status": "公式掲載URL変更・要再確認",
       "pages": 55,
       "chars": 81294,
       "readable_page_rate": 1.0,
