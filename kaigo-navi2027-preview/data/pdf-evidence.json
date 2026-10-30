@@ -289,6 +289,41 @@
           ]
         },
         {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001764376.pdf",
+          "pdf_sha256": "65b9da002263de53b3d23aba9d6166b12c7b30bed297bad08fe6f7c23f754e80",
+          "label": "・【資料２】訪問入浴介護［1.8MB］",
+          "extractor_version": 3,
+          "pdf_pages": 21,
+          "checked_at": "2026-10-30",
+          "topics": [
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 2,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 3,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 5,
+              "evidence": ""
+            },
+            {
+              "heading": "医療ニーズへの対応",
+              "pdf_page": 12,
+              "evidence": "◼訪問診療や訪問看護、家族等による日常的な医療的ケアの提供を受けている方へのサービス提供について、利用者の状態に応じた看護職員によるサービス提供を評価することを検討してはどうか。"
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 15,
+              "evidence": ""
+            }
+          ]
+        },
+        {
           "pdf_url": "https://www.mhlw.go.jp/content/12300000/001760335.pdf",
           "pdf_sha256": "60230ec2f2e24681f5aae9703ae43c4727dd40e12c44a7d0ae5c031c95a8409f",
           "label": "・【資料３】訪問看護［4.4MB］",
