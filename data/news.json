@@ -1,10 +1,10 @@
 {
   "schema_version": 2,
   "mode": "newspaper",
-  "updated_at": "2026-10-31T06:47:05.802561+09:00",
-  "updated_label": "10/31 06:47",
+  "updated_at": "2026-11-01T06:43:59.842123+09:00",
+  "updated_label": "11/01 06:43",
   "latest_article_date": "2026-10-30",
-  "new_count": 12,
+  "new_count": 0,
   "important_ids": [
     "1f77f9d8a1a62dfa",
     "d26fac0a773c5279",
