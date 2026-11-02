@@ -4,6 +4,121 @@
   "disclaimer": "PDFの対応案見出しを機械抽出。資料全文の理解・法的な適用判断は人による確認が必要です。",
   "articles": [
     {
+      "id": "n-pay-273",
+      "meeting_date": "2026-11-02",
+      "source_url": "https://www.mhlw.go.jp/stf/newpage_76900.html",
+      "status": "公式資料の「対応案」見出しを機械抽出（未審査）",
+      "scope": "資料にある検討項目を探しやすくしたものです。新制度の決定・適用条件・数値を保証する解説ではありません。",
+      "documents": [
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001765516.pdf",
+          "pdf_sha256": "5f580a67415dcbb9dd91d15aec561c738ace8555129fae10eedd8e35c625afa1",
+          "label": "【資料１】介護老人福祉施設［4.1MB］",
+          "extractor_version": 3,
+          "pdf_pages": 61,
+          "checked_at": "2026-11-02",
+          "topics": [
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 2,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 3,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 7,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 19,
+              "evidence": "◼透析患者に対する支援は血液透析患者に係る送迎のみではなく、様々な対応が必要であることを踏まえ、透析患者の受入れ体制の整備の推進という観点から、特別通院送迎加算を見直し、透析を継続的に必要とする入所者を受け入れ、医療機関との連携体制を確保しながら行う送迎を含む一連の支援を総合的に評価してはどうか。"
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 27,
+              "evidence": "◼介護支援専門員について、居宅介護支援事業所以外の併設事業所等における業務であって、その業務が本体施設の業務と一体不可分なものについては、本体施設の業務と兼務可能であることを明確化することはどうか。"
+            }
+          ]
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001765517.pdf",
+          "pdf_sha256": "08959f33d2462d03adfcc1f4457315dabab8fbd2733c21c4edf6aeaaada947cc",
+          "label": "【資料２】介護老人保健施設［5.9MB］",
+          "extractor_version": 3,
+          "pdf_pages": 87,
+          "checked_at": "2026-11-02",
+          "topics": [
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 2,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 3,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 9,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 15,
+              "evidence": "◼介護老人保健施設の初期加算（Ⅰ）について、入院後早期に退院した者の受入れを促進する観点から、急性期医療を担う医療機関の一般病棟以外の病棟から退院した者についても、評価の対象とすることとしてはどうか。"
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 28,
+              "evidence": "◼透析患者の受入実態等を踏まえ、介護老人保健施設における透析患者の受入れを促進する観点から、透析医療機関との連携体制の確保や施設内の体制整備等を行った上で、透析患者を受け入れた場合の評価を検討してはどうか。"
+            }
+          ]
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001765518.pdf",
+          "pdf_sha256": "ddee3a4ae48cc04a68ae8cceba0dd6e41ea7548ac43a807677aea4909c090597",
+          "label": "【資料３】介護医療院［4.7MB］",
+          "extractor_version": 3,
+          "pdf_pages": 57,
+          "checked_at": "2026-11-02",
+          "topics": [
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 2,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 3,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 7,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 19,
+              "evidence": "◼透析患者の受入実態等を踏まえ、介護医療院における透析患者の受入れを促進する観点から、透析医療機関との連携体制の確保や施設内の体制整備等を行った上で、透析患者を受け入れた場合の評価を検討してはどうか。"
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 27,
+              "evidence": "◼利用者の状態に応じた適切な栄養摂取方法の選択及び経口摂取への移行等を推進する観点から、基本サービス費における医療処置割合の算定に当たり、経管栄養を実施している利用者は、当該割合の計算に含めないこととし、要件を見直してはどうか。"
+            }
+          ]
+        }
+      ],
+      "warnings": []
+    },
+    {
       "id": "n-pay-272",
       "meeting_date": "2026-10-28",
       "source_url": "https://www.mhlw.go.jp/stf/newpage_76726.html",
@@ -753,34 +868,6 @@
           "label": "【資料２】令和９年度介護報酬改定に向けた基本的な視点（案）概要［690KB］",
           "extractor_version": 3,
           "pdf_pages": 1,
-          "checked_at": "2026-10-18",
-          "topics": []
-        }
-      ],
-      "warnings": []
-    },
-    {
-      "id": "n-ins-136",
-      "meeting_date": "2026-09-18",
-      "source_url": "https://www.mhlw.go.jp/stf/newpage_76225.html",
-      "status": "公式資料の「対応案」見出しを機械抽出（未審査）",
-      "scope": "資料にある検討項目を探しやすくしたものです。新制度の決定・適用条件・数値を保証する解説ではありません。",
-      "documents": [
-        {
-          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001750951.pdf",
-          "pdf_sha256": "db4c9cfbc29e39501181712f0737a84dcb8153c5b28d6799b6685d2b35d9d50e",
-          "label": "資料１ 第１号保険料の在り方について［PDF形式：846KB］",
-          "extractor_version": 3,
-          "pdf_pages": 11,
-          "checked_at": "2026-10-18",
-          "topics": []
-        },
-        {
-          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001750952.pdf",
-          "pdf_sha256": "a0b2bedbfa05bcc47fea7768f6505c3b8e10dfc0b578b8ec1d5bd3b833b38333",
-          "label": "資料２ 持続可能性の確保（給付と負担）について［PDF形式：3.0MB］",
-          "extractor_version": 3,
-          "pdf_pages": 58,
           "checked_at": "2026-10-18",
           "topics": []
         }
