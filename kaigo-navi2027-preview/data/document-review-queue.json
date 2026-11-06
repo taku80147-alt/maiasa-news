@@ -995,6 +995,48 @@
       "checked_at": "2026-11-05"
     },
     {
+      "pdf_url": "https://www.mhlw.go.jp/content/001720493.pdf",
+      "label": "介護保険最新情報Vol.1522(介護職員等処遇改善加算に関する様式例の一部差替について)",
+      "meeting_date": "2026-07-08",
+      "meeting_url": "https://www.mhlw.go.jp/content/001720493.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 4,
+      "chars": 2425,
+      "readable_page_rate": 0.75,
+      "tables_extracted": 2,
+      "notes_and_exceptions_candidates": 13,
+      "sha256": "1d32191a92b213a2d8e267a5823b4a8619dbf5464f8ca206250f34ed1fe1f73e",
+      "checked_at": "2026-11-06"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001719971.pdf",
+      "label": "介護保険最新情報Vol.1521(介護給付適正化における住宅改修等の点検および福祉用具購入・貸与調査の取組促進について 等)",
+      "meeting_date": "2026-07-08",
+      "meeting_url": "https://www.mhlw.go.jp/content/001719971.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 12,
+      "chars": 10121,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 3,
+      "notes_and_exceptions_candidates": 1,
+      "sha256": "dfaab91adcf55456333efdf7bb17d00a23dcccae1b87dce2047cbf978df7da27",
+      "checked_at": "2026-11-06"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001718022.pdf",
+      "label": "介護保険最新情報Vol.1520(公益社団法人国民健康保険中央会運用LIFE への移行に係る再周知について)",
+      "meeting_date": "2026-07-02",
+      "meeting_url": "https://www.mhlw.go.jp/content/001718022.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 8,
+      "chars": 5376,
+      "readable_page_rate": 0.88,
+      "tables_extracted": 6,
+      "notes_and_exceptions_candidates": 4,
+      "sha256": "17f545f0ba8415bbf5db9b44d9ef25f5013714d3cfd6af133dfffdac71b6d205",
+      "checked_at": "2026-11-06"
+    },
+    {
       "pdf_url": "https://www.mhlw.go.jp/content/12300000/001716151.pdf",
       "label": "【資料６】居宅介護支援・介護予防支援［5.9MB］",
       "meeting_date": "2026-06-29",
@@ -1091,6 +1133,20 @@
       "notes_and_exceptions_candidates": 133,
       "sha256": "f9a3f5e3531e93ecfd3ba8167911d1b0f38f94b3572a9cab35e8a80a7aff3651",
       "checked_at": "2026-10-11"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001715668.pdf",
+      "label": "介護保険最新情報vol.1518(社会福祉法等の一部を改正する法律の公布について(通知))",
+      "meeting_date": "2026-06-25",
+      "meeting_url": "https://www.mhlw.go.jp/content/001715668.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 27,
+      "chars": 34107,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 0,
+      "notes_and_exceptions_candidates": 13,
+      "sha256": "bb0f08a9c77619e51390808fd0f81d70f86e0cd9f4d6a264c4e536d427c8c2a3",
+      "checked_at": "2026-11-06"
     }
   ]
 }
