@@ -11,6 +11,15 @@
       "scope": "資料にある検討項目を探しやすくしたものです。新制度の決定・適用条件・数値を保証する解説ではありません。",
       "documents": [
         {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001766560.pdf",
+          "pdf_sha256": "438cc87244a591270376dafca264e0c6a77aae52f8c82453635348fdfe20536a",
+          "label": "【参考資料１】田母神委員提出資料［183KB］",
+          "extractor_version": 3,
+          "pdf_pages": 2,
+          "checked_at": "2026-11-08",
+          "topics": []
+        },
+        {
           "pdf_url": "https://www.mhlw.go.jp/content/12300000/001766774.pdf",
           "pdf_sha256": "4ec91c3c1ae7b393aafa786b53726b09f24d3d5495936731152a7406e43909a6",
           "label": "【資料１－１】人口減少・サービス需要の変化に応じたサービス提供体制の構築（改正法に基づく新たなサービスの枠組み）［3.3MB］",
@@ -59,6 +68,15 @@
               "evidence": "◼訪問入浴介護について、利用者の状態に応じ、ICTを活用した看護職員への相談体制や、医療機関・訪問看護事業所等との連携体制を確保することを前提として、看護職員の配置やサービス提供体制を柔軟化することを検討してはどうか。"
             }
           ]
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001766561.pdf",
+          "pdf_sha256": "4ffdac187f25e54fdb4d92207523c3b066128c3ddf8654d497e1d53975cd4740",
+          "label": "【参考資料２】田母神委員提出資料［1.9MB］",
+          "extractor_version": 3,
+          "pdf_pages": 11,
+          "checked_at": "2026-11-08",
+          "topics": []
         },
         {
           "pdf_url": "https://www.mhlw.go.jp/content/12300000/001766773.pdf",
