@@ -1259,6 +1259,62 @@
       "notes_and_exceptions_candidates": 13,
       "sha256": "bb0f08a9c77619e51390808fd0f81d70f86e0cd9f4d6a264c4e536d427c8c2a3",
       "checked_at": "2026-11-06"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001715374.pdf",
+      "label": "介護保険最新情報vol.1516(健康保険法施行令等の一部を改正する政令の公布について)",
+      "meeting_date": "2026-06-25",
+      "meeting_url": "https://www.mhlw.go.jp/content/001715374.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 5,
+      "chars": 13394,
+      "readable_page_rate": 0.8,
+      "tables_extracted": 0,
+      "notes_and_exceptions_candidates": 1,
+      "sha256": "d386a1ac32e718338ab231f33cbecb8b334c3e8ab440d2673165b6037adc15da",
+      "checked_at": "2026-11-09"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001714541.pdf",
+      "label": "介護保険最新情報Vol.1515(「介護老人福祉施設等における診療行為に係る報酬の給付調整」に関するリーフレットの一部見直しについて)",
+      "meeting_date": "2026-06-23",
+      "meeting_url": "https://www.mhlw.go.jp/content/001714541.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 6,
+      "chars": 9462,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 11,
+      "notes_and_exceptions_candidates": 40,
+      "sha256": "8634fb1d3e51bd9d42276bccb7c089d2488e18508030ca6ee3bbb566f6ad70ec",
+      "checked_at": "2026-11-09"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001714217.pdf",
+      "label": "介護保険最新情報vol.1513(介護保険法施行規則の一部を改正する省令等の公布について)",
+      "meeting_date": "2026-06-22",
+      "meeting_url": "https://www.mhlw.go.jp/content/001714217.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 12,
+      "chars": 114169,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 21,
+      "notes_and_exceptions_candidates": 2,
+      "sha256": "4a780a7c2dc4938359ca9ced9b9f92809a21440766a29f3d7173c90ab2023be6",
+      "checked_at": "2026-11-09"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001707972.pdf",
+      "label": "介護保険最新情報vol.1509(地域の自主性及び自立性を高めるための改革の推進を図るための関係法律の整備に関する法律の公布及び施行について(通知))",
+      "meeting_date": "2026-06-03",
+      "meeting_url": "https://www.mhlw.go.jp/content/001707972.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 7,
+      "chars": 30035,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 2,
+      "notes_and_exceptions_candidates": 2,
+      "sha256": "95baaca099c11353f1b23b1f2377d58cb8e37117041406e643ff3333ab9400c0",
+      "checked_at": "2026-11-09"
     }
   ]
 }
