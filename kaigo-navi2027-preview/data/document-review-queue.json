@@ -1315,6 +1315,62 @@
       "notes_and_exceptions_candidates": 2,
       "sha256": "95baaca099c11353f1b23b1f2377d58cb8e37117041406e643ff3333ab9400c0",
       "checked_at": "2026-11-09"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001707964.pdf",
+      "label": "介護保険最新情報vol.1508(「介護支援専門員等の在宅介護従事者の安全確保の徹底について」)",
+      "meeting_date": "2026-06-03",
+      "meeting_url": "https://www.mhlw.go.jp/content/001707964.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 4,
+      "chars": 2390,
+      "readable_page_rate": 0.75,
+      "tables_extracted": 0,
+      "notes_and_exceptions_candidates": 3,
+      "sha256": "e0e7a6fa43cf46e6c61d566a3db67d32f21df8bf3e55c8132ace6bf40ee8887a",
+      "checked_at": "2026-11-10"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001706483.pdf",
+      "label": "介護保険最新情報vol.1506(【事務連絡】令和8年8月からの特定入所者介護(予防)サービス費の見直し等に係る周知への協力依頼について)",
+      "meeting_date": "2026-05-29",
+      "meeting_url": "https://www.mhlw.go.jp/content/001706483.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 4,
+      "chars": 5451,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 3,
+      "notes_and_exceptions_candidates": 17,
+      "sha256": "d61fb6c2ba2a0a607da6ddb305beb3eb5c350d9a995e05ba873ba20fdc416e8c",
+      "checked_at": "2026-11-10"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001705072.pdf",
+      "label": "介護保険最新情報vol.1505(【事務連絡】「介護保険資格確認等WEB サービスとの連携におけるAPI 仕様書(暫定版)」の公開及び「ケアプランデータ連携標準仕様」の今後の取扱いについて)",
+      "meeting_date": "2026-05-27",
+      "meeting_url": "https://www.mhlw.go.jp/content/001705072.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 3,
+      "chars": 2627,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 0,
+      "notes_and_exceptions_candidates": 3,
+      "sha256": "52e07e7838c614c84a4dad3463eb9252bd36321cf168ccf9033873f3105ef49d",
+      "checked_at": "2026-11-10"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001698614.pdf",
+      "label": "介護保険最新情報vol.1502(「「指定居宅サービスに要する費用の額の算定に関する基準(訪問通所サービス、居宅療養管理指導及び福祉用具貸与に係る部分)及び指定居宅介護支援に要する費用の額の算定に関する基準の制定に伴う実施上の留意事項について」等の一部改正について」及び当該通知の発出に伴うQ&Aの発出について)",
+      "meeting_date": "2026-05-08",
+      "meeting_url": "https://www.mhlw.go.jp/content/001698614.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 29,
+      "chars": 31822,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 17,
+      "notes_and_exceptions_candidates": 29,
+      "sha256": "5592ae7819b447253e92cbf6ebf2d7a0e070ca6c711dcdee9cec28bc4f78cf0e",
+      "checked_at": "2026-11-10"
     }
   ]
 }
