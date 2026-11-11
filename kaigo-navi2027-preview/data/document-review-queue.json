@@ -1371,6 +1371,62 @@
       "notes_and_exceptions_candidates": 29,
       "sha256": "5592ae7819b447253e92cbf6ebf2d7a0e070ca6c711dcdee9cec28bc4f78cf0e",
       "checked_at": "2026-11-10"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001698479.pdf",
+      "label": "介護保険最新情報vol.1501(「訪問看護事業所の看護師等がD to P with N によるオンライン診療の補助を行った場合の令和8年度診療報酬改定を踏まえた評価に関するQ&A」の送付について)",
+      "meeting_date": "2026-05-08",
+      "meeting_url": "https://www.mhlw.go.jp/content/001698479.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 3,
+      "chars": 1920,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 0,
+      "notes_and_exceptions_candidates": 2,
+      "sha256": "ed7b59c116a7826afbbb223b703fe82794b7004ba7d3bce30b512127ab5a776d",
+      "checked_at": "2026-11-11"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001698727.pdf",
+      "label": "介護保険最新情報vol.1499(介護分野の業務効率化に資する汎用機器の導入に向けた省力化補助金の活用について(介護業における対象汎用製品の補助申請受付開始および主な問い合わせについて))",
+      "meeting_date": "2026-04-30",
+      "meeting_url": "https://www.mhlw.go.jp/content/001698727.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 3,
+      "chars": 2828,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 2,
+      "notes_and_exceptions_candidates": 2,
+      "sha256": "cb0c87526baecf457c0436b12150cd71a08344db467c6ba80faff08b618f7441",
+      "checked_at": "2026-11-11"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001697217.pdf",
+      "label": "介護保険最新情報vol.1500(介護保険制度の被保険者となる外国人住民の取扱いに関するQ&Aについて(その2))",
+      "meeting_date": "2026-04-30",
+      "meeting_url": "https://www.mhlw.go.jp/content/001697217.pdf",
+      "status": "本文不足・要確認",
+      "pages": 22,
+      "chars": 6156,
+      "readable_page_rate": 0.41,
+      "tables_extracted": 0,
+      "notes_and_exceptions_candidates": 5,
+      "sha256": "ba68b450ff4bef375c0cf327e3ecd880461b3ebfe5018f916cbc0b4cc541480e",
+      "checked_at": "2026-11-11"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001696517.pdf",
+      "label": "介護保険最新情報vol.1497(令和8年度における介護情報基盤の活用のための介護事業所等への支援について)",
+      "meeting_date": "2026-04-28",
+      "meeting_url": "https://www.mhlw.go.jp/content/001696517.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 4,
+      "chars": 3453,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 5,
+      "notes_and_exceptions_candidates": 10,
+      "sha256": "9d37ce81f40f86fb4944201e56a5b59dda0c7c6b4406d410122b19c8fed804ef",
+      "checked_at": "2026-11-11"
     }
   ]
 }
