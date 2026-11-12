@@ -1427,6 +1427,62 @@
       "notes_and_exceptions_candidates": 10,
       "sha256": "9d37ce81f40f86fb4944201e56a5b59dda0c7c6b4406d410122b19c8fed804ef",
       "checked_at": "2026-11-11"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001696286.pdf",
+      "label": "介護保険最新情報vol.1496(「医療介護提供体制改革推進交付金、地域医療対策支援臨時特例交付金及び地域介護対策支援臨時特例交付金の運営について」の一部改正について)",
+      "meeting_date": "2026-04-27",
+      "meeting_url": "https://www.mhlw.go.jp/content/001696286.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 161,
+      "chars": 268412,
+      "readable_page_rate": 0.99,
+      "tables_extracted": 160,
+      "notes_and_exceptions_candidates": 424,
+      "sha256": "de3ffbada00e299524063928ebdd1f83b374cb936acc2ee61c0f0de2e3bdc3b2",
+      "checked_at": "2026-11-12"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001696866.pdf",
+      "label": "介護保険最新情報vol.1495(「LIFE の厚生労働省から公益社団法人国民健康保険中央会への移管に伴い事業所・施設で必要な対応について」)",
+      "meeting_date": "2026-04-21",
+      "meeting_url": "https://www.mhlw.go.jp/content/001696866.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 9,
+      "chars": 7059,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 3,
+      "notes_and_exceptions_candidates": 16,
+      "sha256": "03efca1cbdf4cdac4f1e713fe8d6fc95b58572775fd71ae123957297939602dd",
+      "checked_at": "2026-11-12"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001690439.pdf",
+      "label": "介護保険最新情報vol.1494(「介護施設・事業所等における災害時情報共有システムに係る平時における物資の備蓄状況等報告機能の追加について」) 参考資料",
+      "meeting_date": "2026-04-13",
+      "meeting_url": "https://www.mhlw.go.jp/content/001690439.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 32,
+      "chars": 15622,
+      "readable_page_rate": 0.94,
+      "tables_extracted": 16,
+      "notes_and_exceptions_candidates": 40,
+      "sha256": "d608b49481263716765500b9bec5c0d9b1371a1c0efd834f2ab774d6e8e27621",
+      "checked_at": "2026-11-12"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001689718.pdf",
+      "label": "介護保険最新情報vol.1493(「令和8年10月貸与分から適用される福祉用具の全国平均貸与価格及び貸与価格の上限の公表について(新商品に係る分)」)",
+      "meeting_date": "2026-04-10",
+      "meeting_url": "https://www.mhlw.go.jp/content/001689718.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 2,
+      "chars": 1323,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 0,
+      "notes_and_exceptions_candidates": 1,
+      "sha256": "11f189e268de54502a66320c0b7bcb4332282fa3cd537afd82e473c2cdd55602",
+      "checked_at": "2026-11-12"
     }
   ]
 }
