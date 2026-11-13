@@ -1483,6 +1483,34 @@
       "notes_and_exceptions_candidates": 1,
       "sha256": "11f189e268de54502a66320c0b7bcb4332282fa3cd537afd82e473c2cdd55602",
       "checked_at": "2026-11-12"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001689598.pdf",
+      "label": "介護保険最新情報vol.1492(「介護保険法施行令第37条の13第5項の規定に基づき厚生労働大臣が定める事由第5号の規定に基づき厚生労働省老健局長が定める事由について」及び「令和6年度以降における地域支援事業交付金に係る介護保険法施行令第37条の13第5項の厚生労働大臣が認める額の取扱いについて」の一部改正について)",
+      "meeting_date": "2026-04-10",
+      "meeting_url": "https://www.mhlw.go.jp/content/001689598.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 19,
+      "chars": 29073,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 11,
+      "notes_and_exceptions_candidates": 27,
+      "sha256": "f58530083a531de9777870bb0d392483c5c2c27bd4fd0750b3bc88c1239555dc",
+      "checked_at": "2026-11-13"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/001686032.pdf",
+      "label": "介護保険最新情報vol.1491(介護保険法施行規則の一部を改正する省令の公布について(通知))",
+      "meeting_date": "2026-04-03",
+      "meeting_url": "https://www.mhlw.go.jp/content/001686032.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 4,
+      "chars": 3150,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 0,
+      "notes_and_exceptions_candidates": 1,
+      "sha256": "82588017fb60a916afb58cac369623ae1879772daeaebea6881309fec0ac0fa9",
+      "checked_at": "2026-11-13"
     }
   ]
 }
