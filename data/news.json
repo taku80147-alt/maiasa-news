@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
   "mode": "newspaper",
-  "updated_at": "2026-11-15T10:03:40.198580+09:00",
-  "updated_label": "11/15 10:03",
+  "updated_at": "2026-11-16T10:01:49.838054+09:00",
+  "updated_label": "11/16 10:01",
   "latest_article_date": "2026-11-14",
   "new_count": 0,
   "important_ids": [
@@ -194,29 +194,6 @@
       "distribution_note": "出典のページで本文を読めます。",
       "fact_note": "掲載・更新日は情報源の配信日時です。開催日とは異なります。",
       "body_sha256": "6ae857fa4bcf8bdff84a659853b67e1b8edc5ddd9f4ceb88f5718c34f06766d7"
-    },
-    {
-      "title": "宮城県議会インターネット上の誹謗中傷等の対策に係る条例検討会の開催について（議会事務局政務調査課）",
-      "url": "https://www.pref.miyagi.jp/release/gikai-hibochushokentokai.html",
-      "published": "2026-11-12",
-      "category": "local",
-      "id": "4ea5ff9a1fffc021",
-      "source": "宮城県",
-      "source_id": "miyagi",
-      "source_type": "official",
-      "primary": true,
-      "verified_source": true,
-      "date_label": "掲載・更新",
-      "summary": "本文は出典のページで読めます。掲載・更新日と開催日を分けてご確認ください。",
-      "detail": "",
-      "key_points": [],
-      "link_only": true,
-      "status": "見出し",
-      "distribution_allowed": false,
-      "distribution_policy_url": "",
-      "distribution_note": "出典のページで本文を読めます。",
-      "fact_note": "掲載・更新日は情報源の配信日時です。開催日とは異なります。",
-      "body_sha256": "fc2f6eeb88f434bbf2165cd9cdf7151afce2de0561690001ee357765c7c5958a"
     },
     {
       "title": "【令和8年9月1日開始】窓口の受付時間を変更しました",
