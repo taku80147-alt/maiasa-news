@@ -31,6 +31,48 @@
       "checked_at": "2026-11-16"
     },
     {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001769460.pdf",
+      "label": "【資料５】令和８年度介護従事者処遇状況等調査結果（案）［3.4MB］",
+      "meeting_date": "2026-11-16",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_77357.html",
+      "status": "本文取得・解説未審査",
+      "pages": 197,
+      "chars": 1142321,
+      "readable_page_rate": 0.99,
+      "tables_extracted": 212,
+      "notes_and_exceptions_candidates": 135,
+      "sha256": "5876d7b4127fe4e9649e61186f686cde605117093770f9c5dcd40712af43540d",
+      "checked_at": "2026-11-17"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001769459.pdf",
+      "label": "【資料４】令和８年度介護従事者処遇状況等調査結果の概要（案）［656KB］",
+      "meeting_date": "2026-11-16",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_77357.html",
+      "status": "本文取得・解説未審査",
+      "pages": 25,
+      "chars": 35940,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 26,
+      "notes_and_exceptions_candidates": 121,
+      "sha256": "2b9e241c4c863cbc0f98c9686feb4642705114224bcf69c132615afd50cb621c",
+      "checked_at": "2026-11-17"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001769458.pdf",
+      "label": "【資料３】令和８年度介護従事者処遇状況等調査結果のポイント（案）［523KB］",
+      "meeting_date": "2026-11-16",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_77357.html",
+      "status": "本文取得・解説未審査",
+      "pages": 5,
+      "chars": 7778,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 15,
+      "notes_and_exceptions_candidates": 21,
+      "sha256": "d7f2afc30aa4138f9d1ee432c9ade602e351ef8176e90581517a17c03c67ece7",
+      "checked_at": "2026-11-17"
+    },
+    {
       "pdf_url": "https://www.mhlw.go.jp/content/12300000/001769457.pdf",
       "label": "【資料２】令和８年度介護事業経営実態調査結果（案）［2.1MB］",
       "meeting_date": "2026-11-16",
@@ -57,6 +99,20 @@
       "notes_and_exceptions_candidates": 32,
       "sha256": "e80f419f8a07d7c36bb74f6c055895b73d05fe8413594268bc91b80b46141a2e",
       "checked_at": "2026-11-16"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001766402.pdf",
+      "label": "資料１ 特定地域の基準案について（報告）［PDF形式：2.4MB］",
+      "meeting_date": "2026-11-09",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_77213.html",
+      "status": "本文取得・解説未審査",
+      "pages": 37,
+      "chars": 48879,
+      "readable_page_rate": 0.97,
+      "tables_extracted": 44,
+      "notes_and_exceptions_candidates": 69,
+      "sha256": "dc3f763d995cb612291b984fbc845dd2c9d6a2488c19e067623eb34b416555af",
+      "checked_at": "2026-11-17"
     },
     {
       "pdf_url": "https://www.mhlw.go.jp/content/12300000/001766775.pdf",
