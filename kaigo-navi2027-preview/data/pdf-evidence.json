@@ -153,6 +153,24 @@
           "pdf_pages": 37,
           "checked_at": "2026-11-17",
           "topics": []
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001766403.pdf",
+          "pdf_sha256": "8af621afbd8c7850dd82c48745bcbad5f6987e935237a6c7ced90d4efe5b466b",
+          "label": "資料２ 特定地域居宅サービス等事業について［PDF形式：4.4MB］",
+          "extractor_version": 3,
+          "pdf_pages": 62,
+          "checked_at": "2026-11-18",
+          "topics": []
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001766404.pdf",
+          "pdf_sha256": "5e962301572bd62e17fdfa0ef96b8217f540d6faa7e74fc17c5955ebde15efa3",
+          "label": "資料３ 有料老人ホームに係る登録制の施行に向けた対応について（報告）［PDF形式：1.4MB］",
+          "extractor_version": 3,
+          "pdf_pages": 11,
+          "checked_at": "2026-11-18",
+          "topics": []
         }
       ],
       "warnings": []
