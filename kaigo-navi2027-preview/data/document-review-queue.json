@@ -3,6 +3,20 @@
   "disclaimer": "本文取得は解説の正確さを意味しません。原文の読込・確認待ちリストです。",
   "documents": [
     {
+      "pdf_url": "https://www.mhlw.go.jp/content/001770868.pdf",
+      "label": "介護保険最新情報Vol.1551(建築基準法施行令の一部を改正する政令等の施行に伴う採光規制の対象外の合理化について(周知))",
+      "meeting_date": "2026-11-18",
+      "meeting_url": "https://www.mhlw.go.jp/content/001770868.pdf",
+      "status": "本文取得・解説未審査",
+      "pages": 8,
+      "chars": 7625,
+      "readable_page_rate": 0.88,
+      "tables_extracted": 1,
+      "notes_and_exceptions_candidates": 14,
+      "sha256": "c4c202f96dd9917e85e162ed4dde8a5f344cefc0c3a35b797570cbca74a6f92e",
+      "checked_at": "2026-11-19"
+    },
+    {
       "pdf_url": "https://www.mhlw.go.jp/content/12300000/001769518.pdf",
       "label": "【資料２】介護現場における生産性向上等の推進［4.7MB］",
       "meeting_date": "2026-11-16",
