@@ -1,9 +1,22 @@
 {
   "schema_version": 1,
-  "verified_on": "2026-11-17",
+  "verified_on": "2026-11-19",
   "source_type": "厚生労働省・会議資料・通知・Q&A",
   "disclaimer": "検討案・通知・Q&Aを区別します。資料公開だけで改正の決定・施行とは判断しません。",
   "articles": [
+    {
+      "id": "n-notice-vol-1551",
+      "date": "2026-11-18",
+      "title": "介護保険最新情報Vol.1551(建築基準法施行令の一部を改正する政令等の施行に伴う採光規制の対象外の合理化について(周知))",
+      "summary": "改正・制度運用に関する公式資料が公開されました。本文の解説は準備中です。",
+      "detail": "この項目は公式一覧の見出しと発出日を確認した速報です。変更内容・対象・適用日は本文確認後に追記します。",
+      "category": "介護保険制度",
+      "status": "公式資料公開・解説準備中",
+      "source_url": "https://www.mhlw.go.jp/content/001770868.pdf",
+      "source_name": "厚生労働省・介護保険最新情報",
+      "source_kind": "notice",
+      "curated": false
+    },
     {
       "id": "n-pay-275",
       "date": "2026-11-16",
