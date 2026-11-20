@@ -4,6 +4,130 @@
   "disclaimer": "PDFの対応案見出しを機械抽出。資料全文の理解・法的な適用判断は人による確認が必要です。",
   "articles": [
     {
+      "id": "n-pay-276",
+      "meeting_date": "2026-11-20",
+      "source_url": "https://www.mhlw.go.jp/stf/newpage_77201.html",
+      "status": "公式資料の「対応案」見出しを機械抽出（未審査）",
+      "scope": "資料にある検討項目を探しやすくしたものです。新制度の決定・適用条件・数値を保証する解説ではありません。",
+      "documents": [
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001771221.pdf",
+          "pdf_sha256": "3047579e6b3754bf0bc450c460a1ce9edfd0d6f427f9aa60dd61ad149eb1eb1a",
+          "label": "【資料１】福祉用具・住宅改修［4.3MB］",
+          "extractor_version": 3,
+          "pdf_pages": 51,
+          "checked_at": "2026-11-20",
+          "topics": [
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 2,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 3,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 6,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 16,
+              "evidence": "◼利用者の負担を軽減しつつ、制度の持続可能性の確保を図る観点から、選択制導入による影響を分析した上で、対象品目の追加等について検討することとしてはどうか。"
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 22,
+              "evidence": "◼上限価格の見直しの頻度を含めた上限価格のあり方について、制度の趣旨を踏まえつつ、物価高騰等の影響、上限価格に対する貸与価格の設定状況などを詳細に分析した上で、引き続き検証していくこととしてはどうか。"
+            }
+          ]
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001771220.pdf",
+          "pdf_sha256": "6cf4f6d1722857735b88b390afb52c5f7d0b376ecdb4e02015e755481d4ce70e",
+          "label": "【資料２】医療・介護連携、人生の最終段階の医療・介護［4.7MB］",
+          "extractor_version": 3,
+          "pdf_pages": 92,
+          "checked_at": "2026-11-20",
+          "topics": [
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 2,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 3,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 10,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 21,
+              "evidence": "◼介護老人福祉施設、地域密着型介護老人福祉施設、介護老人保健施設及び介護医療院については、要件を満たす協力医療機関の設定を更に推進する観点から、令和９年３月31日までとされている経過措置は、次期改定以降延長せず、所要の準備期間を設けた上で、要件を満たす協力医療機関を定めていない場合に減算を適用することとしてはどうか。"
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 32,
+              "evidence": "◼協力医療機関連携加算について、要件を満たす協力医療機関と連携を行う場合のみを評価することとし、要件を満たさない協力医療機関と連携を行う場合の評価は廃止することとしてはどうか。"
+            }
+          ]
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001771222.pdf",
+          "pdf_sha256": "84497fb538d93963850662eb15f45fecfffb03f8d1481d6f88487427a98c9d6b",
+          "label": "【資料３】口腔・栄養、一体的取組［8.5MB］",
+          "extractor_version": 3,
+          "pdf_pages": 79,
+          "checked_at": "2026-11-20",
+          "topics": [
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 2,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 3,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 6,
+              "evidence": ""
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 12,
+              "evidence": "◼口腔連携強化加算の見直しとして、情報連携先については、歯科医療機関のみの場合も算定出来ることとしてはどうか。"
+            },
+            {
+              "heading": "このページの対応案（本文の確認が必要）",
+              "pdf_page": 16,
+              "evidence": "◼入所者の状態に応じた口腔衛生の管理を維持する観点から、予定通り経過措置を終了することとしてはどうか。"
+            }
+          ]
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001771223.pdf",
+          "pdf_sha256": "755f7faf0a75d9e37da884d3802227ee9e4a7efeb9fc364c0295138f70e0b3a6",
+          "label": "【資料４－１】令和８年度介護事業経営実態調査結果の概要（案）［1.2MB］",
+          "extractor_version": 3,
+          "pdf_pages": 24,
+          "checked_at": "2026-11-20",
+          "topics": []
+        }
+      ],
+      "warnings": []
+    },
+    {
       "id": "n-pay-275",
       "meeting_date": "2026-11-16",
       "source_url": "https://www.mhlw.go.jp/stf/newpage_77279.html",
@@ -90,15 +214,6 @@
       "status": "公式資料の「対応案」見出しを機械抽出（未審査）",
       "scope": "資料にある検討項目を探しやすくしたものです。新制度の決定・適用条件・数値を保証する解説ではありません。",
       "documents": [
-        {
-          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001769456.pdf",
-          "pdf_sha256": "e80f419f8a07d7c36bb74f6c055895b73d05fe8413594268bc91b80b46141a2e",
-          "label": "【資料１】令和８年度介護事業経営実態調査結果の概要（案）［611KB］",
-          "extractor_version": 3,
-          "pdf_pages": 22,
-          "checked_at": "2026-11-16",
-          "topics": []
-        },
         {
           "pdf_url": "https://www.mhlw.go.jp/content/12300000/001769457.pdf",
           "pdf_sha256": "22cce7b28a112a013d057b10e8ad8d28e671ec608f5eb42cfb584ef2f049154c",
@@ -639,43 +754,6 @@
           "extractor_version": 3,
           "pdf_pages": 1,
           "checked_at": "2026-10-27",
-          "topics": []
-        }
-      ],
-      "warnings": []
-    },
-    {
-      "id": "n-ins-137",
-      "meeting_date": "2026-10-26",
-      "source_url": "https://www.mhlw.go.jp/stf/newpage_76887.html",
-      "status": "公式資料の「対応案」見出しを機械抽出（未審査）",
-      "scope": "資料にある検討項目を探しやすくしたものです。新制度の決定・適用条件・数値を保証する解説ではありません。",
-      "documents": [
-        {
-          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001762518.pdf",
-          "pdf_sha256": "e20d58e439578a1ebdb616ac83b9ab6b6adec92fc8d9e7c89481fcea681e9603",
-          "label": "資料１ 持続可能性の確保（給付と負担）について［PDF形式：4.6MB］",
-          "extractor_version": 3,
-          "pdf_pages": 82,
-          "checked_at": "2026-10-27",
-          "topics": []
-        },
-        {
-          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001762519.pdf",
-          "pdf_sha256": "ebd14cb69aadc28805817ca7d09a4327567a5cb5bcf3759224b0197182ee7adc",
-          "label": "資料２ 要介護認定について［PDF形式：2.1MB］",
-          "extractor_version": 3,
-          "pdf_pages": 53,
-          "checked_at": "2026-10-27",
-          "topics": []
-        },
-        {
-          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001762527.pdf",
-          "pdf_sha256": "d703ce3465fa5cd1dc6f4c18b498cb1227e5c1cd2491ea1e3a04ae80870cf2c1",
-          "label": "資料３ 介護支援専門員法定研修の見直しの検討状況について（報告）［PDF形式：2.9MB］",
-          "extractor_version": 3,
-          "pdf_pages": 37,
-          "checked_at": "2026-10-29",
           "topics": []
         }
       ],
