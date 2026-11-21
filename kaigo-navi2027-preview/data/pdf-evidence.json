@@ -11,12 +11,12 @@
       "scope": "資料にある検討項目を探しやすくしたものです。新制度の決定・適用条件・数値を保証する解説ではありません。",
       "documents": [
         {
-          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001771221.pdf",
-          "pdf_sha256": "3047579e6b3754bf0bc450c460a1ce9edfd0d6f427f9aa60dd61ad149eb1eb1a",
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001771358.pdf",
+          "pdf_sha256": "dc8c2ccbb61313edfbb092bc6e79af6b659c7fbd4be4c439ecdb2d8eaedf447c",
           "label": "【資料１】福祉用具・住宅改修［4.3MB］",
           "extractor_version": 3,
           "pdf_pages": 51,
-          "checked_at": "2026-11-20",
+          "checked_at": "2026-11-21",
           "topics": [
             {
               "heading": "このページの対応案（本文の確認が必要）",
@@ -123,6 +123,24 @@
           "pdf_pages": 24,
           "checked_at": "2026-11-20",
           "topics": []
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001771224.pdf",
+          "pdf_sha256": "35829d8a2b99b41eaf165845c740a8c66c4dd18d8e40f2d050358adeb4cd821f",
+          "label": "【資料４－２】令和８年度介護事業経営実態調査結果（案）［8.0MB］",
+          "extractor_version": 3,
+          "pdf_pages": 107,
+          "checked_at": "2026-11-21",
+          "topics": []
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001771226.pdf",
+          "pdf_sha256": "639725d179c3c6880b85fcf473f54d72edb3bc924348c6f07450200a95a0ccd6",
+          "label": "【資料５－２】令和８年度介護従事者処遇状況等調査結果の概要（案）［667KB］",
+          "extractor_version": 3,
+          "pdf_pages": 25,
+          "checked_at": "2026-11-21",
+          "topics": []
         }
       ],
       "warnings": []
@@ -221,15 +239,6 @@
           "extractor_version": 3,
           "pdf_pages": 108,
           "checked_at": "2026-11-16",
-          "topics": []
-        },
-        {
-          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001769458.pdf",
-          "pdf_sha256": "d7f2afc30aa4138f9d1ee432c9ade602e351ef8176e90581517a17c03c67ece7",
-          "label": "【資料３】令和８年度介護従事者処遇状況等調査結果のポイント（案）［523KB］",
-          "extractor_version": 3,
-          "pdf_pages": 5,
-          "checked_at": "2026-11-17",
           "topics": []
         },
         {
