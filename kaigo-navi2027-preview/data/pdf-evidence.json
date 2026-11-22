@@ -233,12 +233,30 @@
       "scope": "資料にある検討項目を探しやすくしたものです。新制度の決定・適用条件・数値を保証する解説ではありません。",
       "documents": [
         {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001771118.pdf",
+          "pdf_sha256": "582f6d115b2a45f2b75adeb1d7e98e64f603e59f124559ebfec656de94424e79",
+          "label": "【資料１】令和８年度介護事業経営実態調査結果の概要（案）［1.1MB］",
+          "extractor_version": 3,
+          "pdf_pages": 22,
+          "checked_at": "2026-11-22",
+          "topics": []
+        },
+        {
           "pdf_url": "https://www.mhlw.go.jp/content/12300000/001769457.pdf",
           "pdf_sha256": "22cce7b28a112a013d057b10e8ad8d28e671ec608f5eb42cfb584ef2f049154c",
           "label": "【資料２】令和８年度介護事業経営実態調査結果（案）［2.1MB］",
           "extractor_version": 3,
           "pdf_pages": 108,
           "checked_at": "2026-11-16",
+          "topics": []
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001771553.pdf",
+          "pdf_sha256": "d1b8d9e7b50bade8652d4fc08159cdc3b7fc7f1ee611b83c068eaf50c9b6723f",
+          "label": "【資料３】令和８年度介護従事者処遇状況等調査結果のポイント（案）［523KB］",
+          "extractor_version": 3,
+          "pdf_pages": 5,
+          "checked_at": "2026-11-22",
           "topics": []
         },
         {
