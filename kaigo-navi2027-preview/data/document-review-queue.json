@@ -31,6 +31,20 @@
       "checked_at": "2026-11-21"
     },
     {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001771227.pdf",
+      "label": "【資料５－３】令和８年度介護従事者処遇状況等調査結果（案）［3.6MB］",
+      "meeting_date": "2026-11-20",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_77201.html",
+      "status": "本文取得・解説未審査",
+      "pages": 195,
+      "chars": 1145794,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 213,
+      "notes_and_exceptions_candidates": 135,
+      "sha256": "92f00a68c618db5a6627989c179654d93c73582c5e2bc28d290b7fed8a8ab9af",
+      "checked_at": "2026-11-22"
+    },
+    {
       "pdf_url": "https://www.mhlw.go.jp/content/12300000/001771226.pdf",
       "label": "【資料５－２】令和８年度介護従事者処遇状況等調査結果の概要（案）［667KB］",
       "meeting_date": "2026-11-20",
@@ -127,6 +141,34 @@
       "notes_and_exceptions_candidates": 14,
       "sha256": "c4c202f96dd9917e85e162ed4dde8a5f344cefc0c3a35b797570cbca74a6f92e",
       "checked_at": "2026-11-19"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001771553.pdf",
+      "label": "【資料３】令和８年度介護従事者処遇状況等調査結果のポイント（案）［523KB］",
+      "meeting_date": "2026-11-16",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_77357.html",
+      "status": "本文取得・解説未審査",
+      "pages": 5,
+      "chars": 7776,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 15,
+      "notes_and_exceptions_candidates": 21,
+      "sha256": "d1b8d9e7b50bade8652d4fc08159cdc3b7fc7f1ee611b83c068eaf50c9b6723f",
+      "checked_at": "2026-11-22"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001771118.pdf",
+      "label": "【資料１】令和８年度介護事業経営実態調査結果の概要（案）［1.1MB］",
+      "meeting_date": "2026-11-16",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_77357.html",
+      "status": "本文取得・解説未審査",
+      "pages": 22,
+      "chars": 57643,
+      "readable_page_rate": 0.95,
+      "tables_extracted": 29,
+      "notes_and_exceptions_candidates": 32,
+      "sha256": "582f6d115b2a45f2b75adeb1d7e98e64f603e59f124559ebfec656de94424e79",
+      "checked_at": "2026-11-22"
     },
     {
       "pdf_url": "https://www.mhlw.go.jp/content/12300000/001769518.pdf",
