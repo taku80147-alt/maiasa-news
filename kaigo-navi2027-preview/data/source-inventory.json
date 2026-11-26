@@ -6,6 +6,19 @@
   ],
   "documents": [
     {
+      "id": "n-notice-vol-1553",
+      "date": "2026-11-26",
+      "title": "介護保険最新情報Vol.1553(第10期計画期間に向けた第1号保険料に関する検討について)",
+      "source_url": "https://www.mhlw.go.jp/content/001772546.pdf",
+      "source_urls": [
+        "https://www.mhlw.go.jp/content/001772546.pdf"
+      ],
+      "index_url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/index_00010.html",
+      "selection": "review_pending",
+      "reason": "見出しだけでは改正との関係を判断できないため、本文確認待ち。",
+      "publication": "not_listed"
+    },
+    {
       "id": "n-notice-vol-1552",
       "date": "2026-11-25",
       "title": "介護保険最新情報Vol.1552(ケアプランデータ連携システムの介護保険資格確認等WEB サービスへの移行について(その2))",
