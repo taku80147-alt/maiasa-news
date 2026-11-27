@@ -3,6 +3,20 @@
   "disclaimer": "本文取得は解説の正確さを意味しません。原文の読込・確認待ちリストです。",
   "documents": [
     {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001773042.pdf",
+      "label": "【資料５】住まいの形態に合わせたサービス提供に係る報酬の在り方（その他サービス）［3.1MB］",
+      "meeting_date": "2026-11-26",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_77543.html",
+      "status": "本文取得・解説未審査",
+      "pages": 52,
+      "chars": 134595,
+      "readable_page_rate": 0.98,
+      "tables_extracted": 84,
+      "notes_and_exceptions_candidates": 73,
+      "sha256": "a1a3f72a25aa862fa5ee52705dfa38e27da462d7ab49c4eb4e0cdc913d727ab3",
+      "checked_at": "2026-11-27"
+    },
+    {
       "pdf_url": "https://www.mhlw.go.jp/content/12300000/001773041.pdf",
       "label": "【資料４】住まいの形態に合わせたサービス提供に係る報酬の在り方（通所介護）［1.6MB］",
       "meeting_date": "2026-11-26",
@@ -57,6 +71,48 @@
       "notes_and_exceptions_candidates": 75,
       "sha256": "ef84a5af0e5ccbf6b76ca73fc4677ed0a314f55e471ab4b1255995a8a9541092",
       "checked_at": "2026-11-26"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001772933.pdf",
+      "label": "【資料６】その他（医師の常勤要件、オンライン診療、利用者数等に係る「前年度の平均値」の考え方等）［3.1MB］",
+      "meeting_date": "2026-11-26",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_77543.html",
+      "status": "本文取得・解説未審査",
+      "pages": 48,
+      "chars": 60130,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 55,
+      "notes_and_exceptions_candidates": 93,
+      "sha256": "ee4c83e1705ab43a6eab0701df614c3478ed6fc539fece2db512bf187a90b64e",
+      "checked_at": "2026-11-27"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001772932.pdf",
+      "label": "【参考資料１】LIFEの提出項目等に係る作業部会（とりまとめ）［859KB］",
+      "meeting_date": "2026-11-26",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_77543.html",
+      "status": "本文取得・解説未審査",
+      "pages": 9,
+      "chars": 10298,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 1,
+      "notes_and_exceptions_candidates": 4,
+      "sha256": "b3b21b1559af056fdfb886f7086b7062b138c861ba6c6f8f0bf6b57c332309dc",
+      "checked_at": "2026-11-27"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001772931.pdf",
+      "label": "【参考資料２】志田委員提出資料［251KB］",
+      "meeting_date": "2026-11-26",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_77543.html",
+      "status": "本文取得・解説未審査",
+      "pages": 1,
+      "chars": 1708,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 1,
+      "notes_and_exceptions_candidates": 4,
+      "sha256": "e4034df288a0c540952db45259116e342ae634985c4a53fd923961f9af27e270",
+      "checked_at": "2026-11-27"
     },
     {
       "pdf_url": "https://www.mhlw.go.jp/content/12300000/001771546.pdf",
