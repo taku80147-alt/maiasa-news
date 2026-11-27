@@ -11,6 +11,15 @@
       "scope": "資料にある検討項目を探しやすくしたものです。新制度の決定・適用条件・数値を保証する解説ではありません。",
       "documents": [
         {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001772932.pdf",
+          "pdf_sha256": "b3b21b1559af056fdfb886f7086b7062b138c861ba6c6f8f0bf6b57c332309dc",
+          "label": "【参考資料１】LIFEの提出項目等に係る作業部会（とりまとめ）［859KB］",
+          "extractor_version": 3,
+          "pdf_pages": 9,
+          "checked_at": "2026-11-27",
+          "topics": []
+        },
+        {
           "pdf_url": "https://www.mhlw.go.jp/content/12300000/001772935.pdf",
           "pdf_sha256": "5fad635fd1c36d4f4453614ef552e0d3fdc4bf2c39ea83ee53bd8ec760abd69c",
           "label": "【資料１】認知症への対応力強化［3.8MB］",
@@ -39,6 +48,15 @@
               "evidence": "◼ガイドライン第２版の内容について、調査研究事業を活用して、認知症の人の意見も反映しながら、わかりやすい研修資材や動画コンテンツの作成を進めるとともに、利用者の意思決定の支援や、従業員に対する研修の実施等を各事業の運営基準に位置付けるなど、その実践が図られるような取組について、次期報酬改定（令和12年度）までに検討してはどうか。"
             }
           ]
+        },
+        {
+          "pdf_url": "https://www.mhlw.go.jp/content/12300000/001772931.pdf",
+          "pdf_sha256": "e4034df288a0c540952db45259116e342ae634985c4a53fd923961f9af27e270",
+          "label": "【参考資料２】志田委員提出資料［251KB］",
+          "extractor_version": 3,
+          "pdf_pages": 1,
+          "checked_at": "2026-11-27",
+          "topics": []
         },
         {
           "pdf_url": "https://www.mhlw.go.jp/content/12300000/001772934.pdf",
