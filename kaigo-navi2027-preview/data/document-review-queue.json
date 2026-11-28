@@ -115,6 +115,48 @@
       "checked_at": "2026-11-27"
     },
     {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001772490.pdf",
+      "label": "石田委員提出資料［PDF形式：575KB］",
+      "meeting_date": "2026-11-26",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_77651.html",
+      "status": "本文取得・解説未審査",
+      "pages": 1,
+      "chars": 1285,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 0,
+      "notes_and_exceptions_candidates": 1,
+      "sha256": "928fcfa86f6a51e4d905c0be7d3bca31a7385845a42570a5fce16dc1272771f6",
+      "checked_at": "2026-11-28"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001772489.pdf",
+      "label": "資料２ 持続可能性の確保（給付と負担）について［PDF形式：3.3MB］",
+      "meeting_date": "2026-11-26",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_77651.html",
+      "status": "本文取得・解説未審査",
+      "pages": 56,
+      "chars": 126307,
+      "readable_page_rate": 1.0,
+      "tables_extracted": 65,
+      "notes_and_exceptions_candidates": 131,
+      "sha256": "b316083c10209786234093e85edf2495b821e241a351a1ab26a3d05f6a759ae0",
+      "checked_at": "2026-11-28"
+    },
+    {
+      "pdf_url": "https://www.mhlw.go.jp/content/12300000/001772488.pdf",
+      "label": "資料１ 第１号保険料の在り方について（報告）［PDF形式：905KB］",
+      "meeting_date": "2026-11-26",
+      "meeting_url": "https://www.mhlw.go.jp/stf/newpage_77651.html",
+      "status": "本文取得・解説未審査",
+      "pages": 13,
+      "chars": 15773,
+      "readable_page_rate": 0.92,
+      "tables_extracted": 18,
+      "notes_and_exceptions_candidates": 12,
+      "sha256": "9820c7ba100efb1aef9799c4916d8fc16f937b4ce074aefd294be1e8f1aa00d2",
+      "checked_at": "2026-11-28"
+    },
+    {
       "pdf_url": "https://www.mhlw.go.jp/content/12300000/001771546.pdf",
       "label": "【資料５－１】令和８年度介護従事者処遇状況等調査結果のポイント（案）［531KB］",
       "meeting_date": "2026-11-20",
